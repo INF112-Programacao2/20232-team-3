@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
-#include "Products.h"
+#include "Product.hpp"
 
 // Constructor
-Products::Products(std::string name, std::string studio, int ageRating, float price, std::string availability, int reviews) : 
+Product::Product(std::string name, std::string studio, int ageRating, float price, std::string availability, int reviews) : 
     _name(name), _studio(studio), _ageRating(ageRating), _price(price), _availability(availability), _reviews(reviews) 
 {
     // Verifica se os dados inseridos são válidos
@@ -16,14 +16,14 @@ Products::Products(std::string name, std::string studio, int ageRating, float pr
 }
 
 // Destructor
-Products::~Products() 
+Product::~Product() 
 {
 
 }
 
 // Methods
 // Setters
-void Products::verifyName(){    // Verifica se o nome do produto é válido
+void Product::verifyName(){    // Verifica se o nome do produto é válido
     std::cout << "Digite o nome do produto: " << std::endl;
     std::string tempname;
     std::cin >> tempname;
@@ -34,7 +34,7 @@ void Products::verifyName(){    // Verifica se o nome do produto é válido
     }
 }
 
-void Products::verifyStudio(){    // Verifica se o nome do studio é válido
+void Product::verifyStudio(){    // Verifica se o nome do studio é válido
     std::cout << "Digite o nome do studio: " << std::endl;
     std::string tempstudio;
     std::cin >> tempstudio;
@@ -45,7 +45,7 @@ void Products::verifyStudio(){    // Verifica se o nome do studio é válido
     }
 }
 
-void Products::verifyAgeRating(){    // Verifica se a classificacao etaria do produto é válida
+void Product::verifyAgeRating(){    // Verifica se a classificacao etaria do produto é válida
     std::cout << "Digite a classificacao etaria do produto: " << std::endl;
     int tempageRating;
     std::cin >> tempageRating;
@@ -56,7 +56,7 @@ void Products::verifyAgeRating(){    // Verifica se a classificacao etaria do pr
     }
 }
 
-void Products::verifyPrice(){    // Verifica se o preco do produto é válido
+void Product::verifyPrice(){    // Verifica se o preco do produto é válido
     std::cout << "Digite o preco do produto: " << std::endl;
     float tempprice;
     std::cin >> tempprice;
@@ -67,7 +67,7 @@ void Products::verifyPrice(){    // Verifica se o preco do produto é válido
     }
 }
 
-void Products::verifyAvailability(){    // Verifica se a disponibilidade do produto é válida
+void Product::verifyAvailability(){    // Verifica se a disponibilidade do produto é válida
     std::cout << "Digite a disponibilidade do produto: " << std::endl;
     std::string tempavailability;
     std::cin >> tempavailability;
@@ -78,7 +78,7 @@ void Products::verifyAvailability(){    // Verifica se a disponibilidade do prod
     }
 }
 
-void Products::verifyReviews(){    // Verifica se as avaliacoes do produto são válidas
+void Product::verifyReviews(){    // Verifica se as avaliacoes do produto são válidas
     std::cout << "Digite a avaliacao do produto: " << std::endl;
     int tempreviews;
     std::cin >> tempreviews;
@@ -89,26 +89,26 @@ void Products::verifyReviews(){    // Verifica se as avaliacoes do produto são 
     }
 }
 // Getters
-std::string Products::get_name() {    //Retorna o nome do produto
+std::string Product::get_name() {    //Retorna o nome do produto
     return _name;
 }
 
-std::string Products::get_studio() {    //Retorna o nome do studio que produziu o produto
+std::string Product::get_studio() {    //Retorna o nome do studio que produziu o produto
     return _studio;
 }
 
-int Products::get_ageRating(){ // Retorna a classificacao etaria do produto
+int Product::get_ageRating(){ // Retorna a classificacao etaria do produto
     return _ageRating;
 }
 
-float Products::get_price() {    //Retorna o preco do produto
+float Product::get_price() {    //Retorna o preco do produto
     return _price;
 }
 
-std::string Products::get_availability() {    //Retorna a disponibilidade do produto
+std::string Product::get_availability() {    //Retorna a disponibilidade do produto
     return _availability;
 }
 
-int Products::get_reviews() {    //Retorna as avaliacoes do produto
+int Product::get_reviews() {    //Retorna as avaliacoes do produto
     return _reviews;
 }

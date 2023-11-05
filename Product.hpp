@@ -1,8 +1,8 @@
-#ifndef PRODUCTS_H
-#define PRODUCTS_H
+#ifndef PRODUCT_HPP_
+#define PRODUCT_HPP_
 #include <string>
 
-class Products{
+class Product{
     // Data
     protected:
 	std::string _name;    //Nome do produto
@@ -14,10 +14,10 @@ class Products{
 
 	// Constructor
     public:
-	Products(std::string name, std::string studio, int ageRating, float price, std::string availability, int reviews);
+	Product(std::string name, std::string studio, int ageRating, float price, std::string availability, int reviews);
 
 	// Destructor
-	~Products();
+	~Product();
 
 	// Methods
 	void verifyName();

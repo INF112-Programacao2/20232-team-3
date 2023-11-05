@@ -1,10 +1,10 @@
-#ifndef GAMES_H
-#define GAMES_H
+#ifndef GAME_HPP_
+#define GAME_HPP_
 #include <string>
-#include "Products.h"
+#include "Product.hpp"
 
 
-class Games : public Products
+class Game:public Product
 {
     // Data
     private:
@@ -16,10 +16,10 @@ class Games : public Products
 	// Constructor
 	public:
 	// Console
-	Games(std::string name, std::string studio, int ageRating, float price, std::string availability, int reviews, std::string gender, std::string platform, std::string languages, std::string releaseDate);
+	Game(std::string name, std::string studio, int ageRating, float price, std::string availability, int reviews, std::string gender, std::string platform, std::string languages, std::string releaseDate);
 	
 	// Destructor
-	~Games();
+	~Game();
 
 	// Methods
 	// Getters
