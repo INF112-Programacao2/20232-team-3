@@ -2,65 +2,122 @@
 
 bool checkCPF(const std::string& cpf) 
 {
-    int som1 = 0;
-    int som2 = 0;
-
-    for (int i = 0; i < 9; i++) {
-        int digit = cpf[i] - '0';
-        som1 += digit * (10 - i);
-        som2 += digit * (11 - i);
-    }
-
-    int firstCheckerDigit = (som1 * 10) % 11;
-    int secondCheckerDigit = (som2 * 10) % 11;
-
-    if (firstCheckerDigit == 10)
-        firstCheckerDigit = 0;
-    if (secondCheckerDigit == 10)
-        secondCheckerDigit = 0;
-
-    return (firstCheckerDigit == cpf[9] - '0' && secondCheckerDigit == cpf[10] - '0');
+    if(cpf.size()!=11)
+        return false;
+    return true;
 }
 
 bool checkCNPJ(const std::string& cnpj) 
 {
-
-    int multiplier[] = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
-    int multiplier[] = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
-
-    int som1 = 0;
-    int som2 = 0;
-
-    for (int i = 0; i < 12; i++) {
-        int digit = cnpj[i] - '0';
-        som1 += digit * multiplier[i];
-        som2 += digit * multiplier[i];
-    }
-
-    int firstCheckerDigit = (som1 % 11 < 2) ? 0 : (11 - som1 % 11);
-    int secondCheckerDigit = (som2 % 11 < 2) ? 0 : (11 - som2 % 11);
-
-    return (firstCheckerDigit == cnpj[12] - '0' && secondCheckerDigit == cnpj[13] - '0');
+    if(cnpj.size()!=12)
+        return false;
+    return true;
 }
 
-
-Client::Client(std::string username, std::string password, std::string email, Date birthdate, int id)
+Client::Client()
 {
-    if(username.size()>30 || get_age() < 12 || (id != 1 && id != 2)) // Se o username tiver mais de 30 caracteres, se o usuário tiver menos de 12 anos ou se o id não for 1 ou 2
-        std::cout << "Erro ao criar conta\n";
-    else
+    while (true)
     {
-        this->_username = username;
-        this->_password = password;
-        this->_email = email;
-        this->_birthdate = birthdate;
-        this->_id = id;
-        this->_balance = 0;
+        std::cout << "Digite seu nome de usuário: ";
+        std::cin >> _username;
+        if(_username.size() > 30)
+        {
+            std::cout << "Nome de usuário muito grande, digite novamente\n";
+        }
+        else
+            break;
     }
-}
+    while (true)
+    {
+        std::cout << "Digite sua senha: ";
+        std::cin >> _password;
+        std::string temp;
+        std::cout << "Digite sua senha novamente: ";
+        std::cin >> temp;
+
+        if(_password != temp)
+        {
+            std::cout << "As senhas não coincidem, digite novamente\n";
+            continue;
+        }
+        else
+        {
+            bool hasNumber = false, hasLetter = false;
+            for(auto e: _password)
+            {
+                if(e >= '0' && e <= '9')
+                    hasNumber = true;
+                else if((e >= 'a' && e <= 'z') || (e >= 'A' && e <= 'Z'))
+                    hasLetter = true;
+            }
+            if(!(hasNumber && hasLetter))
+            {
+                std::cout << "Senha muito fraca, ela deve ter pelo menos uma letra e um número\n";
+                continue;
+            }
+            else
+                break;
+        }
+    }
+    while (true)
+    {
+        std::cout << "Digite seu email: ";
+        std::cin >> _email;
+        bool hasAt = false;
+        for (auto e: _email)
+        {
+            if(e == '@')
+            {
+                hasAt = true;
+                break;
+            }
+        }
+        if(hasAt)
+            break;
+        
+    }
+    while (true)
+    {
+        std::cout << "Digite sua data de nascimento dd/mm/aaaa: ";
+        char c;
+        std::cin >> _birthdate.day >> c >> _birthdate.month >> c >> _birthdate.year;
+        if (get_age() < 12)
+        {
+            std::cout << "Você deve ter pelo menos 12 anos para criar uma conta\n";
+            continue;
+        }
+        else
+            break;
+    }
+    /*
+    while (true)
+    {
+        std::cout << "Você deseja criar uma conta como jogador ou desenvolvedor? (j/d)";
+        char c;
+        std::cin >> c;
+        if(c == 'j' || c == 'J')
+        {
+            _id = 0;
+            break;
+        }
+        else if(c == 'd' || c == 'D')
+        {
+                _id = 1;
+                break;
+        }
+        else
+        {
+            std::cout << "Opção inválida, digite novamente\n";
+            continue;
+        }
+    }
+    */
+    _balance = 0;
+} 
 
 Client::~Client()
 {
+    
 }
 
 std::string Client::get_username()

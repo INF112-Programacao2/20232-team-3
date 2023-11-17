@@ -1,28 +1,38 @@
 #include"Studio.hpp"
 
-Studio::Studio(std::string username, std::string password, std::string email, Date birthdate, std::string CNPJorCPF): Client(username, password, email, birthdate, 2)
+Studio::Studio(): Client()
 {
-    int size = 0;
-    std::string correctedCPForCNPJ = "";
-
-    for(int i = 0 ; i < CNPJorCPF.size() ; i++)
-        if(CNPJorCPF[i] >= '0' && CNPJorCPF[i] <= '9')
+    std::string CNPJorCPF = "", aux = "";
+    std::cout << "Digite seu CNPJ ou CPF: ";
+    while(true)
+    {
+        std::cin >> CNPJorCPF;
+        for(int i = 0 ; i < CNPJorCPF.size() ; i++)
         {
-            size++;
-            correctedCPForCNPJ += CNPJorCPF[i];
+            if(CNPJorCPF[i] >= '0' && CNPJorCPF[i] <= '9')
+            {
+                aux += CNPJorCPF[i];
+            }
         }
-    if(size == 14 && checkCNPJ(correctedCPForCNPJ)) // Se o CNPJ tiver 14 caracteres
-    {
-        _CNPJ = CNPJorCPF;
-        _CPF = "";
-    }    
-    else if(size == 11 && checkCPF(correctedCPForCNPJ)) // Se o CPF tiver 11 caracteres
-    {
-        _CPF = CNPJorCPF;
-        _CNPJ = "";
-    }
-    else
-        std::cout << "Erro ao criar conta\n";
+        CNPJorCPF = aux;
+        if(CNPJorCPF.size() == 11) // É CPF
+        {
+            _CPF = CNPJorCPF;
+            _CNPJ = "";
+            break;
+        }
+        else if(CNPJorCPF.size() == 14) // É CNPJ
+        {
+            _CNPJ = CNPJorCPF;
+            _CPF = "";
+            break;
+        }
+        else
+        {
+            std::cout << "CNPJ ou CPF inválido. Digite novamente!\n";
+            continue;
+        }
+    }   
 }
 
 Studio::~Studio()

@@ -1,8 +1,8 @@
 #include"User.hpp"
 
-User::User(std::string username, std::string password, std::string email, Date birthdate): Client(username, password, email, birthdate, 1)
+User::User(): Client()
 {
-    
+    _id = 0;
 }
 
 User::~User()

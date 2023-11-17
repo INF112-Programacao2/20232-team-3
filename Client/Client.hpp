@@ -17,11 +17,11 @@ class Client
 {
 protected:
     std::string _username, _password, _email;
-    int _id;    // Tipo de cliente 
+    int _id;    // Tipo de cliente
     Date _birthdate;
     double _balance; // Saldo do cliente
 public:
-    Client(std::string username, std::string password, std::string email, Date birthdate, int id);
+    Client();
     ~Client();
     std::string get_username();
     std::string get_password();
