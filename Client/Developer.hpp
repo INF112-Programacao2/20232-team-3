@@ -7,16 +7,12 @@
 class Developer: public Client
 {
 private:
-    std::string _CNPJ;
-    std::string _CPF;
     std::vector<Game> _publishedGames;
 public:
-    Developer();
+    Developer(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::vector<Game> publishedGames);
     ~Developer();
-    void publish_game(Game game);
-    void remove_game(Game game);
-    std::string get_CNPJ();
-    std::string get_CPF();
+    void publish_game();
+    void remove_game();
     virtual void menu();
 };
 

@@ -1,5 +1,5 @@
 #include"Client.hpp"
-
+/*
 bool checkCPF(const std::string& cpf) 
 {
     if(cpf.size()!=11)
@@ -13,7 +13,8 @@ bool checkCNPJ(const std::string& cnpj)
         return false;
     return true;
 }
-
+*/
+/*
 Client::Client()
 {
     while (true)
@@ -89,7 +90,6 @@ Client::Client()
         else
             break;
     }
-    /*
     while (true)
     {
         std::cout << "Você deseja criar uma conta como jogador ou desenvolvedor? (j/d)";
@@ -111,9 +111,19 @@ Client::Client()
             continue;
         }
     }
-    */
     _balance = 0;
-} 
+}
+*/
+
+Client::Client(std::string username, std::string password, std::string email, std::string cpf, double balance, int id)
+{
+    _username = username;
+    _password = password;
+    _email = email;
+    _cpf = cpf;
+    _balance = balance;
+    _id = id;
+}
 
 Client::~Client()
 {
@@ -159,10 +169,7 @@ double Client::get_balance()
     return _balance;
 }
 
-void Client::change_password(std::string old_password, std::string new_password)
+std::string Client::get_cpf()
 {
-    if(old_password == _password)
-        _password = new_password;
-    else
-        std::cout << "Senha incorreta\n";
+    return _cpf;
 }

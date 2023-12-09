@@ -1,9 +1,10 @@
 #include"User.hpp"
 #include "../Data_manage/Database.hpp"
 
-User::User(): Client()
+User::User(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::vector<MyGame> _library, std::vector<Game> _wishlist): Client(_username, _password, _email, _cpf, balance, 1)
 {
-    _id = 0;
+    _library = _library;
+    _wishlist = _wishlist;
 }
 
 User::~User()
@@ -11,15 +12,15 @@ User::~User()
 
 }
 
-void User::buy_game(Game game)
+void User::buy_game()
 {
+    /*
     if(game.get_price() > _balance)
         std::cout << "Saldo insuficiente\n";
     else if(game.get_ageRating() > get_age())
         std::cout << "Você não tem idade suficiente para comprar esse jogo\n";
     else
     {
-        /*
         bool alreadyHave = false;
         for(int i = 0; i < _library.size(); i++)
             if(_library[i].get_name() == game.get_name())
@@ -34,7 +35,6 @@ void User::buy_game(Game game)
         else
             std::cout << "Você já possui esse jogo\n";
         */
-    }
 }
 
 void User::add_to_wishlist(Game game)

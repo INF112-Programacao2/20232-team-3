@@ -1,5 +1,11 @@
 #include"Developer.hpp"
 
+Developer::Developer(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::vector<Game> publishedGames): Client(_username, _password, _email, _cpf, balance, 10)
+{ 
+    _publishedGames = publishedGames;
+}
+
+/*
 Developer::Developer(): Client()
 {
     std::string CNPJorCPF = "", aux = "";
@@ -34,24 +40,23 @@ Developer::Developer(): Client()
         }
     }   
 }
+*/
 
 Developer::~Developer()
 {
 }
 
-void Developer::publish_game(Game game)
+void Developer::publish_game()
 {
-    for(int i = 0 ; i < _publishedGames.size() ; i++)
-        if(_publishedGames[i].get_name() == game.get_name())
-        {
-            std::cout << "Jogo já publicado\n";
-            return;
-        }
+    Game game = Autentication::publish_game(); // Funcao que faz o tratamento de erro para criar jogo e adiciona no banco de dados e retorna um ponteiro para o jogo
     _publishedGames.push_back(game);
+
 }
 
-void Developer::remove_game(Game game)
+void Developer::remove_game()
 {
+    Game game = Autentication::remove_game(); // Funcao que faz o tratamento de erro para criar jogo e adiciona no banco de dados e retorna um ponteiro para o jogo
+
     for(int i = 0 ; i < _publishedGames.size() ; i++)
         if(_publishedGames[i].get_name() == game.get_name())
         {
@@ -59,22 +64,6 @@ void Developer::remove_game(Game game)
             return;
         }
     std::cout << "Jogo nao publicado\n";
-}
-
-std::string Developer::get_CNPJ()
-{
-    if(_CNPJ != "")
-        return _CNPJ;
-    else
-        return "Nao possui CNPJ";
-}
-
-std::string Developer::get_CPF()
-{
-    if(_CPF != "")
-        return _CPF;
-    else
-        return "Nao possui CPF";
 }
 
 void Developer::menu()
