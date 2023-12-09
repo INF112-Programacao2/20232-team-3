@@ -8,7 +8,7 @@
 class MyGame
 {
 private:
-    std::vector<Game> _my_games;
+    Game *_gamecopy;
 public:
     MyGame();
     ~MyGame();

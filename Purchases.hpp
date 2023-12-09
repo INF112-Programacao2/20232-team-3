@@ -9,9 +9,7 @@ class Purchases : public Client
 public:
     Purchases();
     ~Purchases();
-    bool checkAge(Date birthdate, std::string ageRating);
-    bool checkBalance(double balance, double price);
-    void buy_game(My_Games new_game, Game game);
+    void buy_game();
 
 };
 

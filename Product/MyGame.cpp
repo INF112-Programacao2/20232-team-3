@@ -10,27 +10,16 @@ MyGame::~MyGame()
 
 void MyGame::add_game(Game game)
 {
-    _my_games.push_back(game);
+    this->_gamecopy = &game;
 }
 
 void MyGame::remove_game(Game game)
 {
-    for (int i = 0; i < _my_games.size(); i++)
-    {
-        if (_my_games[i].get_name() == game.get_name())
-        {
-            _my_games.erase(_my_games.begin() + i);
-            break;
-        }
-    }
+    this->_gamecopy = nullptr;
 }
 
 void MyGame::show_my_games(){
-    std::cout << "My Games:" << std::endl;
-    for (auto e : _my_games)
-    {
-        std::cout << "Name: " << e.get_name() << std::endl;
-        std::cout << "Studio: " << e.get_studio() << std::endl;
-    }
-    
+    std::cout << "Name: " << this->_gamecopy->get_name() << std::endl << "Studio: " << this->_gamecopy->get_studio() << std::endl 
+    << "Age rating: " << this->_gamecopy->get_ageRating() << std::endl << "Release Date: " << this->_gamecopy->get_releaseDate() << std::endl 
+    << "Reviews: " << this->_gamecopy->get_review() << std::endl;   
 }
