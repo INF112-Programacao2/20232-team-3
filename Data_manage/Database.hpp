@@ -5,11 +5,11 @@
 
     class Database{
         public:
-        static void add_user(std::string username, std::string email, std::string password,
-        int ID, std::string cpf);
-        static void show_info(std::string username, std::string password);
-        static void add_game_user(std::string username, std::string password, std::string game);
-        static void add_balance(std::string username, std::string password, double balance);
+        static void add_user(std::string &username, std::string &email, std::string &password,
+        int &ID, std::string &cpf, int &Age);
+        static void show_info(std::string &username, std::string &password);
+        static void add_game_user(std::string &username, std::string &password, std::string &ame);
+        static void add_balance(std::string &username, std::string &password, double &balance);
         static void add_game(
                             std::string name,
                             std::string studio,
@@ -28,7 +28,11 @@
                             std::string directx,
                             std::string storage
                             );
-        };
+        static void show_games();
+        static void search_game(std::string &username, std::string &password, std::string &game);
+        static void add_to_wishlist(std::string &username, std::string &password, std::string &game);
+
+    };
 
 
 

@@ -6,7 +6,9 @@
               "ID": 10,
               "Jogos": [],
               "Password": "pedro123",
-              "Username": "Pedro"
+              "Username": "Pedro",
+              "Wishlist": [],
+              "Idade": 0
        },
        {
               "Balance": 0.0,
@@ -15,7 +17,9 @@
               "ID": 1,
               "Jogos": null,
               "Password": "123",
-              "Username": "joao"
+              "Username": "joao",
+              "Wishlist": [],
+              "Idade": 0
        },
        {
               "Balance": 400.0,
@@ -27,6 +31,8 @@
                      "ResidentEvil"
               ],
               "Password": "1234",
-              "Username": "LEANDERSON"
+              "Username": "LEANDERSON",
+              "Wishlist":[],
+              "Idade": 0
        }
 ]

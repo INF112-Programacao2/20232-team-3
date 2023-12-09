@@ -1,5 +1,6 @@
 #include "Autentication.hpp"
 
+const std::string bd = "../users.json";
 
 Autentication::Autentication(std::string username, std::string email, std::string password):
     _username(username), _email(email), _password(password){};
@@ -14,8 +15,9 @@ std::string Autentication::get_password(){
     return _password;
 }
 using json = nlohmann::json;
+
 std::string Autentication::search_user(){
-    std::ifstream arquivo("Usuarios.json");
+    std::ifstream arquivo(bd);
     if (!arquivo.is_open()) {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
         //return false;
