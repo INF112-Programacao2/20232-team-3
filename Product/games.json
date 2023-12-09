@@ -1,0 +1,92 @@
+[
+                {
+                                "Age Rating": "",
+                                "Availability": "Available",
+                                "Gender": "Action",
+                                "Language": "PORTUGUES",
+                                "Name": "GTA",
+                                "Platform": "PS4",
+                                "Price": "",
+                                "Release Date": "19/9/2013",
+                                "Review": "10",
+                                "Studio": "ROCKSTAR"
+                },
+                {
+                                "Age Rating": "18",
+                                "Availability": "Available",
+                                "Gender": "Action",
+                                "Language": "PORTUGUES",
+                                "Name": "CALL OF DUTY",
+                                "Platform": "PS4",
+                                "Price": "199",
+                                "Release Date": "10/9/2023",
+                                "Review": "10",
+                                "Studio": "ACTIVISION"
+                },
+                {
+                                "Age Rating": "18",
+                                "Availability": "Available",
+                                "Gender": "Action",
+                                "Language": "Portugues",
+                                "Name": "The last of us",
+                                "Platform": "PS4",
+                                "Price": "199",
+                                "Release Date": "14/5/2013",
+                                "Review": "10",
+                                "Studio": "Naughty dog"
+                },
+                {
+                                "Age Rating": "18",
+                                "Availability": "Available",
+                                "Gender": "Action",
+                                "Language": "Portugues",
+                                "Name": "God of war",
+                                "Platform": "PS4",
+                                "Price": "199",
+                                "Release Date": "21/4/2019",
+                                "Review": "10",
+                                "Studio": "Santa monica "
+                },
+                {
+                                "Age Rating": "10",
+                                "Availability": "Available",
+                                "Gender": "Adventure",
+                                "Language": "Portugues",
+                                "Name": "Mario",
+                                "Platform": "Switch",
+                                "Price": "199",
+                                "Release Date": "17/10/2017",
+                                "Review": "10",
+                                "Studio": "Nintendo"
+                },
+                {
+                                "Age Rating": "18",
+                                "Availability": "Available",
+                                "Gender": "Action",
+                                "Language": "Portugues",
+                                "Name": "Assassins creed",
+                                "Platform": "PS4",
+                                "Price": "199",
+                                "Release Date": "21/10/2020",
+                                "Review": "10",
+                                "Studio": "Ubisoft"
+                },
+                {
+                                "Age Rating": "18",
+                                "Availability": "Available",
+                                "DirectX": "12",
+                                "Gender": "FPS",
+                                "Graphics": "RTX 3050",
+                                "Language": "Portugues",
+                                "Memory": "8 GB",
+                                "Name": "Valorant",
+                                "OS": "Windows 11",
+                                "Platform": "PC",
+                                "Price": "0",
+                                "Processor": "Intel core i5",
+                                "Release Date": "20/5/2020",
+                                "Review": "10",
+                                "Storage": "35 GB",
+                                "Studio": "Riot games"
+                }
+]
