@@ -1,0 +1,32 @@
+[
+       {
+              "Balance": 0.0,
+              "CPF": "123456789",
+              "Email": "Pedro@gmail.com",
+              "ID": 10,
+              "Jogos": [],
+              "Password": "pedro123",
+              "Username": "Pedro"
+       },
+       {
+              "Balance": 0.0,
+              "CPF": "12345678910",
+              "Email": "joao@gmail.com",
+              "ID": 1,
+              "Jogos": null,
+              "Password": "123",
+              "Username": "joao"
+       },
+       {
+              "Balance": 400.0,
+              "CPF": "123456789210",
+              "Email": "joaoL@gmail.com",
+              "ID": 1,
+              "Jogos": [
+                     "Gta",
+                     "ResidentEvil"
+              ],
+              "Password": "1234",
+              "Username": "LEANDERSON"
+       }
+]

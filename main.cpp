@@ -4,6 +4,9 @@
 #include "Product.hpp"
 #include "Game.hpp"
 #include "GameSystem.hpp"
+#include "Autentication.hpp"
+#include "Database.hpp"
+
 
 int main() {
     std::cout << "Welcome to Steam!" << std::endl;

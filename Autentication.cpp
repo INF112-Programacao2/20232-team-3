@@ -14,8 +14,8 @@ std::string Autentication::get_password(){
     return _password;
 }
 using json = nlohmann::json;
-std::string Autentication::search_user(const std::string& nomeArquivo) {
-    std::ifstream arquivo(nomeArquivo);
+std::string Autentication::search_user(){
+    std::ifstream arquivo("Usuarios.json");
     if (!arquivo.is_open()) {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
         //return false;
@@ -29,7 +29,7 @@ std::string Autentication::search_user(const std::string& nomeArquivo) {
         for (const auto& data: dadosJSON) {
             std::string usernameJSON= data["Username"];
             std::string emailJSON = data["Email"];
-            std::string passwordJSON = data["PASSWORD"];
+            std::string passwordJSON = data["Pawword"];
             int idJSON = data["ID"].get<int>();
 
             // Verifique se o nome e o usuário correspondem aos fornecidos
@@ -46,43 +46,3 @@ std::string Autentication::search_user(const std::string& nomeArquivo) {
 
     return "Usuario Invalido";
 }
-void Autentication::add_user(const std::string& nomeArquivo, std::string username, std::string email, std::string password, int ID) {
-    std::ifstream arquivo(nomeArquivo);
-    if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
-        //return false;
-    }
-
-    json dadosJSON;
-    arquivo >> dadosJSON;
-    arquivo.close();
-
-    if (dadosJSON.is_array()) {
-        for (const auto& data: dadosJSON) {
-            std::string usernameJSON= data["Username"];
-            std::string emailJSON = data["Email"];
-            std::string passwordJSON = data["PASSWORD"];
-            int idJSON = data["ID"].get<int>();
-
-            // Verifique se o nome e o usuário correspondem aos fornecidos
-            if ((usernameJSON == username || emailJSON == email) && passwordJSON == password) {
-                std::cout << "Usuario ja cadastrado" << std::endl;
-                return;
-            }
-        }
-    }
-    json novoUsuario;
-    novoUsuario["Username"] = username;
-    novoUsuario["Email"] = email;
-    novoUsuario["PASSWORD"] = password;
-    novoUsuario["ID"] = ID;
-
-    dadosJSON.push_back(novoUsuario);
-
-    std::ofstream arquivoSaida(nomeArquivo);
-    arquivoSaida << dadosJSON.dump(4);
-    arquivoSaida.close();
-    std::cout << "Usuario cadastrado com sucesso" << std::endl;
-    return;
-}
-
