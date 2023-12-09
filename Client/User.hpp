@@ -3,12 +3,13 @@
 
 #include"Client.hpp"
 #include"../Product/Game.hpp"
+#include"../Product/MyGame.hpp"
 #include<vector>
 
 class User: public Client
 {
 private:
-    //std::vector<Game_Copy> _library;
+    std::vector<MyGame> _library;
     std::vector<Game> _wishlist;
 public:
     User();
@@ -16,6 +17,7 @@ public:
     void buy_game(Game game);
     void add_to_wishlist(Game game);
     void remove_from_wishlist(Game game);
+    virtual void menu();
 };
 
 #endif // USER_HPP_

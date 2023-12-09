@@ -30,6 +30,7 @@ public:
     int get_age();
     double get_balance();
     void change_password(std::string old_password, std::string new_password);
+    virtual void menu() = 0;
 
 };
 

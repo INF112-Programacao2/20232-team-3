@@ -1,19 +1,19 @@
-#include "My_Games.hpp"
+#include "MyGame.hpp"
 
-My_Games::My_Games()
+MyGame::MyGame()
 {
 }
 
-My_Games::~My_Games()
+MyGame::~MyGame()
 {
 }
 
-void My_Games::add_game(Game game)
+void MyGame::add_game(Game game)
 {
     _my_games.push_back(game);
 }
 
-void My_Games::remove_game(Game game)
+void MyGame::remove_game(Game game)
 {
     for (int i = 0; i < _my_games.size(); i++)
     {
@@ -25,7 +25,7 @@ void My_Games::remove_game(Game game)
     }
 }
 
-void My_Games::show_my_games(){
+void MyGame::show_my_games(){
     std::cout << "My Games:" << std::endl;
     for (auto e : _my_games)
     {
