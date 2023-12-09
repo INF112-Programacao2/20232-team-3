@@ -16,7 +16,8 @@ class Product{
     public:
 	    // Constructor
 	    Product(std::string name, std::string studio, std::string ageRating, std::string price, std::string availability, std::string review, std::string releaseDate);
-
+        Product(std::string name, std::string price, std::string availability);
+		
 	    // Destructor
 	    ~Product();
 

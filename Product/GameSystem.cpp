@@ -3,9 +3,8 @@
 #include <limits>
 #include <stdexcept>
 #include <fstream>
-#include <vector>
 #include <algorithm>
-#include "ctype.h"
+#include <cctype>
 #include "Product.hpp"
 #include "Game.hpp"
 #include "GameSystem.hpp"
@@ -18,12 +17,12 @@ int GameSystem::numberOfGames = 0;    // Número de jogos
 void GameSystem::gameMenu(){    // Menu principal do sistema de jogos
     int opcao;
     while(true){
-        std::cout << "What do you want to do?" << std::endl;
-        std::cout << "1 - Add Game" << std::endl;
-        std::cout << "2 - Remove Game" << std::endl;
-        std::cout << "3 - Change Game" << std::endl;
-        std::cout << "4 - Search Game" << std::endl;
-        std::cout << "5 - Back" << std::endl;
+        std::cout << "O que deseja fazer?" << std::endl;
+        std::cout << "1 - Adicionar jogo" << std::endl;
+        std::cout << "2 - Remover jogo" << std::endl;
+        std::cout << "3 - Alterar jogo" << std::endl;
+        std::cout << "4 - Buscar jogo" << std::endl;
+        std::cout << "5 - Voltar" << std::endl;
         std::cin >> opcao;
         std::cin.ignore();
         switch(opcao){
@@ -52,14 +51,14 @@ void GameSystem::addGame(){    // Adiciona um jogo
     std::ifstream inputFile(nameFile);
 
     if(!inputFile.is_open()){
-        std::cerr << "Error opening json file" << std::endl;
+        std::cerr << "Erro ao abrir o arquivo json" << std::endl;
         return;
     }
 
     json dadosJSON;
     inputFile >> dadosJSON;
     inputFile.close();
-    std::cout << "Enter the name of the game: ";
+    std::cout << "Digite o nome do jogo: ";
     name = GameSystem::verifyName();
     
     auto it = std::find_if(dadosJSON.begin(), dadosJSON.end(), [&](const auto& data) {    // Verifica se o jogo já existe
@@ -67,28 +66,28 @@ void GameSystem::addGame(){    // Adiciona um jogo
     });
 
     if(it != dadosJSON.end()){    // Se o jogo já existir, não adiciona
-        std::cout << "Game already exists." << std::endl;
+        std::cout << "Esse jogo ja existe!" << std::endl;
         return;
 
     }
     else{    // Jogo não existe, crie um novo jogo
-        std::cout << "Enter the studio: ";
+        std::cout << "Digite o nome do studio: ";
         studio = GameSystem::verifyStudio();
-        std::cout << "Enter the age rating: ";
+        std::cout << "Digite a classificação etaria: ";
         ageRating = GameSystem::verifyAgeRating();
-        std::cout << "Enter the price: ";
+        std::cout << "Digite o preco: ";
         price = GameSystem::verifyPrice();
-        std::cout << "Enter the availability: ";
+        std::cout << "Digite a disponibilidade: ";
         availability = GameSystem::verifyAvailability();
-        std::cout << "Enter the review: ";
+        std::cout << "Digite o review: ";
         review = GameSystem::verifyReview();
-        std::cout << "Enter the day, month and year of release: " << std::endl;
+        std::cout << "Digite o dia, mes e ano do lancamento: " << std::endl;
         releaseDate = GameSystem::verifyReleaseDate();
-        std::cout << "Enter the gender: ";
+        std::cout << "Digite o genero: ";
         gender = GameSystem::verifyName();
-        std::cout << "Enter the platform: ";
+        std::cout << "Digite a plataforma: ";
         platform = GameSystem::verifyName();
-        std::cout << "Enter the language: ";
+        std::cout << "Digite o idioma: ";
         language = GameSystem::verifyName();
  
         if(platform != "PC"){    // Se a plataforma for diferente de PC, não pede as informações de PC
@@ -109,21 +108,21 @@ void GameSystem::addGame(){    // Adiciona um jogo
             std::ofstream fileout(nameFile);    // Abre o arquivo JSON
             fileout << dadosJSON.dump(10);  // Use o valor apropriado para a formatação desejada
             fileout.close();
-            std::cout << "Game added successfully!" << std::endl;
+            std::cout << "Jogo adicionado com sucesso!" << std::endl;
             numberOfGames++;
         }
         else{    // Se a plataforma for PC, pede as informações de PC
-            std::cout << "Enter the OS: ";
+            std::cout << "Digite o sistema operacional: ";
             os = GameSystem::verifyName();
-            std::cout << "Enter the processor: ";
+            std::cout << "Digite o processador: ";
             processor = GameSystem::verifyName();
-            std::cout << "Enter the memory: ";
+            std::cout << "Digite o tamanho da memoria: ";
             memory = GameSystem::verifyName();
-            std::cout << "Enter the graphics: ";
+            std::cout << "Digite a placa de video: ";
             graphics = GameSystem::verifyName();
-            std::cout << "Enter the DirectX: ";
+            std::cout << "Digite o directx: ";
             directx = GameSystem::verifyName();
-            std::cout << "Enter the storage: ";
+            std::cout << "Digite o tamanho do armazenamento: ";
             storage = GameSystem::verifyName();
 
             json newGame;
@@ -149,7 +148,7 @@ void GameSystem::addGame(){    // Adiciona um jogo
             std::ofstream fileout(nameFile);    // Abre o arquivo JSON
             fileout << dadosJSON.dump(16);
             fileout.close();
-            std::cout << "Game added successfully!" << std::endl;
+            std::cout << "Jogo adicionado com sucesso!" << std::endl;
             numberOfGames++;
         }
     }
@@ -158,14 +157,14 @@ void GameSystem::addGame(){    // Adiciona um jogo
 void GameSystem::removeGame(){    // Remove um jogo
     std::string name;
     bool gameExists = false;
-    std::cout << "Enter the name of the game you want to remove: ";
+    std::cout << "Digite o nome do jogo que deseja remover: ";
 
     while (true) {
         name = GameSystem::verifyName();
 
         std::ifstream inputFile("games.json");    // Abre o arquivo JSON
         if (!inputFile.is_open()) {    // Verifica se o arquivo foi aberto corretamente
-            std::cerr << "Error opening json file" << std::endl;
+            std::cerr << "Erro ao abrir o arquivo json" << std::endl;
             return;
         }
 
@@ -185,11 +184,11 @@ void GameSystem::removeGame(){    // Remove um jogo
             fileout << dadosJSON.dump(4);  // Ajuste o valor de indentação conforme necessário
             fileout.close();
 
-            std::cout << "Game removed successfully!" << std::endl;
+            std::cout << "Jogo removido com sucesso!" << std::endl;
             gameExists = true;
         }
         else{    // Jogo não encontrado, pede para tentar novamente
-            std::cout << "Game not found. Please try again: " << std::endl;
+            std::cout << "Jogo nao encontrado. Por favor tente novamente: " << std::endl;
         }
 
         if(gameExists){

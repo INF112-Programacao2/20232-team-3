@@ -8,6 +8,11 @@ Product::Product(std::string name, std::string studio, std::string ageRating, st
 {
 }
 
+Product::Product(std::string name, std::string price, std::string availability) : 
+    _name(name), _price(price), _availability(availability) 
+{
+}
+
 // Destructor
 Product::~Product() 
 {
