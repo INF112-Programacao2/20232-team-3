@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Product.hpp"
-#include "Game.hpp"
+#include "Product/Product.hpp"
+#include "Product/Game.hpp"
 #include "Data_manage/GameSystem.hpp"
-#include "Autentication.hpp"
-#include "Database.hpp"
+#include "Data_manage/Autentication.hpp"
+#include "Data_manage/Database.hpp"
 
 
 int main() {
