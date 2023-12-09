@@ -5,13 +5,8 @@
 #include <fstream>
 #include <algorithm>
 #include <cctype>
-<<<<<<< HEAD:Product/GameSystem.cpp
-#include "Product.hpp"
-#include "Game.hpp"
-=======
 #include "../Product/Product.hpp"
 #include "../Product/Game.hpp"
->>>>>>> bb1e84d68a5dd2868d623552bbeae55891900422:Data_manage/GameSystem.cpp
 #include "GameSystem.hpp"
 
 using json = nlohmann::json;
