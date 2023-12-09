@@ -4,8 +4,8 @@
 #include <vector>
 #include <string>
 #include <nlohmann/json.hpp>
-#include "Product.hpp"
-#include "Game.hpp"
+#include "../Product/Product.hpp"
+#include "../Product/Game.hpp"
 
 class GameSystem{
     private:

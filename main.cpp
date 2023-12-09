@@ -3,7 +3,7 @@
 #include <vector>
 #include "Product.hpp"
 #include "Game.hpp"
-#include "GameSystem.hpp"
+#include "Product/GameSystem.hpp"
 #include "Autentication.hpp"
 #include "Database.hpp"
 

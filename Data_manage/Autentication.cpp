@@ -14,8 +14,9 @@ std::string Autentication::get_password(){
     return _password;
 }
 using json = nlohmann::json;
+
 std::string Autentication::search_user(){
-    std::ifstream arquivo("Usuarios.json");
+    std::ifstream arquivo("users.json");
     if (!arquivo.is_open()) {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
         //return false;

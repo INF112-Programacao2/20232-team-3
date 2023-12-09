@@ -4,7 +4,7 @@ using json = nlohmann::json;
 
 void Database::add_user(std::string &username, std::string &email, 
 std::string &password,int &ID, std::string &cpf, int &Age){
-    std::ifstream arquivo("Usuarios.json");
+    std::ifstream arquivo("users.json");
     if (!arquivo.is_open()) {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
         // return;
@@ -45,14 +45,14 @@ std::string &password,int &ID, std::string &cpf, int &Age){
 
     dadosJSON.push_back(novoUsuario);
 
-    std::ofstream arquivoSaida("Usuarios.json");
+    std::ofstream arquivoSaida("users.json");
     arquivoSaida << dadosJSON.dump(7);
     arquivoSaida.close();
     std::cout << "Usuario cadastrado com sucesso" << std::endl;
     // return;
 }
 void Database::show_info(std::string &username, std::string &password){
-    std::ifstream arquivo("Usuarios.json");
+    std::ifstream arquivo("users.json");
     if (!arquivo.is_open()) {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
         // return;
@@ -97,7 +97,7 @@ void Database::show_info(std::string &username, std::string &password){
     // return;
 }
 void Database::add_game_user(std::string &username, std::string &password, std::string &game){
-    std::ifstream arquivo("Usuarios.json");
+    std::ifstream arquivo("users.json");
     if (!arquivo.is_open()) {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
         // return;
@@ -123,7 +123,7 @@ void Database::add_game_user(std::string &username, std::string &password, std::
                     }
                     data["Jogos"].push_back(game);
                     std::cout << "Jogo cadastrado com sucesso" << std::endl;
-                    std::ofstream arquivoSaida("Usuarios.json");
+                    std::ofstream arquivoSaida("users.json");
                     arquivoSaida << dadosJSON.dump(7);
                     arquivoSaida.close();
                     return;
@@ -142,7 +142,7 @@ void Database::add_game_user(std::string &username, std::string &password, std::
     // return;
 }
 void Database::add_balance(std::string &username, std::string &password, double &balance){
-    std::ifstream arquivo("Usuarios.json");
+    std::ifstream arquivo("users.json");
     if (!arquivo.is_open()) {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
         // return;
@@ -164,7 +164,7 @@ void Database::add_balance(std::string &username, std::string &password, double 
             if (usernameJSON == username && passwordJSON == password) {
                 data["Balance"] = balanceJSON + balance;
                 std::cout << "Saldo atualizado com sucesso" << std::endl;
-                std::ofstream arquivoSaida("Usuarios.json");
+                std::ofstream arquivoSaida("users.json");
                 arquivoSaida << dadosJSON.dump(7);
                 arquivoSaida.close();
                 return;
@@ -192,7 +192,7 @@ void Database::add_game(
                             std::string directx,
                             std::string storage
                         ){
-                            std::ifstream arquivo("Usuarios.json");
+                            std::ifstream arquivo("users.json");
                             if (!arquivo.is_open()) {
                                 std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
                                 //return;
@@ -248,7 +248,7 @@ void Database::show_games(){
     }
 }
 void Database::search_game(std::string &username, std::string &password, std::string &game){
-    std::ifstream arquivo("Usuarios.json");
+    std::ifstream arquivo("users.json");
     if (!arquivo.is_open()) {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
         // return;
@@ -290,7 +290,7 @@ void Database::search_game(std::string &username, std::string &password, std::st
 
 }
 void Database::add_to_wishlist(std::string &username, std::string &password, std::string &game){
-    std::ifstream arquivo("Usuarios.json");
+    std::ifstream arquivo("users.json");
     if (!arquivo.is_open()) {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
         // return;
@@ -310,7 +310,7 @@ void Database::add_to_wishlist(std::string &username, std::string &password, std
                 if (data["Wishlist"].is_array()) {
                     data["Wishlist"].push_back(game);
                     std::cout << "Jogo cadastrado com sucesso" << std::endl;
-                    std::ofstream arquivoSaida("Usuarios.json");
+                    std::ofstream arquivoSaida("users.json");
                     arquivoSaida << dadosJSON.dump(7);
                     arquivoSaida.close();
                     return;

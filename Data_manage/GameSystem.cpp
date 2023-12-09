@@ -5,9 +5,9 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
-#include "ctype.h"
-#include "Product.hpp"
-#include "Game.hpp"
+#include <cctype>
+#include "../Product/Product.hpp"
+#include "../Product/Game.hpp"
 #include "GameSystem.hpp"
 
 using json = nlohmann::json;

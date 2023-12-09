@@ -1,7 +1,7 @@
 #ifndef PURCHASES_HPP
 #define PURCHASES_HPP
-#include "My_Games.hpp"
-#include "Client.hpp"
+#include "Product/My_Games.hpp"
+#include "Client/Client.hpp"
 #include <ctime>
 class Purchases : public Client
 {
