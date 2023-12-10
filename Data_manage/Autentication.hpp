@@ -4,16 +4,25 @@
 #include <bits/stdc++.h>
 
     class Autentication{
-private:
-    std::string _username, _email, _password;
-public:
-    Autentication(std::string username, std::string email, std::string password); // Construtor que coloca username passaword e email como 
-    std::string search_user(); // Entra no txt/json e confere o tipo do cliente, se for user retorna 1, se for studio retorna 2, se não encontrar retorna 0
-    //User load_user(); // Entra no txt/json e carrega os dados do user;
-    //Studio load_studio(); // Entra no txt/json e carrega os dados do studio;
-    std::string get_username();
-    std::string get_password();
-    std::string get_email();
+        public:
+        void Registrar();
+        void Login(std::string usermail, std::string password);
+        std::string user_name();
+        std::string user_email();
+        std::string user_password();
+        std::string user_cpf();
+        std::string user_birthdate();
+        static std::string verifyName();    // Verifica se o nome é válido
+        static std::string verifyStudio();    // Verifica se o nome do studio é válido
+        static std::string verifyAgeRating();    // Verifica se a classificacao etaria é válida
+        static double verifyPrice();    // Verifica se o preco é válido
+        static std::string verifyAvailability();    // Verifica se a disponibilidade é válida
+        static std::string verifyReview();    // Verifica se a avaliacão é válida
+        static std::string verifyReleaseDate();    // Verifica se a data de lancamento é válida
+
+
+
+    
 
 };
 
