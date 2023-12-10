@@ -11,6 +11,7 @@ class ClientDB
 public:
     static void edit_info(Developer* dev);
     static bool exist_userName(std::string &username);
+    static bool exist_email(std::string &email);
 };
 
 #endif // CLIENTDB_HPP

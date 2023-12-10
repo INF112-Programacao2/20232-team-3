@@ -7,11 +7,11 @@
 int main()
 {
 
-    Developer dev("LEANDERSON", "1234", "joaoL@gmail.com", "123456789210", 0);
+    Developer dev("LEANDERSON", "1234", "leleleles@gmail.com", "123456789210", 0);
 
-    std::cout << dev.get_username() << '\n';
+    std::cout << dev.get_email() << '\n';
     dev.menu();
-    std::cout << dev.get_username() << '\n';
+    std::cout << dev.get_email() << '\n';
 
 
 

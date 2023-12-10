@@ -19,8 +19,7 @@ void Developer::menu()
     switch (aux)
     {
     case 1:
-        // Mostra os dados de Developer sem usar DB
-        ClientDB::edit_info(this); // Função que edita os dados do cliente no banco de dados e usando o this, edita nessa instancia da classe
+        ClientDB::edit_info(this);
         std::cout << "Dados alterados com sucesso!\n";
         goto INIT;
         break;

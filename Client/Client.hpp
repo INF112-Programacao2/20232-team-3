@@ -23,7 +23,7 @@ public:
     std::string get_username();
     void set_username(std::string username);
     std::string get_password();
-    void set_password(std::string oldPassword, std::string newPassword);
+    void set_password(std::string newPassword);
     std::string get_email();
     void set_email(std::string email);
     std::string get_cpf();

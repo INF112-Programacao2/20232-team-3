@@ -25,9 +25,19 @@ std::string Client::get_password()
     return _password;
 }
 
+void Client::set_password(std::string newPassword)
+{
+    _password = newPassword;
+}
+
 std::string Client::get_email()
 {
     return _email;
+}
+
+void Client::set_email(std::string email)
+{
+    _email = email;
 }
 
 std::string Client::get_cpf()
