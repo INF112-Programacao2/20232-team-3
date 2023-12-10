@@ -8,7 +8,9 @@
 class MyGame
 {
 private:
-    Game *_gamecopy;
+    std::string gamecopy_name;
+    std::string gamecopy_username;
+    Game _gamecopy;
 public:
     MyGame();
     ~MyGame();

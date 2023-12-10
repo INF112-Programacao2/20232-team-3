@@ -12,42 +12,47 @@ User::~User()
 
 }
 
-void User::buy_game()
-{
-    /*
-    if(game.get_price() > _balance)
+void User::buy_game(Game game)
+{ 
+    if(stoi(game.get_price()) > this->_balance)
         std::cout << "Saldo insuficiente\n";
-    else if(game.get_ageRating() > get_age())
-        std::cout << "Você não tem idade suficiente para comprar esse jogo\n";
+    else if(stoi(game.get_ageRating()) > get_age())
+        std::cout << "Você não possui idade suficiente para comprar esse jogo\n";
     else
     {
         bool alreadyHave = false;
-        for(int i = 0; i < _library.size(); i++)
-            if(_library[i].get_name() == game.get_name())
+        for(auto e : this->_library)
+        {
+            if(e->get_name() == game.get_name())
                 alreadyHave = true;
+        }        
         
         if(!alreadyHave)
         {
-            _library.push_back(game);
             remove_from_wishlist(game);
-            _balance -= game.get_price();
+            _balance -= stoi(game.get_price());
+            this->_library->add_game(game);
+            
         }
         else
-            std::cout << "Você já possui esse jogo\n";
-        */
+            std::cout << "Você já possui esse jogo\n";     
+    }
 }
-
 void User::add_to_wishlist(Game game)
 {
     bool alreadyHave = false;
-    for(int i = 0; i < _wishlist.size(); i++)
-        if(_wishlist[i].get_name() == game.get_name())
+    for(auto e : this->_wishlist)
+    {
+        if(e->get_name() == game.get_name())
             alreadyHave = true;
-    /*
-    for(int i = 0; i < _library.size(); i++)
-        if(_library[i].get_name() == game.get_name())
+    }
+
+    for(auto e : this->_library)
+    {
+        if(e->get_name() == game.get_name())
             alreadyHave = true;
-    */
+    }
+
     if(!alreadyHave)
         _wishlist.push_back(game);
     else
@@ -75,7 +80,7 @@ void User::menu()
     int aux;
     std::cout << "Bem vindo, " << _username << "!\n";
     INIT:
-    std::cout << "O que deseja fazer?\n1 - Ver/Alterar Dados;\n2 - Ver/Adicionar Saldo;\n3 - Ver biblioteca;\n4 - Loja;\n5 - Ver lista de desejos;\n6 - Resgatar gift card;\n7 gerar gift card;\n";
+    std::cout << "O que deseja fazer?\n1-Ver/Alterar Dados;\n2-Ver/Adicionar Saldo;\n3-Ver biblioteca;\n4-Loja;\n5-Lista de desejos;\n6-Sair;\n";
     std::cin >> aux;
     switch (aux)
     {
@@ -160,7 +165,7 @@ void User::menu()
                 break;
         }
         
-    case 5:
+    case 6:
         for(int i = 0 ; i < _wishlist.size() ; i++)
         {
             std::cout << i+1 << " " << _wishlist[i].get_name() << '\n';
@@ -176,8 +181,8 @@ void User::menu()
                 std::cin >> index; // verificar isso
                 if(check_index(index))
                 {
-                    // buy_game(_wishlist[index]);
-                    remove_from_wishlist(_wishlist[index-1]);
+                    buy_game(this->_wishlist[index]);
+                    remove_from_wishlist(this->_wishlist[index-1]);
                     break;
                 }
 
@@ -185,9 +190,12 @@ void User::menu()
                 {
                     goto CIN;
                 }
-                 
             default:
                 break;
+        
+        case 7:        
+        std::cout << "Obrigado por usar a Steam!\n";             
+            
         }
         // Pergunta se ele quer remover um jogo da lista de desejos e se quiser, remove
         for(int i = 0 ; i < _wishlist.size() ; i++)
@@ -217,12 +225,6 @@ void User::menu()
                 break;
         }
         
-    case 6:
-        // Pergunta o código do gift card e se estiver certo, adiciona o saldo
-        break;
-    case 7:
-        // Pergunta o valor do gift card e gera um código, removendo o valor do saldo
-        break;
     default:
         break;
     }

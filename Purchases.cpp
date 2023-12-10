@@ -8,69 +8,25 @@ Purchases::~Purchases()
 {
 }
 
-bool Purchases::checkAge(Date birthdate, std::string ageRating)
-{
-    time_t t = time(NULL);
-    tm* timePtr = localtime(&t);
-    std::vector<int> ;
-
-    int currentYear = timePtr->tm_year + 1900;
-    int currentMonth = timePtr->tm_mon + 1;
-    int currentDay = timePtr->tm_mday;
-    int age;
-    
-    if (this->_birthdate.month == 11)
-    {
-        if (currentMonth == this->_birthdate.month && currentDay >= this->_birthdate.day)
-        {
-            age = currentYear - this->_birthdate.year;
-        }
-
-        else if (currentMonth == this->_birthdate.month && currentDay < this->_birthdate.day)
-        {
-            age = currentYear - this->_birthdate.year - 1;
-        }
-        
-        else if (currentMonth < this->_birthdate.month)
-        {
-            age = currentYear - this->_birthdate.year - 1;
-        }
-        
-    }
-    
+void Purchases::buy_game(User use){
+    if(game.get_price() > _balance)
+        std::cout << "Saldo insuficiente\n";
+    else if(game.get_ageRating() > get_age())
+        std::cout << "Você não tem idade suficiente para comprar esse jogo\n";
     else
     {
-        if (currentMonth == this->_birthdate.month && currentDay < this->_birthdate.day)
-        {
-            age = currentYear - this->_birthdate.year - 1;
-        }
+        bool alreadyHave = false;
+        for(int i = 0; i < _library.size(); i++)
+            if(_library[i].get_name() == game.get_name())
+                alreadyHave = true;
         
-        else if (currentMonth > this->_birthdate.month)
+        if(!alreadyHave)
         {
-            age = currentYear - this->_birthdate.year;
+            _library.push_back(game);
+            remove_from_wishlist(game);
+            _balance -= game.get_price();
         }
-        
-        else if (currentMonth == this->_birthdate.month && currentDay >= this->_birthdate.day)
-        {
-            age = currentYear - this->_birthdate.year;
-        }
-
-        else if (currentMonth < this->_birthdate.month)
-        {
-            age = currentYear - this->_birthdate.year - 1;
-        }
-        
-    }
-    
-    
-    
-    if (age >= std::stoi(ageRating))
-    {
-        return true;
-    }
-    
-    else
-    {
-        return false;
-    }
+        else
+            std::cout << "Você já possui esse jogo\n";
+}
 }

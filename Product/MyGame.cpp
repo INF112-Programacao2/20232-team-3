@@ -2,6 +2,7 @@
 
 MyGame::MyGame()
 {
+    username da pessoa e nome do jogo
 }
 
 MyGame::~MyGame()
@@ -10,12 +11,12 @@ MyGame::~MyGame()
 
 void MyGame::add_game(Game game)
 {
-    this->_gamecopy = &game;
+    
 }
 
 void MyGame::remove_game(Game game)
 {
-    this->_gamecopy = nullptr;
+    
 }
 
 void MyGame::show_my_games(){

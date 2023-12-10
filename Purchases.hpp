@@ -1,15 +1,15 @@
 #ifndef PURCHASES_HPP
 #define PURCHASES_HPP
-#include "Product/My_Games.hpp"
-#include "Client/Client.hpp"
+#include "../Product/MyGame.hpp"
+#include "Client/User.hpp"
 #include <ctime>
-class Purchases : public Client
+class Purchases
 {
     
 public:
     Purchases();
     ~Purchases();
-    void buy_game();
+    void buy_game(Game new_game);
 
 };
 

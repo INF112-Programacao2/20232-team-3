@@ -14,7 +14,7 @@ private:
 public:
     User(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::vector<MyGame> _library, std::vector<Game> _wishlist);
     ~User();
-    void buy_game();
+    void buy_game(MyGame& new_game, Game game);
     void add_to_wishlist(Game game);
     void remove_from_wishlist(Game game);
     virtual void menu();
