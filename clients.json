@@ -1,0 +1,41 @@
+[
+          {
+                    "Balance": 0.0,
+                    "CPF": "123456789",
+                    "Email": "Pedro@gmail.com",
+                    "ID": 10,
+                    "Idade": "0",
+                    "Jogos": [],
+                    "Password": "pedro123",
+                    "Publicacoes": [],
+                    "Username": "Pedro",
+                    "Wishlist": []
+          },
+          {
+                    "Balance": 0.0,
+                    "CPF": "12345678910",
+                    "Email": "joao@gmail.com",
+                    "ID": 1,
+                    "Idade": "0",
+                    "Jogos": null,
+                    "Password": "123",
+                    "Publicacoes": [],
+                    "Username": "joao",
+                    "Wishlist": []
+          },
+          {
+                    "Balance": 400.0,
+                    "CPF": "123456789210",
+                    "Email": "joaoL@gmail.com",
+                    "ID": 1,
+                    "Idade": "0",
+                    "Jogos": [
+                              "Gta",
+                              "ResidentEvil"
+                    ],
+                    "Password": "1234",
+                    "Publicacoes": [],
+                    "Username": "Leozinho",
+                    "Wishlist": []
+          }
+]

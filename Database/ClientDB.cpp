@@ -5,17 +5,12 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-ClientDB::ClientDB(std::string path)
-{
-    _path = path;
-}
 
 bool ClientDB::exist_userName(std::string &username)
 {
-    std::ifstream arquivo(_path);
+    std::ifstream arquivo("clients.json");
     if (!arquivo.is_open()) {
         std::cerr << "Erro ao abrir o arquivo JSON.1" << std::endl;
-        return false;
     }
 
     json dadosJSON;
@@ -47,7 +42,7 @@ void ClientDB::edit_info(Developer* dev)
         case 1:
             while (true)
             {
-                std::cout << "Digite seu nome de usuário: ";
+                std::cout << "Digite seu novo nome de usuário: ";
                 std::cin >> tempUsername;
                 if(tempUsername.size() > 30)
                 {
@@ -61,9 +56,9 @@ void ClientDB::edit_info(Developer* dev)
                     }
                     else
                     {
-                        dev->set_username(tempUsername);
+                        //dev->set_username(tempUsername);
 
-                        std::ifstream arquivo(_path);
+                        std::ifstream arquivo("clients.json");
                         if (!arquivo.is_open()) {
                             std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
                         }
@@ -79,23 +74,22 @@ void ClientDB::edit_info(Developer* dev)
                                 // Verifique se o nome e o usuário correspondem aos fornecidos
                                 if (usernameJSON == dev->get_username()) {
                                     data["Username"] = tempUsername;
+                                    std::ofstream arquivoSaida("clients.json");
+                                    arquivoSaida << dadosJSON.dump(10);
+                                    arquivoSaida.close();
+                                    dev->set_username(tempUsername);
+                                    return;
                                 }
                             }
                         }
+                        else
+                            std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
+                            break;
+                            // return;
 
-                        break;
                     }
-
                 }
+                break;
             }
-            
-
-
-
-
-
-
-            break;
-        
-    }
+        }
 }

@@ -2,7 +2,7 @@
 #include"../Database/ClientDB.hpp"
 #include<iostream>
 
-class ClientDB;
+//class ClientDB;
 
 Developer::Developer(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance): Client(_username, _password, _email, _cpf, balance, 10)
 { 
@@ -12,7 +12,6 @@ Developer::Developer(std::string _username, std::string _password, std::string _
 void Developer::menu()
 {
     int aux;
-    ClientDB DB("../Database/clients.json");
     std::cout << "Bem vindo, " << _username << "!\n";
     INIT:
     std::cout << "O que deseja fazer?\n1 - Ver/Alterar Dados;\n2 - Ver/Resgatar Saldo;\n3 - Ver/Editar jogos;\n4 - Sair\n";
@@ -21,7 +20,7 @@ void Developer::menu()
     {
     case 1:
         // Mostra os dados de Developer sem usar DB
-        DB.edit_info(this); // Função que edita os dados do cliente no banco de dados e usando o this, edita nessa instancia da classe
+        ClientDB::edit_info(this); // Função que edita os dados do cliente no banco de dados e usando o this, edita nessa instancia da classe
         std::cout << "Dados alterados com sucesso!\n";
         goto INIT;
         break;
