@@ -15,6 +15,11 @@ std::string Client::get_username()
     return _username;
 }
 
+void Client::set_username(std::string username)
+{
+    _username = username;
+}
+
 std::string Client::get_password()
 {
     return _password;

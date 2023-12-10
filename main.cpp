@@ -60,7 +60,7 @@ int main()
         break;
     }
 
-    client->menu();
+    //client->menu();
 
 
 	return 0;

@@ -8,9 +8,9 @@
 class Developer: public Client
 {
 private:
-    std::vector<Game> _publishedGames;
+    //std::vector<Game> _publishedGames;
 public:
-    Developer(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::vector<Game> publishedGames);
+    Developer(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance);
     virtual void menu();
 };
 

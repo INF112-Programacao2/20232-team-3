@@ -1,0 +1,7 @@
+class GameDB
+{
+private:
+    
+public:
+    
+};
