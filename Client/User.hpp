@@ -18,6 +18,7 @@ public:
     void add_to_wishlist(Game game);
     void remove_from_wishlist(Game game);
     virtual void menu();
+    bool check_index(int index);
 };
 
 #endif // USER_HPP_
