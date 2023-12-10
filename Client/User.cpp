@@ -1,7 +1,7 @@
 #include"User.hpp"
 #include "../Data_manage/Database.hpp"
 
-User::User(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::vector<MyGame> _library, std::vector<Game> _wishlist): Client(_username, _password, _email, _cpf, balance, 1)
+User::User(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::vector<Game> _library, std::vector<Game> _wishlist): Client(_username, _password, _email, _cpf, balance, 1)
 {
     _library = _library;
     _wishlist = _wishlist;
