@@ -17,32 +17,16 @@ int main() {
 		case 1: LOGIN:
 			// Pega passwaord e username/email e ve se existe
 			Client* client = Autentication::login();
-			if(client == nullptr) // Se nao existir
+			switch (client->get_id())
 			{
-				std::cout << "Usuario nao encontrado, o que deseja fazer?\n1 - Tentar novamente;\n2 - Registrar-se.\n";
-				std::cin >> aux;
-				switch(aux)
-				{
-					case 1:
-						goto LOGIN; // Volta pro inicio do while
-						break;
-					case 2:
-						goto REGISTER; // Vai para o registro
-						break;
-				}
-			}
-			else{
-				switch (client->get_id())
-				{
-				case 1: // Usuario
-					User* user = static_cast<User*>(client);
-					user->menu();
-					break;
-				default: // Desenvolvedor
-					Developer *dev = static_cast<Developer*>(client);
-					dev->menu();
-					break;
-				}
+			case 1: // Usuario
+				User* user = static_cast<User*>(client);
+				user->menu();
+				break;
+			default: // Desenvolvedor
+				Developer *dev = static_cast<Developer*>(client);
+				dev->menu();
+				break;
 			}
 			break;
 		case 2: REGISTER:
