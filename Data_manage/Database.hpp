@@ -17,6 +17,7 @@
         static void addGame();    // Adiciona um jogo
         static void removeGame();    // Remove um jogo
         static void changeGame();    // Altera um jogo
+        static void modify_user(std::string &username, std::string &password, std::string &new_username, std::string &new_password, std::string &new_email);    // Edita os dados de um usuário
 
     };
 

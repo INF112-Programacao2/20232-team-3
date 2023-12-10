@@ -19,6 +19,7 @@
         static std::string verifyAvailability();    // Verifica se a disponibilidade é válida
         static std::string verifyReview();    // Verifica se a avaliacão é válida
         static std::string verifyReleaseDate();    // Verifica se a data de lancamento é válida
+        void editar_dados();    // Edita os dados de um usuário
 
 
 

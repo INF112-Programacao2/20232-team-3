@@ -521,5 +521,36 @@ void Database::changeGame(){    // Altera um jogo
         }
     }
 }
+void Database::modify_user(std::string &username, std::string &password, std::string &new_username, std::string &new_password, std::string &new_email){
+    std::ifstream arquivo(bd);
+    if (!arquivo.is_open()) {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
 
+    json dadosJSON;
+    arquivo >> dadosJSON;
+    arquivo.close();
+
+    if (dadosJSON.is_array()) {
+        for (auto& data : dadosJSON) {
+            std::string usernameJSON = data["Username"];
+            std::string passwordJSON = data["Password"];
+            std::string emailJSON = data["Email"];
+            // Verifique se o nome e o usuário correspondem aos fornecidos
+            if (usernameJSON == username && passwordJSON == password) {
+                data["Username"] = new_username;
+                data["Password"] = new_password;
+                data["Email"] = new_email;
+                std::cout << "Dados alterados com sucesso" << std::endl;
+                std::ofstream arquivoSaida(bd);
+                arquivoSaida << dadosJSON.dump(7);
+                arquivoSaida.close();
+                return;
+            }
+        }
+    }
+    std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
+    // return;
+
+}
 

@@ -112,9 +112,86 @@ std::string Autentication::user_password(){
     
 }
 std::string Autentication::user_cpf(){
+    std::string _cpf;
+    while (true)
+    {
+        std::cout << "Digite seu CPF: ";
+        std::cin >> _cpf;
+        if(_cpf.size() != 11)
+        {
+            std::cout << "CPF inválido, digite novamente\n";
+            continue;
+        }
+        else
+        {
+            bool hasOnlyNumbers = true;
+            for(auto e: _cpf)
+            {
+                if(e < '0' || e > '9')
+                {
+                    hasOnlyNumbers = false;
+                    break;
+                }
+            }
+            if(!hasOnlyNumbers)
+            {
+                std::cout << "CPF inválido, digite novamente\n";
+                continue;
+            }
+            else
+            {
+                bool hasRepeated = false;
+                for(int i = 0; i < 10; i++)
+                {
+                    if(_cpf[i] == _cpf[i + 1])
+                    {
+                        hasRepeated = true;
+                        break;
+                    }
+                }
+                if(hasRepeated)
+                {
+                    std::cout << "CPF inválido, digite novamente\n";
+                    continue;
+                }
+                else
+                {
+                    int sum = 0;
+                    for(int i = 0; i < 9; i++)
+                        sum += (_cpf[i] - '0') * (10 - i);
+                    int digit1 = (sum * 10) % 11;
+                    if(digit1 == 10)
+                        digit1 = 0;
+                    if(digit1 != _cpf[9] - '0')
+                    {
+                        std::cout << "CPF inválido, digite novamente\n";
+                        continue;
+                    }
+                    else
+                    {
+                        sum = 0;
+                        for(int i = 0; i < 10; i++)
+                            sum += (_cpf[i] - '0') * (11 - i);
+                        int digit2 = (sum * 10) % 11;
+                        if(digit2 == 10)
+                            digit2 = 0;
+                        if(digit2 != _cpf[10] - '0')
+                        {
+                            std::cout << "CPF inválido, digite novamente\n";
+                            continue;
+                        }
+                        else
+                            return _cpf;
+                            break;
+                    }
+                }
+            }
+        }
+    }
     
 }
 std::string Autentication::user_birthdate(){
+    
 
     
 }
@@ -332,6 +409,26 @@ std::string Autentication::verifyReleaseDate(){    // Verifica se a data de lan�
     std::string releaseDate = std::to_string(day) + '/' + std::to_string(month) + '/' + std::to_string(year);
     return releaseDate;
 }
+void Autentication::editar_dados(){
+    std::string username, password, new_username, new_password, new_email;
+    std::cout << "Digite o seu username: ";
+    std::cin >> username;
+    std::cout << "Digite a sua senha: ";
+    std::cin >> password;
+    Database::check_user(username, password);
+    if(Database::check_user(username,password)){
+        std::cout << "Bem vindo a seção de edição de dados" << username << std::endl;
+        std::cout << "Digite seus novos dados" << std::endl;
+        new_username = user_name();
+        new_email = user_email();
+        new_password = user_password();
+        Database::modify_user(username,password,new_username,new_password,new_email);
+    }else
+        std::cout << "Usuario ou senha incorretos" << std::endl;
+        
+}
+
+
 
 
 
