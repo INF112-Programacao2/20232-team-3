@@ -1,49 +1,9 @@
 #include"Developer.hpp"
+#include<iostream>
 
 Developer::Developer(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::vector<Game> publishedGames): Client(_username, _password, _email, _cpf, balance, 10)
 { 
     _publishedGames = publishedGames;
-}
-
-/*
-Developer::Developer(): Client()
-{
-    std::string CNPJorCPF = "", aux = "";
-    std::cout << "Digite seu CNPJ ou CPF: ";
-    while(true)
-    {
-        std::cin >> CNPJorCPF;
-        for(int i = 0 ; i < CNPJorCPF.size() ; i++)
-        {
-            if(CNPJorCPF[i] >= '0' && CNPJorCPF[i] <= '9')
-            {
-                aux += CNPJorCPF[i];
-            }
-        }
-        CNPJorCPF = aux;
-        if(CNPJorCPF.size() == 11) // É CPF
-        {
-            _CPF = CNPJorCPF;
-            _CNPJ = "";
-            break;
-        }
-        else if(CNPJorCPF.size() == 14) // É CNPJ
-        {
-            _CNPJ = CNPJorCPF;
-            _CPF = "";
-            break;
-        }
-        else
-        {
-            std::cout << "CNPJ ou CPF inválido. Digite novamente!\n";
-            continue;
-        }
-    }   
-}
-*/
-
-Developer::~Developer()
-{
 }
 
 void Developer::publish_game()

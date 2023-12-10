@@ -1,15 +1,10 @@
 #include"User.hpp"
 #include "../Data_manage/Database.hpp"
 
-User::User(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::vector<MyGame> _library, std::vector<Game> _wishlist): Client(_username, _password, _email, _cpf, balance, 1)
+User::User(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::vector<Game> _library, std::vector<Game> _wishlist): Client(_username, _password, _email, _cpf, balance, 1)
 {
     _library = _library;
     _wishlist = _wishlist;
-}
-
-User::~User()
-{
-
 }
 
 void User::buy_game(Game game)
@@ -61,18 +56,7 @@ void User::add_to_wishlist(Game game)
 
 void User::remove_from_wishlist(Game game)
 {
-    bool notRemoved = false;
-    int index;
-    for(int i = 0; i < _wishlist.size(); i++)
-        if(_wishlist[i].get_name() == game.get_name())
-        {
-            notRemoved = true;
-            index = i;
-        }
-    if(notRemoved)
-        _wishlist.erase(_wishlist.begin() + index);
-    else
-        std::cout << "Você não possui esse jogo na sua lista de desejos\n";
+    Database::remove_from_wishlist(this->_username, game);
 }
 
 void User::menu()
