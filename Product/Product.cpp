@@ -55,3 +55,8 @@ void Product::set_studio(std::string studio)    //Define o nome do studio que pr
 {
     _studio = studio;
 }
+
+void Product::set_price(double price)   //Define o preco do produto
+{
+    _price = price;
+}

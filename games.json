@@ -13,7 +13,7 @@
                     "Price": 0,
                     "Processor": "Intel core i5",
                     "Release Date": "20/5/2020",
-                    "Review": "Mo bosta",
+                    "Review": ["Mo bosta", "Muito bom"],
                     "Storage": "35 GB",
                     "Studio": "Riot games"
           },
@@ -31,7 +31,7 @@
                     "Price": 0,
                     "Processor": "Intel core i5",
                     "Release Date": "20/5/2020",
-                    "Review": "Mo bosta",
+                    "Review": ["Mo bosta", "Muito bom"],
                     "Storage": "35 GB",
                     "Studio": "Riot games"
   }

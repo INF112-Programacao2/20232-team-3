@@ -31,7 +31,7 @@ class Product{
         void set_name(std::string name);	//Define o nome do produto
         void set_studio(std::string studio);	//Define o nome do studio que produziu o produto
         void set_ageRating(std::string ageRating);		//Define a classificacao etaria do produto
-        void set_price(std::string price);	//Define o preco do produto
+        void set_price(double price);	//Define o preco do produto
         void set_releaseDate(std::string releaseDate);	//Define a data de lancamento do produto
 
 };

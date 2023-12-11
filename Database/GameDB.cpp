@@ -38,7 +38,8 @@ void GameDB::list_games()
             std::cout << "Idioma: " << data["Language"] << std::endl;
             std::cout << "Classificação indicativa: " << data["Age rating"] << std::endl;
             std::cout << "Gênero: " << data["Gender"] << std::endl;
-            std::cout << "Review: " << data["Review"] << std::endl;
+            for(auto review : data["Review"])
+                std::cout << "Review: " << review << std::endl;
 
         }
     }
@@ -48,3 +49,28 @@ void GameDB::list_games()
     }
 }
 
+void GameDB::edit_game(Game* game)
+{
+    std::cout << "Digite o número correspondente à informação que deseja alterar: \n";
+    std::cout << "1 - Nome\n2 - Plataforma\n3 - Preço\n4 - Disponibilidade\n5 - Estúdio\n6 - Data de lançamento\n7 - Processador\n8 - Memória\n9 - Armazenamento\n10 - Placa de vídeo\n11 - DirectX\n12 - Sistema operacional\n13 - Idioma\n14 - Classificação indicativa\n15 - Gênero\n";
+    int aux;
+    std::cin >> aux;
+    std::string cat[15] = {"nome", "plataforma", "preco", "disponibilidade", "estudio", "data de lancamento", "processador", "memoria", "armazenamento", "placa de video", "directx", "sistema operacional", "idioma", "classificacao indicativa", "genero"};
+
+    std::cout << "Digite o novo valor para " << cat[aux-1] << ": ";
+    std::string new_value;
+    std::cin >> new_value;
+    if(aux == 2)
+    {
+        double value = std::stod(new_value);
+        if(value < 0)
+        {
+            std::cout << "Valor inválido" << std::endl;
+        }
+        else
+        {
+            game->set_price(value);
+            // CONTINUAR AQUI
+        }
+    }
+}
