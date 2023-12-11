@@ -9,9 +9,12 @@
 class ClientDB
 {
 public:
-    static void edit_info(Developer* dev);
+    // Auxiliares
     static bool exist_userName(std::string &username);
     static bool exist_email(std::string &email);
+
+    static void edit_info(Developer* dev);
+    static void redeem_balance(Developer* dev);
 };
 
 #endif // CLIENTDB_HPP

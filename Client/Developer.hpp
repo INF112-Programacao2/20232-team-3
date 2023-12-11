@@ -12,6 +12,7 @@ private:
 public:
     Developer(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance);
     virtual void menu();
+    void set_balance(double balance);
 };
 
 #endif // DEVELOPER_HPP_

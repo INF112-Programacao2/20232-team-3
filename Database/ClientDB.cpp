@@ -5,6 +5,77 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
+void change_value(std::string key, std::string value, std::string username)
+{
+    std::ifstream arquivo("clients.json");
+    if (!arquivo.is_open()) 
+    {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosJSON;
+    arquivo >> dadosJSON;
+    arquivo.close();
+
+    if (dadosJSON.is_array()) 
+    {
+        for (auto& data : dadosJSON) 
+        {
+            std::string usernameJSON = data["Username"];
+
+            // Verifique se o nome e o usuário correspondem aos fornecidos
+            if (usernameJSON == username) 
+            {
+                data[key] = value;
+                std::ofstream arquivoSaida("clients.json");
+                arquivoSaida << dadosJSON.dump(10);
+                arquivoSaida.close();
+                //dev->set_username(temp);
+                return;
+            }
+        }
+    }
+    else
+    {
+        std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
+    }
+}
+
+void change_value(std::string key, double value, std::string username)
+{
+    std::ifstream arquivo("clients.json");
+    if (!arquivo.is_open()) 
+    {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosJSON;
+    arquivo >> dadosJSON;
+    arquivo.close();
+
+    if (dadosJSON.is_array()) 
+    {
+        for (auto& data : dadosJSON) 
+        {
+            std::string usernameJSON = data["Username"];
+
+            // Verifique se o nome e o usuário correspondem aos fornecidos
+            if (usernameJSON == username) 
+            {
+                data[key] = value;
+                std::ofstream arquivoSaida("clients.json");
+                arquivoSaida << dadosJSON.dump(10);
+                arquivoSaida.close();
+                //dev->set_username(temp);
+                return;
+            }
+        }
+    }
+    else
+    {
+        std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
+    }
+}
 
 bool ClientDB::exist_userName(std::string &username)
 {
@@ -87,28 +158,9 @@ void ClientDB::edit_info(Developer* dev)
                     arquivo >> dadosJSON;
                     arquivo.close();
 
-                    if (dadosJSON.is_array()) 
-                    {
-                        for (auto& data : dadosJSON) 
-                        {
-                            std::string usernameJSON = data["Username"];
-
-                            // Verifique se o nome e o usuário correspondem aos fornecidos
-                            if (usernameJSON == dev->get_username()) 
-                            {
-                                data["Username"] = temp;
-                                std::ofstream arquivoSaida("clients.json");
-                                arquivoSaida << dadosJSON.dump(10);
-                                arquivoSaida.close();
-                                dev->set_username(temp);
-                                return;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
-                    }
+                    change_value("Username", temp, dev->get_username());
+                    dev->set_username(temp);
+                    break;
                 }
             }
         break;
@@ -132,28 +184,9 @@ void ClientDB::edit_info(Developer* dev)
                     arquivo >> dadosJSON;
                     arquivo.close();
 
-                    if (dadosJSON.is_array()) 
-                    {
-                        for (auto& data : dadosJSON) 
-                        {
-                            std::string usernameJSON = data["Username"];
-
-                            // Verifique se o nome e o usuário correspondem aos fornecidos
-                            if (usernameJSON == dev->get_username()) 
-                            {
-                                data["Password"] = temp2;
-                                std::ofstream arquivoSaida("clients.json");
-                                arquivoSaida << dadosJSON.dump(10);
-                                arquivoSaida.close();
-                                dev->set_password(temp2);
-                                return;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
-                    }
+                    change_value("Password", temp2, dev->get_username());
+                    dev->set_password(temp);
+                    break;
 
                 }
                 else
@@ -187,31 +220,48 @@ void ClientDB::edit_info(Developer* dev)
                     arquivo >> dadosJSON;
                     arquivo.close();
 
-                    if (dadosJSON.is_array()) 
-                    {
-                        for (auto& data : dadosJSON) 
-                        {
-                            std::string emailJSON = data["Email"];
-
-                            // Verifique se o email do usuario corresponde ao fornecidos
-                            if (emailJSON == dev->get_email()) 
-                            {
-                                data["Email"] = temp;
-                                std::ofstream arquivoSaida("clients.json");
-                                arquivoSaida << dadosJSON.dump(10);
-                                arquivoSaida.close();
-                                dev->set_email(temp);
-                                return;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
-                    }
+                    change_value("Email", temp, dev->get_username());
+                    dev->set_email(temp);
+                    break;
                 }
             }
         break;
     }
 }
 
+void ClientDB::redeem_balance(Developer* dev)
+{
+    while (true)
+    {
+        std::cout << "Seu saldo atual é de: R$" << dev->get_balance() << '\n';
+        std::cout << "Digite o valor que deseja resgatar: ";
+        double aux;
+        std::cin >> aux;
+        if(aux > dev->get_balance())
+        {
+            std::cout << "Valor maior que o saldo atual, tente novamente\n";
+        }
+        else if (aux < 0)
+        {
+            std::cout << "Valor inválido, tente novamente\n";
+        }
+        else
+        {
+
+            std::ifstream arquivo("clients.json");
+            if (!arquivo.is_open()) 
+            {
+                std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+            }
+
+            json dadosJSON;
+            arquivo >> dadosJSON;
+            arquivo.close();
+
+            dev->set_balance(dev->get_balance() - aux);
+            change_value("Balance", dev->get_balance(), dev->get_username());
+            break;
+        }
+    }
+    
+}

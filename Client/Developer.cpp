@@ -24,7 +24,7 @@ void Developer::menu()
         goto INIT;
         break;
     case 2:
-        //ClientDB::redeem_balance(this); // Função que permite que o usuario veja seu saldo atual e resgate um valor
+        ClientDB::redeem_balance(this); // Função que permite que o usuario veja seu saldo atual e resgate um valor
         std::cout << "Valores resgatados com sucesso!\n";
         goto INIT;
         break;
@@ -38,4 +38,9 @@ void Developer::menu()
     default:
         break;
     }
+}
+
+void Developer::set_balance(double balance)
+{
+    _balance = balance;
 }
