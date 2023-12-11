@@ -60,3 +60,25 @@ void Product::set_price(double price)   //Define o preco do produto
 {
     _price = price;
 }
+
+void Product::set_releaseDate(std::string releaseDate) //Define a data de lancamento do produto
+{
+    _releaseDate = releaseDate;
+}
+
+void Product::set_ageRating(std::string ageRating) //Define a classificacao etaria do produto
+{
+    _ageRating = stoi(ageRating);
+}
+
+std::vector <std::string> Product::get_review() //Retorna as avaliacoes do produto
+{
+    return _review;
+}
+
+void Product::set_review(std::vector <std::string> review) //Define as avaliacoes do produto
+{
+    _review = review;
+}
+
+

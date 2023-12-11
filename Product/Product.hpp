@@ -22,16 +22,18 @@ class Product{
 	    std::string get_name();    //Retorna o nome do produto
 	    std::string get_studio();    //Retorna o nome do studio que produziu o produto
 	    int get_ageRating();    //Retorna a classificacao etaria do produto
-	    double get_price();    //Retorna o preco do produto
-	    bool get_availability();    //Retorna a disponibilidade do produto
-	    std::string get_releaseDate();    //Retorna a data de lancamento do produto
-        
+		double get_price();		//Retorna o preco do produto
+		bool get_availability();    //Retorna a disponibilidade do produto
+		std::vector <std::string> get_review();    //Retorna as avaliacoes do produto
+		std::string get_releaseDate();    //Retorna a data de lancamento do produto
+		
 		//setters
-        void set_availability(bool availability); //Define a disponibilidade do produto
         void set_name(std::string name);	//Define o nome do produto
-        void set_studio(std::string studio);	//Define o nome do studio que produziu o produto
-        void set_ageRating(std::string ageRating);		//Define a classificacao etaria do produto
-        void set_price(double price);	//Define o preco do produto
+		void set_studio(std::string studio);	//Define o nome do studio que produziu o produto
+		void set_ageRating(std::string ageRating);		//Define a classificacao etaria do produto
+		void set_price(double price);	//Define o preco do produto
+		void set_availability(bool availability); //Define a disponibilidade do produto
+		void set_review(std::vector <std::string> review);	//Define as avaliacoes do produto
         void set_releaseDate(std::string releaseDate);	//Define a data de lancamento do produto
 
 };
