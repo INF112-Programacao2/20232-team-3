@@ -17,9 +17,6 @@ class Product{
 	    // Constructor
 	    Product(std::string name, std::string studio, int ageRating, double price, bool availability, std::vector<std::string> review, std::string releaseDate);
         Product(std::string name, double price, std::string availability);
-		
-	    // Destructor
-	    ~Product();
 
         // Getters
 	    std::string get_name();    //Retorna o nome do produto
