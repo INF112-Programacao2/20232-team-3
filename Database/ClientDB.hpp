@@ -2,6 +2,8 @@
 #define CLIENTDB_HPP
 
 #include "../Client/Developer.hpp"
+#include "../Client/User.hpp"
+#include "../Client/Client.hpp"
 #include <string>
 
 //class Developer;
@@ -13,8 +15,9 @@ public:
     static bool exist_userName(std::string &username);
     static bool exist_email(std::string &email);
 
-    static void edit_info(Developer* dev);
+    static void edit_info(Client* client);
     static void redeem_balance(Developer* dev);
+    static void add_balance(User* usr);
 };
 
 #endif // CLIENTDB_HPP

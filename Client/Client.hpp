@@ -30,6 +30,7 @@ public:
     int get_id();
     int get_age();
     double get_balance();
+    void set_balance(double balance);
     
     virtual void menu() = 0;
 

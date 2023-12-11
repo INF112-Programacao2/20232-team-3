@@ -39,8 +39,3 @@ void Developer::menu()
         break;
     }
 }
-
-void Developer::set_balance(double balance)
-{
-    _balance = balance;
-}

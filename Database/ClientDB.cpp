@@ -125,7 +125,7 @@ bool ClientDB::exist_email(std::string &email)
     return false;
 }
 
-void ClientDB::edit_info(Developer* dev)
+void ClientDB::edit_info(Client* client)
 {
     int aux;
     std::string temp, temp2;
@@ -158,8 +158,8 @@ void ClientDB::edit_info(Developer* dev)
                     arquivo >> dadosJSON;
                     arquivo.close();
 
-                    change_value("Username", temp, dev->get_username());
-                    dev->set_username(temp);
+                    change_value("Username", temp, client->get_username());
+                    client->set_username(temp);
                     break;
                 }
             }
@@ -169,7 +169,7 @@ void ClientDB::edit_info(Developer* dev)
             {
                 std::cout << "Digite sua senha antiga: ";
                 std::cin >> temp;
-                if(temp == dev->get_password())
+                if(temp == client->get_password())
                 {
                     std::cout << "Digite sua nova senha: ";
                     std::cin >> temp2;
@@ -184,8 +184,8 @@ void ClientDB::edit_info(Developer* dev)
                     arquivo >> dadosJSON;
                     arquivo.close();
 
-                    change_value("Password", temp2, dev->get_username());
-                    dev->set_password(temp);
+                    change_value("Password", temp2, client->get_username());
+                    client->set_password(temp);
                     break;
 
                 }
@@ -220,8 +220,8 @@ void ClientDB::edit_info(Developer* dev)
                     arquivo >> dadosJSON;
                     arquivo.close();
 
-                    change_value("Email", temp, dev->get_username());
-                    dev->set_email(temp);
+                    change_value("Email", temp, client->get_username());
+                    client->set_email(temp);
                     break;
                 }
             }
@@ -264,4 +264,36 @@ void ClientDB::redeem_balance(Developer* dev)
         }
     }
     
+}
+
+void ClientDB::add_balance(User* usr)
+{
+    while (true)
+    {
+        std::cout << "Seu saldo atual é de: R$" << usr->get_balance() << '\n';
+        std::cout << "Digite o valor que deseja adicionar: ";
+        double aux;
+        std::cin >> aux;
+        if (aux < 0)
+        {
+            std::cout << "Valor inválido, tente novamente\n";
+        }
+        else
+        {
+
+            std::ifstream arquivo("clients.json");
+            if (!arquivo.is_open()) 
+            {
+                std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+            }
+
+            json dadosJSON;
+            arquivo >> dadosJSON;
+            arquivo.close();
+
+            usr->set_balance(usr->get_balance() + aux);
+            change_value("Balance", usr->get_balance(), usr->get_username());
+            break;
+        }
+    }
 }

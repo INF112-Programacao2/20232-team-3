@@ -1,5 +1,6 @@
 #include "Client/Client.hpp"
 #include "Client/Developer.hpp"
+#include "Client/User.hpp"
 #include "Database/ClientDB.hpp"
 
 #include<bits/stdc++.h>
@@ -7,11 +8,11 @@
 int main()
 {
 
-    Developer dev("LEANDERSON", "1234", "joaoL@gmail.com", "123456789210", 400.00);
+    User usr("LEANDERSON", "1234", "leleleles@gmail.com", "123456789210", 400.00);
 
-    std::cout << dev.get_balance() << '\n';
-    dev.menu();
-    std::cout << dev.get_balance() << '\n';
+    std::cout << usr.get_balance() << '\n';
+    usr.menu();
+    std::cout << usr.get_balance() << '\n';
 
 
 

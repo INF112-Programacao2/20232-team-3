@@ -73,3 +73,8 @@ double Client::get_balance()
 {
     return _balance;
 }
+
+void Client::set_balance(double balance)
+{
+    _balance = balance;
+}
