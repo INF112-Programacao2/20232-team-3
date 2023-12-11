@@ -32,6 +32,8 @@
                     "Jogos": [],
                     "Password": "1234",
                     "Username": "Leles",
-                    "Wishlist": ["Valorant", "Minecraft"]
+                    "Wishlist": [
+                              "Minecraft"
+                    ]
           }
 ]

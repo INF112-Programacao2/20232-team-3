@@ -17,6 +17,7 @@ public:
     void buy_game(std::string gameName, std::string username);
     void print_wishlist();
     void print_library();
+    void add_to_wishlist(std::string gameName, std::string username);
 
 };
 

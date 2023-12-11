@@ -34,6 +34,49 @@ bool checkgame(std::string gameName)
     return false;
 }
 
+void search_game(std::string &game, std::vector<Game> &games){
+    std::ifstream arquivo("games.json");
+    if (!arquivo.is_open()) 
+    {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosJSON;
+    arquivo >> dadosJSON;
+    arquivo.close();
+
+    if (dadosJSON.is_array()) {
+        for (auto& data : dadosJSON) {
+            std::string gameJSON = data["Name"];
+            if (gameJSON == game)
+            {
+                std::string name = data["Name"];
+                std::string platform = data["Platform"];
+                std::string release_date = data["Release Date"];
+                std::string studio = data["Studio"];
+                int age = data["Age Rating"];
+                bool available = data["Availability"].get<int>();
+                int directx = data["DirectX"];
+                double price = data["Price"];
+                std::string gender = data["Gender"];
+                std::string graphics =data["Graphics"];
+                std::string language = data["Language"];
+                std::string memory = data["Memory"];
+                std::string os = data["OS"];
+                std::string processor = data["Processor"];
+                std::string storage = data["Storage"];
+                std::vector <std::string> review;
+                for(auto& rev : data["Review"])
+                {
+                    review.push_back(rev);
+                }
+                Game jogo(name, studio, age, price, available, review, release_date, gender, platform, language, os, processor, memory, graphics, directx, storage);
+                games.push_back(jogo);
+            }
+        }
+    }
+}
+
 User::User(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, const std::vector<Game> _library, const std::vector<Game> _wishlist): Client(_username, _password, _email, _cpf, balance, 1), _library(_library), _wishlist(_wishlist)
 {
 }
@@ -71,7 +114,6 @@ void User::buy_game(std::string gameName, std::string username)
     json dadosClientsJSON;
     arquivo >> dadosClientsJSON;
     arquivo.close();
-    std::cout << "Aqui\n";
     if(dadosClientsJSON.is_array())
     {
         for (auto& data : dadosClientsJSON)
@@ -105,6 +147,57 @@ void User::buy_game(std::string gameName, std::string username)
     std::ofstream arquivoSaida("clients.json");
     arquivoSaida << dadosClientsJSON.dump(10);
     arquivoSaida.close();
+}
+
+void User::add_to_wishlist(std::string gameName, std::string username)
+{
+    if(!checkgame(gameName))
+    {
+        std::cout << "Erro: jogo nao encontrado\n";
+        return;
+    }
+
+    std::ifstream arquivo("clients.json");
+    if (!arquivo.is_open()) 
+    {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosClientsJSON;
+    arquivo >> dadosClientsJSON;
+    arquivo.close();
+
+    bool existe = false;
+
+    if(dadosClientsJSON.is_array())
+    {
+        for (auto& data : dadosClientsJSON)
+        {
+            if(data["Username"] == username)
+            {
+                // Adiciona à wishlist no json
+                for (auto it = data["Wishlist"].begin(); it != data["Wishlist"].end(); ++it) 
+                {
+                    if (*it == gameName) 
+                    {
+                        existe = true;
+                        std::cout << "Jogo já está na lista de desejos\n";
+                        break;
+                    } 
+                }
+                // Adiciona à wishlist no objeto
+                if(!existe)
+                {
+                    search_game(gameName, _wishlist);
+                    data["Wishlist"].push_back(gameName);
+                }
+            }
+        }
+    }
+    std::ofstream arquivoSaida("clients.json");
+    arquivoSaida << dadosClientsJSON.dump(10);
+    arquivoSaida.close();
+
 }
 
 void User::menu()
@@ -148,7 +241,9 @@ void User::menu()
                 buy_game(aux2, _username);
                 break;
             case 2:
-                //GameDB::add_to_wishlist(this);
+                std::cout << "Digite o nome do jogo que deseja adicionar à lista de desejos: ";
+                std::cin >> aux2;
+                add_to_wishlist(aux2, _username);
                 break;
             default:
                 break;
