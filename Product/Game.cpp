@@ -1,7 +1,8 @@
 #include "Game.hpp"
 
+// Chama o construtor da classe base
 Game::Game(std::string name, std::string studio, int ageRating, double price, bool availability, std::vector<std::string> review, std::string releaseDate, std::string gender, std::string platform, std::string language, std::string os, std::string processor, std::string memory, std::string graphics, int directx, std::string storage): 
-Product(name, studio, ageRating, price, availability, review, releaseDate) // Chama o construtor da classe base(utilizando polimorfismo e heranca)
+Product(name, studio, ageRating, price, availability, review, releaseDate)
 {
     _gender = gender;
     _platform = platform;
@@ -14,97 +15,116 @@ Product(name, studio, ageRating, price, availability, review, releaseDate) // Ch
     _storage = storage;
 }
 
-Game::~Game() // Destrutor
+// Destrutor
+Game::~Game() 
 {
 
 }
 
-std::string Game::get_gender() //Retorna o genero do jogo
+//Retorna o genero do jogo
+std::string Game::get_gender() 
 {
     return _gender;
 }
 
-std::string Game::get_platform() // Retorna a plataforma do jogo
+// Retorna a plataforma do jogo
+std::string Game::get_platform() 
 {
     return _platform;
 }
 
-std::string Game::get_language()    //Retorna os idiomas do jogo
+//Retorna os idiomas do jogo
+std::string Game::get_language()    
 {
     return _language;
 }
 
-std::string Game::get_os()  //Retorna o sistema operacional
+//Retorna o sistema operacional
+std::string Game::get_os()  
 {
     return _os;
 }
 
-std::string Game::get_processor()   //Retorna o processador
+//Retorna o processador
+std::string Game::get_processor()   
 {
     return _processor;
 }
 
-std::string Game::get_memory()  //Retorna a memoria
+//Retorna a memoria
+std::string Game::get_memory()  
 {
     return _memory;
 }
 
-std::string Game::get_graphics()    //Retorna a placa de video
+//Retorna a placa de video
+std::string Game::get_graphics()    
 {
     return _graphics;
 }
 
-int Game::get_directx()     //Retorna o DirectX
+//Retorna o DirectX
+int Game::get_directx()     
 {
     return _directx;
 }
 
-std::string Game::get_storage()     //Retorna o armazenamento
+//Retorna o armazenamento
+std::string Game::get_storage()     
 {
     return _storage;
 }
 
-void Game::set_gender(std::string gender)   // Define o genero do jogo
+// Define o genero do jogo
+void Game::set_gender(std::string gender)   
 {
     _gender = gender;
 }
 
-void Game::set_platform(std::string platform)      // Define a plataforma do jogo
+// Define a plataforma do jogo
+void Game::set_platform(std::string platform)      
 {
     _platform = platform;
 }
 
-void Game::set_language(std::string language)   // Define os idiomas do jogo
+// Define os idiomas do jogo
+void Game::set_language(std::string language)   
 {
     _language = language;
 }
 
-void Game::set_os(std::string os)   // Define o sistema operacional
+// Define o sistema operacional
+void Game::set_os(std::string os)   
 {
     _os = os;
 }
 
-void Game::set_processor(std::string processor)    // Define o processador
+// Define o processador
+void Game::set_processor(std::string processor)    
 {
     _processor = processor;
 }
 
-void Game::set_memory(std::string memory)   // Define a memoria
+// Define a memoria
+void Game::set_memory(std::string memory)  
 {
     _memory = memory;
 }
 
-void Game::set_graphics(std::string graphics)   // Define a placa de video
+// Define a placa de video
+void Game::set_graphics(std::string graphics)   
 {
     _graphics = graphics;
 }
 
-void Game::set_directx(int directx)    // Define o DirectX
+// Define o DirectX
+void Game::set_directx(int directx)    
 {
     _directx = directx;
 }
 
-void Game::set_storage(std::string storage)   // Define o armazenamento
+// Define o armazenamento
+void Game::set_storage(std::string storage)   
 {
     _storage = storage;
 }
