@@ -543,3 +543,43 @@ Game* GameDB::add_game()
 
     return gameptr;
 }
+
+void GameDB::delete_game(std::string game){
+    std::string name = game;
+    bool gameExists = false;
+
+    while (true) {
+
+        std::ifstream inputFile("games.json");    // Abre o arquivo JSON
+        if (!inputFile.is_open()) {    // Verifica se o arquivo foi aberto corretamente
+            std::cerr << "Erro ao abrir o arquivo json" << std::endl;
+            return;
+        }
+
+        json dadosJSON;    // Cria um vetor JSON
+        inputFile >> dadosJSON;    // Lê o arquivo JSON
+        inputFile.close();    // Fecha o arquivo
+
+        auto it = std::find_if(dadosJSON.begin(), dadosJSON.end(), [&](const json& game) {    // Verifica se o jogo existe
+            return game["Name"] == name;
+        });
+
+        if (it != dadosJSON.end()) {    // Se o jogo existir, remove
+            dadosJSON.erase(it);
+
+            std::ofstream fileout("games.json");
+            fileout << dadosJSON.dump(4);  // Ajuste o valor de indentação conforme necessário
+            fileout.close();
+
+            std::cout << "Jogo removido com sucesso!" << std::endl;
+            gameExists = true;
+        }
+        else{    // Jogo não encontrado, pede para tentar novamente
+            std::cout << "Jogo nao encontrado. Por favor tente novamente: " << std::endl;
+        }
+
+        if(gameExists){
+            break;
+        }
+    }
+}
