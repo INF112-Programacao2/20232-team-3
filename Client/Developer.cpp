@@ -8,6 +8,12 @@ Developer::Developer(std::string _username, std::string _password, std::string _
     _publishedGames = publishedGames;
 }
 
+void Developer::print_published_games()
+{
+    for(int i = 0 ; i < _publishedGames.size() ; i++)
+        std::cout << i+1 << " " << _publishedGames[i].get_name() << '\n';
+}
+
 void Developer::menu()
 {
     int aux;
@@ -28,19 +34,33 @@ void Developer::menu()
         goto INIT;
         break;
     case 3:
-        for(int i = 0 ; i < _publishedGames.size() ; i++)
-            std::cout << i+1 << " " << _publishedGames[i].get_name() << '\n';
-        while (true)
+        std::cout << "O que deseja fazer?\n1 - Editar Jogos;\n2 - Publicar um jogo;\n3 - Remover um jogo da loja\n4 - Voltar\n";
+        std::cin >> aux;
+        switch (aux)
         {
-            std::cout << "Digite o número correspondente ao jogo que deseja editar: ";
-            std::cin >> aux;
-            if(aux >= 1 && aux <= _publishedGames.size()) break;
-            else std::cout << "Número inválido, tente novamente" << std::endl;
+            case 1:
+                for(int i = 0 ; i < _publishedGames.size() ; i++)
+                    std::cout << i+1 << " " << _publishedGames[i].get_name() << '\n';
+                while (true)
+                {
+                    std::cout << "Digite o número correspondente ao jogo que deseja editar: ";
+                    std::cin >> aux;
+                    if(aux >= 1 && aux <= _publishedGames.size()) break;
+                    else std::cout << "Número inválido, tente novamente" << std::endl;
+                }
+                aux--;
+                GameDB::edit_game(&_publishedGames[aux]); // Função que permite que o usuario veja seus jogos e edite eles
+                std::cout << _publishedGames[aux].get_name() << "!\n";
+                std::cout << "Jogos editados com sucesso!\n";
+            break;
+            case 2:
+                Game* game = GameDB::add_game(); // Função que permite que o usuario publique um jogo
+                Game game2 = *game;
+                delete game;
+                std::cout << "Jogo publicado com sucesso!\n";
+                _publishedGames.push_back(game2);
+                std::cout << "Jogo publicado com sucesso!2\n";
         }
-        aux--;
-        GameDB::edit_game(&_publishedGames[aux]); // Função que permite que o usuario veja seus jogos e edite eles
-        std::cout << _publishedGames[aux].get_name() << "!\n";
-        std::cout << "Jogos editados com sucesso!\n";
         goto INIT;
     default:
         break;

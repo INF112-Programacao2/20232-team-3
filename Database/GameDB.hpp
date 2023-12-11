@@ -10,7 +10,7 @@ class GameDB
 private:
     
 public:
-    static void add_game(Game game);
+    static Game* add_game();
     static void edit_game(Game* game);
     static void delete_game(std::string game);
     static void list_games();

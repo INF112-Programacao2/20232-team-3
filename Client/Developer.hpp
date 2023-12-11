@@ -12,6 +12,7 @@ private:
     std::vector<Game> _publishedGames;
 public:
     Developer(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::vector<Game> publishedGames);
+    void print_published_games();
     virtual void menu();
 };
 

@@ -19,5 +19,23 @@
                                 ],
                                 "Storage": "35 GB",
                                 "Studio": "Riot games"
+                },
+                {
+                                "Age Rating": 0,
+                                "Availability": 1,
+                                "DirectX": 10,
+                                "Gender": "Sandbox",
+                                "Graphics": "IntelGraphics",
+                                "Language": "Portugues",
+                                "Memory": "4GB",
+                                "Name": "Minecraft",
+                                "OS": "Windows",
+                                "Platform": "PC",
+                                "Price": 125.0,
+                                "Processor": "Intelcorei2",
+                                "Release Date": "21/4/2008",
+                                "Review": null,
+                                "Storage": "5",
+                                "Studio": "Mojang"
                 }
 ]

@@ -5,6 +5,189 @@
 #include <vector>
 using json = nlohmann::json;
 
+std::string verifyName() {    // Verifica se o nome é válido
+    std::string name;
+    while (true) {
+        try {
+            std::cin >> name;
+            if (name.empty()) {
+                throw std::invalid_argument("O nome nao pode ser vazio.");
+            }
+            for (char c : name) {    // Verifica se o nome contém apenas letras, números e espaços
+                if (!std::isalnum(c) && c != ' ') {
+                    throw std::invalid_argument("O nome deve ter apenas letras, numeros e espacos.");
+                }
+            }
+            if (!std::isupper(name[0]) && !std::isdigit(name[0])) {    // Verifica se o nome começa com uma letra maiúscula ou um número
+                throw std::invalid_argument("O nome deve comecar com letra maiuscula ou numero.");
+            }
+
+            if(name.size() > 50){    // Verifica se o nome tem mais de 50 caracteres
+                throw std::out_of_range("O nome deve ter no maximo 50 caracteres.");
+            }
+            break;
+
+        } catch (const std::exception& e) {
+            std::cerr << e.what() << " Por favor tente novamente: ";
+        }
+    }
+    return name;
+}
+
+std::string verifyStudio() {    // Verifica se o nome é válido
+    std::string studio;
+    while (true) {
+        try {
+            std::cin >> studio;
+            for (char c : studio) {    // Verifica se o nome contém apenas letras, números e espaços
+                if (!std::isalnum(c) && c != ' ') {
+                    throw std::invalid_argument("The studio must contain only letters, numbers, and spaces.");
+                }
+            }
+            if (!std::isupper(studio[0])) {    // Verifica se o nome começa com uma letra maiúscula
+                throw std::invalid_argument("The studio must start with a capital letter or a number.");
+            }
+        
+            if(studio.size() > 30){    // Verifica se o nome tem mais de 50 caracteres
+                throw std::out_of_range("The studio must have a maximum of 30 characters.");
+            }
+            break;
+
+        } catch (const std::exception& e) {
+            std::cerr << e.what() << " Please try again: ";
+        }
+    }
+    return studio;
+}
+
+int verifyAgeRating(){
+    int ageRating;
+    while(true){
+        try{
+            bool validAgeRating = true;
+            std::cin >> ageRating;
+            if(ageRating > 18 || ageRating < 0){    // Verifica se a classificação etária é válida
+                validAgeRating = false;
+                throw std::invalid_argument("The age rating must be between 0 and 18.");
+            }
+            if(validAgeRating){
+                break;
+            }
+        }catch (const std::exception& e){
+            std::cerr << e.what() << " Please try again: ";
+        }
+    }
+    return ageRating;
+}
+
+double verifyPrice() {
+    std::string price;
+    while (true){
+        try{
+            std::cin >> price;
+            bool validPrice = true;
+            for(char c : price) {
+                if(!std::isdigit(c) && c != '.'){
+                    validPrice = false;
+                    throw std::invalid_argument("The price must contain only numbers and '.'");
+                }
+            }
+            if(price.size() > 6){    // Verifica se o nome tem mais de 50 caracteres
+                throw std::out_of_range("The price must have a maximum of 10 characters.");
+            }
+            if(validPrice){
+                break;
+            }
+        }catch (const std::exception& e){
+            std::cerr << e.what() << " Please try again: ";
+        }
+    }
+    return std::stod(price);
+}
+
+int verifyAvailability() {    // Verifica se a disponibilidade é válida
+    int availability;
+    while (true) {
+        try {
+            bool validAvailability = true;
+            std::cin >> availability;
+            if (availability != 0 && availability != 1) {
+                validAvailability = false;
+                throw std::invalid_argument("Availability must be 0 or 1.");
+            }
+            if(validAvailability){
+                break;
+            }
+        } catch (const std::exception& e) {    // Caso a disponibilidade não seja válida, pede para tentar novamente
+            std::cerr << e.what() << " Please try again: ";
+            //std::cin.clear(); // Limpa o estado de erro
+            //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Descarta caracteres inválidos no buffer
+        }
+    }
+    return availability == 0 ? 0 : 1;
+}
+
+std::string verifyReleaseDate(){    // Verifica se a data de lançamento é válida
+    int day, month, year;
+    while (true){
+        try{
+            std::cout << "Day: ";
+            std::cin >> day;
+            std::cout << "Month: ";
+            std::cin >> month;
+            std::cout << "Year: ";
+            std::cin >> year;
+            if(day < 1 || day > 31 || month < 1 || month > 12 || year < 1951){    // Verifica se a data é válida
+                throw std::out_of_range("The date is out of a valid range. The day must be between 1 and 31, the month must be between 1 and 12 and the year must be between 1951 and the current year.");
+            }
+            if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){    // Verifica se o ano é bissexto
+                if (month == 2 && day > 29) {    // Verifica se o dia é válido para o mês de fevereiro em um ano bissexto
+                    throw std::out_of_range("The date is out of a valid range. The day must be between 1 and 29.");
+                }
+            }
+            else{
+                if (month == 2 && day > 28) {    // Verifica se o dia é válido para o mês de fevereiro
+                    throw std::out_of_range("The date is out of a valid range. The day must be between 1 and 28.");
+                }
+            }
+            if((month == 4 || month == 6 || month == 9 || month == 11) && day > 30){    // Verifica se o dia é válido para os meses de 30 dias
+                throw std::out_of_range("The date is out of a valid range. The day must be between 1 and 30.");
+            }
+            if((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day > 31){    // Verifica se o dia é válido para os meses de 31 dias
+                throw std::out_of_range("The date is out of a valid range. The day must be between 1 and 31.");
+            }
+            break;
+        }catch(const std::exception& e){    // Caso a data não seja válida, pede para tentar novamente
+            std::cerr << " Please try again." << std::endl;
+        }
+    }
+    std::string releaseDate = std::to_string(day) + '/' + std::to_string(month) + '/' + std::to_string(year);
+    return releaseDate;
+}
+
+int verify_num()
+{
+    int num;
+    while (true)
+    {
+        try
+        {
+            std::cin >> num;
+            if (num < 0)
+            {
+                throw std::invalid_argument("O número deve ser positivo.");
+            }
+            break;
+        }
+        catch (const std::exception& e)
+        {
+            std::cerr << e.what() << " Por favor tente novamente: ";
+        }
+    }
+    return num;
+
+}
+
 void change_gameValue(std::string key, std::string value, std::string gameName)
 {
     std::ifstream arquivo("games.json");
@@ -260,4 +443,103 @@ void GameDB::edit_game(Game* game)
     default:
         break;
     }
+}
+
+Game* GameDB::add_game() 
+{
+    std::string name, studio, releaseDate, gender, plataform, language, os, processor, memory, graphics, storage;
+    int ageRating, directx;
+    double price;
+    bool availability;
+
+    Game* gameptr;
+
+    std::ifstream arquivo("games.json");
+    if (!arquivo.is_open()) 
+    {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosJSON;
+    arquivo >> dadosJSON;
+    arquivo.close();
+
+    while (true)
+    {
+        std::cout << "Digite o nome do jogo: ";
+        name = verifyName();
+        std::cout << "Digite o estúdio do jogo: ";
+        studio = verifyStudio();
+        std::cout << "Digite a classificação indicativa do jogo: ";
+        ageRating = verifyAgeRating();
+        std::cout << "Digite o preço do jogo: ";
+        price = verifyPrice();
+        std::cout << "O jogo está disponível? (1 - Sim, 0 - Não): ";
+        availability = verifyAvailability();
+        // review = {}
+        std::cout << "Digite a data de lançamento do jogo: \n";
+        releaseDate = verifyReleaseDate();
+        std::cout << "Digite o gênero do jogo: ";
+        gender = verifyName();
+        std::cout << "Digite a plataforma do jogo: ";
+        plataform = verifyName();
+        std::cout << "Digite o idioma do jogo: ";
+        language = verifyName();
+        std::cout << "Digite o sistema operacional do jogo: ";
+        os = verifyName();
+        std::cout << "Digite o processador do jogo: ";
+        processor = verifyName();
+        std::cout << "Digite a memória do jogo: ";
+        memory = verifyName();
+        std::cout << "Digite a placa de vídeo do jogo: ";
+        graphics = verifyName();
+        std::cout << "Digite o DirectX do jogo: ";
+        directx = verify_num();
+        std::cout << "Digite o armazenamento do jogo: ";
+        storage = verifyName();
+
+        gameptr = new Game(name, studio, ageRating, price, availability, {}, releaseDate, gender, plataform, language, os, processor, memory, graphics, directx, storage);
+
+        if (dadosJSON.is_array())
+        {
+            for (const auto& data : dadosJSON) 
+            {
+                if (data["Name"] == gameptr->get_name()) 
+                {
+                    std::cout << "Jogo já cadastrado." << std::endl;
+                    delete gameptr;
+                    continue;
+                }
+            }
+        }
+        break;
+    }
+    
+
+
+    json novoGame;
+    novoGame["Name"] = gameptr->get_name();
+    novoGame["Platform"] = gameptr->get_platform();
+    novoGame["Release Date"] = gameptr->get_releaseDate();
+    novoGame["Studio"] = gameptr->get_studio();
+    novoGame["Age Rating"] = gameptr->get_ageRating();
+    novoGame["Availability"] = (int)gameptr->get_availability();
+    novoGame["DirectX"] = gameptr->get_directx();
+    novoGame["Memory"] = gameptr->get_memory();
+    novoGame["Graphics"] = gameptr->get_graphics();
+    novoGame["Processor"] = gameptr->get_processor();
+    novoGame["Storage"] = gameptr->get_storage();
+    novoGame["Price"] = gameptr->get_price();
+    novoGame["Language"] = gameptr->get_language();
+    novoGame["OS"] = gameptr->get_os();
+    novoGame["Gender"] = gameptr->get_gender();
+    novoGame["Review"] = {};
+
+    dadosJSON.push_back(novoGame);
+    std::ofstream arquivoSaida("games.json");
+    arquivoSaida << dadosJSON.dump(16);
+    arquivoSaida.close();
+    //std::cout << "Game cadastrado com sucesso" << std::endl;
+
+    return gameptr;
 }
