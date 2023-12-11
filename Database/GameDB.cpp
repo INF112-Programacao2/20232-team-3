@@ -38,6 +38,72 @@ void change_gameValue(std::string key, std::string value, std::string gameName)
     }
 }
 
+void change_gameValue(std::string key, double value, std::string gameName)
+{
+    std::ifstream arquivo("games.json");
+    if (!arquivo.is_open()) 
+    {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosJSON;
+    arquivo >> dadosJSON;
+    arquivo.close();
+
+    if (dadosJSON.is_array()) 
+    {
+        for (auto& data : dadosJSON) 
+        {
+            // Verifique se o nome e o usuário correspondem aos fornecidos
+            if (data["Name"] == gameName) 
+            {
+                data[key] = value;
+                std::ofstream arquivoSaida("games.json");
+                arquivoSaida << dadosJSON.dump(16);
+                arquivoSaida.close();
+                return;
+            }
+        }
+    }
+    else
+    {
+        std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
+    }
+}
+
+void change_gameValue(std::string key, int value, std::string gameName)
+{
+    std::ifstream arquivo("games.json");
+    if (!arquivo.is_open()) 
+    {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosJSON;
+    arquivo >> dadosJSON;
+    arquivo.close();
+
+    if (dadosJSON.is_array()) 
+    {
+        for (auto& data : dadosJSON) 
+        {
+            // Verifique se o nome e o usuário correspondem aos fornecidos
+            if (data["Name"] == gameName) 
+            {
+                data[key] = value;
+                std::ofstream arquivoSaida("games.json");
+                arquivoSaida << dadosJSON.dump(16);
+                arquivoSaida.close();
+                return;
+            }
+        }
+    }
+    else
+    {
+        std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
+    }
+}
+
 void GameDB::list_games()
 {
     std::ifstream arquivo("games.json");
@@ -98,7 +164,6 @@ void GameDB::edit_game(Game* game)
         std::cin >> aux2;
         change_gameValue("Name", aux2, game->get_name());
         game->set_name(aux2);
-        //std::cout << game->get_name() << " - " << aux2 << std::endl;
         break;
     case 2: // Editar plataforma
         std::cout << "Digite a nova plataforma: ";
@@ -114,16 +179,16 @@ void GameDB::edit_game(Game* game)
             if(aux3 >= 0) break;
             else std::cout << "Preço inválido, tente novamente" << std::endl;
         }
-        //data["Price"] = aux3;
+        change_gameValue("Price", aux3, game->get_name());
         game->set_price(aux3);
         break;
     case 4: // Editar disponibilidade
         std::cout << "O produto está disponível? (1 - Sim, 0 - Não): ";
         std::cin >> aux;
-        //if(aux == 0)
-            //data["Availability"] = 0;
-        //else
-            //data["Availability"] = 1;
+        if(aux == 0)
+            change_gameValue("Availability", 0, game->get_name());
+        else
+            change_gameValue("Availability", 1, game->get_name());
         game->set_availability((bool)aux);
         break;
     case 5: // Editar estúdio
@@ -165,7 +230,7 @@ void GameDB::edit_game(Game* game)
     case 11: // Editar DirectX
         std::cout << "Digite o novo DirectX: ";
         std::cin >> aux;
-        //data["DirectX"] = aux;
+        change_gameValue("DirectX", aux, game->get_name());
         game->set_directx(aux);
         break;
     case 12: // Editar sistema operacional
@@ -183,7 +248,7 @@ void GameDB::edit_game(Game* game)
     case 14: // Editar classificação indicativa
         std::cout << "Digite a nova classificação indicativa: ";
         std::cin >> aux;
-        //data["Age rating"] = aux;
+        change_gameValue("Age rating", aux, game->get_name());
         game->set_age_rating(aux);
         break;
     case 15: // Editar gênero
