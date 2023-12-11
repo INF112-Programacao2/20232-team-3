@@ -34,9 +34,6 @@ public:
     void set_username(std::string username);    // Define o nome de usuario
     void set_password(std::string newPassword); // Define a senha
     void set_email(std::string email);  // Define o email
-    void set_cpf(std::string cpf);  // Define o CPF
-    void set_id(int id);    // Define o ID
-    void set_birthdate(Date birthdate); // Define a data de nascimento 
     void set_balance(double balance);   // Define o saldo
     
     // Método virtual para o menu, igualado a 0 para forçar a classe filha a implementar

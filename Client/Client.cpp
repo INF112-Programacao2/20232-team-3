@@ -93,23 +93,3 @@ void Client::set_balance(double balance)
 {
     _balance = balance;
 }
-
-// define o CPF
-void Client::set_cpf(std::string cpf)
-{
-    _cpf = cpf;
-}
-
-// define o ID
-void Client::set_id(int id)
-{
-    _id = id;
-}
-
-// define a data de nascimento
-void Client::set_birthdate(Date birthdate)
-{
-    _birthdate = birthdate;
-}
-
-
