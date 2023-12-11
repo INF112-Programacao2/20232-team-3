@@ -18,9 +18,9 @@ class Game : public Product {    // Classe Game herda da classe Product
 
 	public:
 	    // Console constructor
-	    Game(std::string name, std::string studio, std::string ageRating, std::string price, std::string availability, std::string review, std::string releaseDate, std::string gender, std::string platform, std::string language);
+	    Game(std::string name, std::string studio, int ageRating, double price, bool availability, std::vector<std::string> review, std::string releaseDate, std::string gender, std::string platform, std::string language);
 	    // PC constructor
-	    Game(std::string name, std::string studio, std::string ageRating, std::string price, std::string availability, std::string review, std::string releaseDate, std::string gender, std::string platform, std::string language, std::string os, std::string processor, std::string memory, std::string graphics, int directx, std::string storage);
+	    Game(std::string name, std::string studio, int ageRating, double price, bool availability, std::vector<std::string> review, std::string releaseDate, std::string gender, std::string platform, std::string language, std::string os, std::string processor, std::string memory, std::string graphics, int directx, std::string storage);
 	
 	    // Destructor
 	    ~Game();
@@ -33,8 +33,20 @@ class Game : public Product {    // Classe Game herda da classe Product
 	    std::string get_processor();    //Retorna o processador
 	    std::string get_memory();    //Retorna a memoria
 	    std::string get_graphics();    //Retorna a placa de video
-	    std::string get_directx();    //Retorna o DirectX
+	    int get_directx();    //Retorna o DirectX
 	    std::string get_storage();    //Retorna o armazenamento
+		
+		//Setters
+		void set_gender(std::string gender);	//Define o genero do jogo
+		void set_platform(std::string platform);	//Define a plataforma do jogo
+		void set_language(std::string language);	//Define os idiomas do jogo
+		void set_os(std::string os);	//Define o sistema operacional
+		void set_processor(std::string processor);	//Define o processador
+		void set_memory(std::string memory);	//Define a memoria
+		void set_graphics(std::string graphics);	//Define a placa de video
+		void set_directx(int directx);	//Define o DirectX
+		void set_storage(std::string storage);	//Define o armazenamento
+
 };
 
 #endif    // GAMES_HPP_
