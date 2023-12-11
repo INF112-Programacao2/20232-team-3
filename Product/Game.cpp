@@ -6,7 +6,6 @@ Product(name, studio, ageRating, price, availability, review, releaseDate)  //Ch
     _gender = gender;
     _platform = platform;
     _language = language;
-
 }
 
 Game::Game(std::string name, std::string studio, int ageRating, double price, bool availability, std::vector<std::string> review, std::string releaseDate, std::string gender, std::string platform, std::string language, std::string os, std::string processor, std::string memory, std::string graphics, int directx, std::string storage): 
@@ -21,7 +20,6 @@ Product(name, studio, ageRating, price, availability, review, releaseDate) // Ch
     _graphics = graphics;
     _directx = directx;
     _storage = storage;
-
 }
 
 Game::~Game() // Destrutor

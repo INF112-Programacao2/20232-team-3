@@ -28,13 +28,14 @@ class Product{
 	    double get_price();    //Retorna o preco do produto
 	    bool get_availability();    //Retorna a disponibilidade do produto
 	    std::string get_releaseDate();    //Retorna a data de lancamento do produto
-        //setters
-        void set_availability(bool availability);
-        void set_name(std::string name);
-        void set_studio(std::string studio);
-        void set_ageRating(std::string ageRating);
-        void set_price(std::string price);
-        void set_releaseDate(std::string releaseDate);
+        
+		//setters
+        void set_availability(bool availability); //Define a disponibilidade do produto
+        void set_name(std::string name);	//Define o nome do produto
+        void set_studio(std::string studio);	//Define o nome do studio que produziu o produto
+        void set_ageRating(std::string ageRating);		//Define a classificacao etaria do produto
+        void set_price(std::string price);	//Define o preco do produto
+        void set_releaseDate(std::string releaseDate);	//Define a data de lancamento do produto
 
 };
 
