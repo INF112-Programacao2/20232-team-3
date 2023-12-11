@@ -39,9 +39,7 @@ void Developer::menu()
         }
         aux--;
         GameDB::edit_game(&_publishedGames[aux]); // Função que permite que o usuario veja seus jogos e edite eles
-        
-        //ClientDB::edit_games(this); // Função que permite que o usuario veja seus jogos e edite eles
-        //std::cout << "O que deseja fazer?\n1 - Publicar novo jogo;\n2 - Remover jogo;\n3 - Editar jogo;\n";
+        std::cout << _publishedGames[aux].get_name() << "!\n";
         std::cout << "Jogos editados com sucesso!\n";
         goto INIT;
     default:

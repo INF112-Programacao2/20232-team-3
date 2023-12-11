@@ -147,16 +147,6 @@ void ClientDB::edit_info(Client* client)
                 }
                 else
                 {
-                    std::ifstream arquivo("clients.json");
-                    if (!arquivo.is_open()) 
-                    {
-                        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
-                    }
-
-                    json dadosJSON;
-                    arquivo >> dadosJSON;
-                    arquivo.close();
-
                     change_clientValue("Username", temp, client->get_username());
                     client->set_username(temp);
                     break;

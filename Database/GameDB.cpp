@@ -98,6 +98,7 @@ void GameDB::edit_game(Game* game)
         std::cin >> aux2;
         change_gameValue("Name", aux2, game->get_name());
         game->set_name(aux2);
+        //std::cout << game->get_name() << " - " << aux2 << std::endl;
         break;
     case 2: // Editar plataforma
         std::cout << "Digite a nova plataforma: ";
