@@ -29,13 +29,9 @@
                     "Email": "leleleles@gmail.com",
                     "ID": 1,
                     "Idade": "0",
-                    "Jogos": [
-                              "Gta",
-                              "ResidentEvil"
-                    ],
+                    "Jogos": [],
                     "Password": "1234",
-                    "Publicacoes": [],
-                    "Username": "LEANDERSON",
-                    "Wishlist": []
+                    "Username": "Leles",
+                    "Wishlist": ["Valorant", "Minecraft"]
           }
 ]

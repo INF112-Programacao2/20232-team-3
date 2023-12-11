@@ -560,7 +560,8 @@ void GameDB::delete_game(std::string game){
         inputFile >> dadosJSON;    // Lê o arquivo JSON
         inputFile.close();    // Fecha o arquivo
 
-        auto it = std::find_if(dadosJSON.begin(), dadosJSON.end(), [&](const json& game) {    // Verifica se o jogo existe
+        auto it = std::find_if(dadosJSON.begin(), dadosJSON.end(), [&](const json& game) 
+        {    // Verifica se o jogo existe
             return game["Name"] == name;
         });
 

@@ -1,16 +1,116 @@
 #include"User.hpp"
 #include"../Database/ClientDB.hpp"
+#include"../Database/GameDB.hpp"
 #include "iostream"
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 
-User::User(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance): Client(_username, _password, _email, _cpf, balance, 1)
+bool checkgame(std::string gameName)
 {
-    //_library = _library;
-    //_wishlist = _wishlist;
+    std::ifstream arquivo("games.json");
+    if (!arquivo.is_open()) 
+    {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosGamesJSON;
+    arquivo >> dadosGamesJSON;
+    arquivo.close();
+
+    if (dadosGamesJSON.is_array()) 
+    {
+        for (auto& data : dadosGamesJSON) 
+        {
+            if (data["Name"] == gameName) 
+            {
+                return true;
+            }
+        }
+    }
+    else
+    {
+        std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
+    }
+    return false;
+}
+
+User::User(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, const std::vector<Game> _library, const std::vector<Game> _wishlist): Client(_username, _password, _email, _cpf, balance, 1), _library(_library), _wishlist(_wishlist)
+{
+}
+
+void User::print_wishlist()
+{
+    for(int i = 0 ; i < _wishlist.size() ; i++)
+    {
+        std::cout << i+1 << " " << _wishlist[i].get_name() << '\n';
+    }
+}
+
+void User::print_library()
+{
+    for(int i = 0 ; i < _library.size() ; i++)
+    {
+        std::cout << i+1 << " " << _library[i].get_name() << '\n';
+    }
+}
+
+void User::buy_game(std::string gameName, std::string username)
+{
+    if(!checkgame(gameName))
+    {
+        std::cout << "Erro: jogo nao encontrado\n";
+        return;
+    }
+
+    std::ifstream arquivo("clients.json");
+    if (!arquivo.is_open()) 
+    {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosClientsJSON;
+    arquivo >> dadosClientsJSON;
+    arquivo.close();
+    std::cout << "Aqui\n";
+    if(dadosClientsJSON.is_array())
+    {
+        for (auto& data : dadosClientsJSON)
+        {
+            if(data["Username"] == username)
+            {
+                // Remove da wishlist e adiciona em jogos no json
+                for (auto it = data["Wishlist"].begin(); it != data["Wishlist"].end(); ++it) 
+                {
+                    if (*it == gameName) 
+                    {
+                        data["Wishlist"].erase(it);
+                        data["Jogos"].push_back(gameName);
+                        break; // Para remover apenas a primeira ocorrência de "gameName"
+                    }
+                            
+                }
+                // remove da wishlist e adiciona na biblioteca no objeto
+                for(int i = 0 ; i < _wishlist.size() ; i++)
+                {
+                    if(_wishlist[i].get_name() == gameName)
+                    {
+                        _library.push_back(_wishlist[i]);
+                        _wishlist.erase(_wishlist.begin()+i);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    std::ofstream arquivoSaida("clients.json");
+    arquivoSaida << dadosClientsJSON.dump(10);
+    arquivoSaida.close();
 }
 
 void User::menu()
 {
     int aux;
+    std::string aux2;
     std::cout << "Bem vindo, " << _username << "!\n";
     INIT:
     std::cout << "O que deseja fazer?\n1 - Ver/Alterar Dados\n2 - Ver/Adicionar Saldo\n3 - Ver biblioteca\n4 - Loja\n5 - Ver lista de desejos\n6 - Sair\n";
@@ -29,22 +129,23 @@ void User::menu()
         goto INIT;
         break;
     case 3:
-    /*
+        std::cout << "Biblioteca:\n";
         for(int i = 0 ; i < _library.size() ; i++)
         {
             std::cout << i+1 << " " << _library[i].get_name() << '\n';
         }
-    */
         goto INIT;
         break;
     case 4:
-        //GameDB::show_games();
+        GameDB::list_games(); // Função que mostra os jogos disponiveis para compra
         std::cout << "O que deseja fazer?\n1 - Comprar jogo;\n2 - Adicionar um jogo à lista de desejos;\n3 - Sair;\n";
         std::cin >> aux;
         switch (aux)
         {
             case 1:
-                //GameDB::buy_game(this);
+                std::cout << "Digite o nome do jogo que deseja comprar: ";
+                std::cin >> aux2;
+                buy_game(aux2, _username);
                 break;
             case 2:
                 //GameDB::add_to_wishlist(this);
