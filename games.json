@@ -1,0 +1,92 @@
+[
+          {
+                    "Age Rating": "18",
+                    "Availability": "Available",
+                    "Gender": "Action",
+                    "Language": "PORTUGUES",
+                    "Name": "CALL OF DUTY",
+                    "Platform": "PS4",
+                    "Price": "199",
+                    "Release Date": "10/9/2023",
+                    "Review": "10",
+                    "Studio": "ACTIVISION"
+          },
+          {
+                    "Age Rating": "18",
+                    "Availability": "Available",
+                    "Gender": "Action",
+                    "Language": "Portugues",
+                    "Name": "The last of us",
+                    "Platform": "PS4",
+                    "Price": "199",
+                    "Release Date": "14/5/2013",
+                    "Review": "10",
+                    "Studio": "Naughty dog"
+          },
+          {
+                    "Age Rating": "18",
+                    "Availability": "Available",
+                    "Gender": "Action",
+                    "Language": "Portugues",
+                    "Name": "God of war",
+                    "Platform": "PS4",
+                    "Price": "99",
+                    "Release Date": "21/4/2019",
+                    "Review": "10",
+                    "Studio": "Santa monica "
+          },
+          {
+                    "Age Rating": "18",
+                    "Availability": "Available",
+                    "DirectX": "12",
+                    "Gender": "FPS",
+                    "Graphics": "RTX 3050",
+                    "Language": "Portugues",
+                    "Memory": "8 GB",
+                    "Name": "Valorant",
+                    "OS": "Windows 11",
+                    "Platform": "PC",
+                    "Price": "0",
+                    "Processor": "Intel core i5",
+                    "Release Date": "20/5/2020",
+                    "Review": "10",
+                    "Storage": "35 GB",
+                    "Studio": "Riot games"
+          },
+          {
+                    "Age Rating": "16",
+                    "Availability": "Available",
+                    "Gender": "Action",
+                    "Language": "Portugues",
+                    "Name": "Spider man 2",
+                    "Platform": "PS4",
+                    "Price": "199",
+                    "Release Date": "21/10/2023",
+                    "Review": "10",
+                    "Studio": "Insomniac games"
+          },
+          {
+                    "Age Rating": "18+",
+                    "Availability": "Available",
+                    "Gender": "Action",
+                    "Language": "Portugues",
+                    "Name": "Red dead redemption 2",
+                    "Platform": "PS4",
+                    "Price": "99",
+                    "Release Date": "18/10/2019",
+                    "Review": "10",
+                    "Studio": "Rockstar"
+          },
+          {
+                    "Age Rating": "18",
+                    "Availability": "Available",
+                    "Gender": "Terror",
+                    "Language": "Portugues",
+                    "Name": "Resident Evil 4",
+                    "Platform": "PS4",
+                    "Price": "149.90",
+                    "Release Date": "23/3/2023",
+                    "Review": "10",
+                    "Studio": "Capcom"
+          }
+]
