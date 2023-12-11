@@ -223,10 +223,7 @@ void User::menu()
         break;
     case 3:
         std::cout << "Biblioteca:\n";
-        for(int i = 0 ; i < _library.size() ; i++)
-        {
-            std::cout << i+1 << " " << _library[i].get_name() << '\n';
-        }
+        print_library();
         goto INIT;
         break;
     case 4:
@@ -250,12 +247,7 @@ void User::menu()
         }
         goto INIT;
     case 5:
-        /*
-        for(int i = 0 ; i < _wishlist.size() ; i++)
-        {
-            std::cout << i+1 << " " << _wishlist[i].get_name() << '\n';
-        }
-        */
+        print_wishlist();
         goto INIT;
         break;
     default:
