@@ -1,12 +1,11 @@
 #include"Developer.hpp"
 #include"../Database/ClientDB.hpp"
+#include"../Database/GameDB.hpp"
 #include<iostream>
 
-//class ClientDB;
-
-Developer::Developer(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance): Client(_username, _password, _email, _cpf, balance, 10)
+Developer::Developer(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::vector<Game> publishedGames): Client(_username, _password, _email, _cpf, balance, 10)
 { 
-    //_publishedGames = publishedGames;
+    _publishedGames = publishedGames;
 }
 
 void Developer::menu()
@@ -29,8 +28,18 @@ void Developer::menu()
         goto INIT;
         break;
     case 3:
-        //for(int i = 0 ; i < _publishedGames.size() ; i++)
-            //std::cout << i+1 << " " << _publishedGames[i].get_name() << '\n';
+        for(int i = 0 ; i < _publishedGames.size() ; i++)
+            std::cout << i+1 << " " << _publishedGames[i].get_name() << '\n';
+        while (true)
+        {
+            std::cout << "Digite o número correspondente ao jogo que deseja editar: ";
+            std::cin >> aux;
+            if(aux >= 1 && aux <= _publishedGames.size()) break;
+            else std::cout << "Número inválido, tente novamente" << std::endl;
+        }
+        aux--;
+        GameDB::edit_game(&_publishedGames[aux]); // Função que permite que o usuario veja seus jogos e edite eles
+        
         //ClientDB::edit_games(this); // Função que permite que o usuario veja seus jogos e edite eles
         //std::cout << "O que deseja fazer?\n1 - Publicar novo jogo;\n2 - Remover jogo;\n3 - Editar jogo;\n";
         std::cout << "Jogos editados com sucesso!\n";

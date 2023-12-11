@@ -17,9 +17,19 @@ std::string Product::get_name() //Retorna o nome do produto
     return _name;
 }
 
+void Product::set_name(std::string name) //Define o nome do produto
+{
+    _name = name;
+}
+
 std::string Product::get_studio()   //Retorna o nome do studio que produziu o produto
 {
     return _studio;
+}
+
+void Product::set_studio(std::string studio)    //Define o nome do studio que produziu o produto
+{
+    _studio = studio;
 }
 
 int Product::get_ageRating()    //Retorna a classificacao etaria do produto
@@ -46,17 +56,12 @@ void Product::set_availability(bool availability) //Define a disponibilidade do 
     _availability = availability;
 }
 
-void Product::set_name(std::string name) //Define o nome do produto
-{
-    _name = name;
-}
-
-void Product::set_studio(std::string studio)    //Define o nome do studio que produziu o produto
-{
-    _studio = studio;
-}
-
 void Product::set_price(double price)   //Define o preco do produto
 {
     _price = price;
+}
+
+void Product::set_releaseDate(std::string releaseDate) //Define a data de lancamento do produto
+{
+    _releaseDate = releaseDate;
 }

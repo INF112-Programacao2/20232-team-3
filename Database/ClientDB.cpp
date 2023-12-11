@@ -5,7 +5,7 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-void change_value(std::string key, std::string value, std::string username)
+void change_clientValue(std::string key, std::string value, std::string username)
 {
     std::ifstream arquivo("clients.json");
     if (!arquivo.is_open()) 
@@ -30,7 +30,6 @@ void change_value(std::string key, std::string value, std::string username)
                 std::ofstream arquivoSaida("clients.json");
                 arquivoSaida << dadosJSON.dump(10);
                 arquivoSaida.close();
-                //dev->set_username(temp);
                 return;
             }
         }
@@ -41,7 +40,7 @@ void change_value(std::string key, std::string value, std::string username)
     }
 }
 
-void change_value(std::string key, double value, std::string username)
+void change_clientValue(std::string key, double value, std::string username)
 {
     std::ifstream arquivo("clients.json");
     if (!arquivo.is_open()) 
@@ -158,7 +157,7 @@ void ClientDB::edit_info(Client* client)
                     arquivo >> dadosJSON;
                     arquivo.close();
 
-                    change_value("Username", temp, client->get_username());
+                    change_clientValue("Username", temp, client->get_username());
                     client->set_username(temp);
                     break;
                 }
@@ -184,7 +183,7 @@ void ClientDB::edit_info(Client* client)
                     arquivo >> dadosJSON;
                     arquivo.close();
 
-                    change_value("Password", temp2, client->get_username());
+                    change_clientValue("Password", temp2, client->get_username());
                     client->set_password(temp);
                     break;
 
@@ -220,7 +219,7 @@ void ClientDB::edit_info(Client* client)
                     arquivo >> dadosJSON;
                     arquivo.close();
 
-                    change_value("Email", temp, client->get_username());
+                    change_clientValue("Email", temp, client->get_username());
                     client->set_email(temp);
                     break;
                 }
@@ -259,7 +258,7 @@ void ClientDB::redeem_balance(Developer* dev)
             arquivo.close();
 
             dev->set_balance(dev->get_balance() - aux);
-            change_value("Balance", dev->get_balance(), dev->get_username());
+            change_clientValue("Balance", dev->get_balance(), dev->get_username());
             break;
         }
     }
@@ -292,7 +291,7 @@ void ClientDB::add_balance(User* usr)
             arquivo.close();
 
             usr->set_balance(usr->get_balance() + aux);
-            change_value("Balance", usr->get_balance(), usr->get_username());
+            change_clientValue("Balance", usr->get_balance(), usr->get_username());
             break;
         }
     }

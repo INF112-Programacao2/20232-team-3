@@ -1,38 +1,23 @@
 [
-          {
-                    "Age Rating": 18,
-                    "Availability": 1,
-                    "DirectX": 12,
-                    "Gender": "FPS",
-                    "Graphics": "RTX 3050",
-                    "Language": "Portugues",
-                    "Memory": "8 GB",
-                    "Name": "Valorant",
-                    "OS": "Windows 11",
-                    "Platform": "PC",
-                    "Price": 0,
-                    "Processor": "Intel core i5",
-                    "Release Date": "20/5/2020",
-                    "Review": ["Mo bosta", "Muito bom"],
-                    "Storage": "35 GB",
-                    "Studio": "Riot games"
-          },
-          {
-                    "Age Rating": 18,
-                    "Availability": 1,
-                    "DirectX": 12,
-                    "Gender": "FPS",
-                    "Graphics": "RTX 3050",
-                    "Language": "Portugues",
-                    "Memory": "8 GB",
-                    "Name": "Valorant",
-                    "OS": "Windows 11",
-                    "Platform": "PC",
-                    "Price": 0,
-                    "Processor": "Intel core i5",
-                    "Release Date": "20/5/2020",
-                    "Review": ["Mo bosta", "Muito bom"],
-                    "Storage": "35 GB",
-                    "Studio": "Riot games"
-  }
+                {
+                                "Age Rating": 18,
+                                "Availability": 1,
+                                "DirectX": 12,
+                                "Gender": "FPS",
+                                "Graphics": "RTX 3050",
+                                "Language": "Portugues",
+                                "Memory": "8 GB",
+                                "Name": "Valorant",
+                                "OS": "Windows 11",
+                                "Platform": "PC",
+                                "Price": 0,
+                                "Processor": "Intel core i5",
+                                "Release Date": "20/5/2020",
+                                "Review": [
+                                                "Mo bosta",
+                                                "Muito bom"
+                                ],
+                                "Storage": "35 GB",
+                                "Studio": "Riot games"
+                }
 ]

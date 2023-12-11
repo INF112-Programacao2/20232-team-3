@@ -43,6 +43,7 @@ class Game : public Product {    // Classe Game herda da classe Product
 		void set_graphics(std::string graphics);	//Define a placa de video
 		void set_directx(int directx);	//Define o DirectX
 		void set_storage(std::string storage);	//Define o armazenamento
+		void set_age_rating(int ageRating);	//Define a classificacao etaria do jogo
 
 };
 
