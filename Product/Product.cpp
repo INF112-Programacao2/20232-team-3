@@ -12,6 +12,10 @@ Product::Product(std::string name, std::string studio, int ageRating, double pri
     _releaseDate = releaseDate;
 }
 
+Product::Product() // Construtor
+{
+}
+
 std::string Product::get_name() //Retorna o nome do produto
 {
     return _name;

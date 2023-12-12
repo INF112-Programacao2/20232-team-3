@@ -18,6 +18,7 @@ class Game : public Product {    // Classe Game herda da classe Product
 
 	public:
 	    Game(std::string name, std::string studio, int ageRating, double price, bool availability, std::vector<std::string> review, std::string releaseDate, std::string gender, std::string platform, std::string language, std::string os, std::string processor, std::string memory, std::string graphics, int directx, std::string storage);
+		Game();	// Construtor
 	
 	    // Destructor
 	    ~Game();

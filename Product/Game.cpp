@@ -15,6 +15,10 @@ Product(name, studio, ageRating, price, availability, review, releaseDate)
     _storage = storage;
 }
 
+Game::Game() 
+{
+}
+
 // Destrutor
 Game::~Game() 
 {

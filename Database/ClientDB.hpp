@@ -12,10 +12,6 @@
 class ClientDB
 {
 public:
-    // Auxiliares
-    static bool exist_username(std::string &username);
-    static bool exist_email(std::string &email);
-
     static void edit_info(Client* client);
     static void redeem_balance(Developer* dev);
     static void add_balance(User* usr);

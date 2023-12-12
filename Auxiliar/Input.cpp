@@ -97,12 +97,12 @@ std::string Input::input_password()
     {
         try
         {
-            std::cout << "Digite sua senha: ";
+            std::cout << "Defina a sua senha: ";
             std::getline(std::cin, password);
-            std::cout << "Digite sua senha novamente: ";
+            std::cout << "Repita a sua senha: ";
             std::getline(std::cin, password2);
 
-            if(password != password)
+            if(password != password2)
             {
                 throw std::invalid_argument("As senhas não coincidem.");
             }

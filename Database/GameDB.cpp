@@ -8,14 +8,7 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-// VERIFY NAME
-// VERIFY STUDIO
-// VERIFY AGE RATING
-// VERIFY PRICE
-// VERIFY AVAILABILITY
-// VERIFY DATE
-
-void change_gameValue(std::string key, std::string value, std::string gameName)
+void change_gameValue(std::string key, std::string value, std::string gameName) // Função auxiliar para alterar um valor string de um jogo no arquivo JSON
 {
     std::ifstream arquivo("games.json");
     if (!arquivo.is_open()) 
@@ -48,7 +41,7 @@ void change_gameValue(std::string key, std::string value, std::string gameName)
     }
 }
 
-void change_gameValue(std::string key, double value, std::string gameName)
+void change_gameValue(std::string key, double value, std::string gameName) // Função auxiliar para alterar um valor double de um jogo no arquivo JSON
 {
     std::ifstream arquivo("games.json");
     if (!arquivo.is_open()) 
@@ -81,7 +74,7 @@ void change_gameValue(std::string key, double value, std::string gameName)
     }
 }
 
-void change_gameValue(std::string key, int value, std::string gameName)
+void change_gameValue(std::string key, int value, std::string gameName) // Função auxiliar para alterar um valor int de um jogo no arquivo JSON
 {
     std::ifstream arquivo("games.json");
     if (!arquivo.is_open()) 
@@ -130,7 +123,7 @@ void GameDB::list_games()
     {
         for (auto& data : dadosJSON) 
         {
-            std::cout << "    Nome: " << data["Name"] << std::endl;
+            std::cout << "  Nome: " << data["Name"] << std::endl;
             std::cout << "Plataforma: " << data["Platform"] << std::endl;
             std::cout << "Preço: " << data["Price"] << std::endl;
             std::cout << "Disponivel? ";
@@ -149,6 +142,7 @@ void GameDB::list_games()
             std::cout << "Gênero: " << data["Gender"] << std::endl;
             for(auto review : data["Review"])
                 std::cout << "Review: " << review << std::endl;
+            std::cout << std::endl;
 
         }
     }
@@ -161,31 +155,29 @@ void GameDB::list_games()
 void GameDB::edit_game(Game* game)
 {
     std::cout << "Digite o número correspondente à informação que deseja alterar: \n";
-    std::cout << "1 - Nome\n2 - Plataforma\n3 - Preço\n4 - Disponibilidade\n5 - Estúdio\n6 - Data de lançamento\n7 - Processador\n8 - Memória\n9 - Armazenamento\n10 - Placa de vídeo\n11 - DirectX\n12 - Sistema operacional\n13 - Idioma\n14 - Classificação indicativa\n15 - Gênero\n16 - Sair\n";
+    std::cout << "1 - Nome\n2 - Plataforma\n3 - Preço\n4 - Disponibilidade\n5 - Estúdio\n6 - Data de lançamento\n7 - Processador\n8 - Memória\n9 - Armazenamento\n10 - Placa de vídeo\n11 - DirectX\n12 - Sistema operacional\n13 - Idioma\n14 - Classificação indicativa\n15 - Gênero\nAperte qualquer outra tecla para sair\n";
     int aux;
     std::string aux2;
     double aux3;
     std::cin >> aux;
+    std::cin.ignore();
 
     switch (aux)
     {
     case 1: // Editar nome
-        std::cout << "Digite o novo nome: ";
-        std::cin >> aux2;
+        aux2 = Input::input_name("Digite o novo nome: ");
         change_gameValue("Name", aux2, game->get_name());
         game->set_name(aux2);
         break;
     case 2: // Editar plataforma
-        std::cout << "Digite a nova plataforma: ";
-        std::cin >> aux2;
+        aux2 = Input::input_name("Digite a nova plataforma: ");
         change_gameValue("Platform", aux2, game->get_name());
         game->set_platform(aux2);
         break;
     case 3: // Editar preço
         while (true)
         {
-            std::cout << "Digite o novo preço: ";
-            std::cin >> aux3;
+            aux3 = Input::input_double("Digite o novo preço: ");
             if(aux3 >= 0) break;
             else std::cout << "Preço inválido, tente novamente" << std::endl;
         }
@@ -193,8 +185,7 @@ void GameDB::edit_game(Game* game)
         game->set_price(aux3);
         break;
     case 4: // Editar disponibilidade
-        std::cout << "O produto está disponível? (1 - Sim, 0 - Não): ";
-        std::cin >> aux;
+        aux = Input::input_bool("O jogo está disponível? (1 - Sim, 0 - Não): ");
         if(aux == 0)
             change_gameValue("Availability", 0, game->get_name());
         else
@@ -202,68 +193,57 @@ void GameDB::edit_game(Game* game)
         game->set_availability((bool)aux);
         break;
     case 5: // Editar estúdio
-        std::cout << "Digite o novo estúdio: ";
-        std::cin >> aux2;
+        aux2 = Input::input_name("Digite o novo estúdio: ");
         change_gameValue("Studio", aux2, game->get_name());
         game->set_studio(aux2);
         break;
     case 6: // Editar data de lançamento
-        std::cout << "Digite a nova data de lançamento: ";
-        std::cin >> aux2;
+        aux2 = Input::input_date("Digite a nova data de lançamento: ");
         change_gameValue("Release Date", aux2, game->get_name());
         game->set_releaseDate(aux2);
         break;
     case 7: // Editar processador
-        std::cout << "Digite o novo processador: ";
-        std::cin >> aux2;
+        aux2 = Input::input_name("Digite o novo processador: ");
         change_gameValue("Processor", aux2, game->get_name());
         game->set_processor(aux2);
         break;
     case 8: // Editar memória
-        std::cout << "Digite a nova memória: ";
-        std::cin >> aux2;
+        aux2 = Input::input_name("Digite a nova memória: ");
         change_gameValue("Memory", aux2, game->get_name());
         game->set_memory(aux2);
         break;
     case 9: // Editar armazenamento
-        std::cout << "Digite o novo armazenamento: ";
-        std::cin >> aux2;
+        aux2 = Input::input_name("Digite o novo armazenamento: ");
         change_gameValue("Storage", aux2, game->get_name());
         game->set_storage(aux2);
         break;
     case 10: // Editar placa de vídeo
-        std::cout << "Digite a nova placa de vídeo: ";
-        std::cin >> aux2;
+        aux2 = Input::input_name("Digite a nova placa de vídeo: ");
         change_gameValue("Graphics", aux2, game->get_name());
         game->set_graphics(aux2);
         break;
     case 11: // Editar DirectX
-        std::cout << "Digite o novo DirectX: ";
-        std::cin >> aux;
+        aux = Input::input_int("Digite o novo DirectX: ", 0, 12);
         change_gameValue("DirectX", aux, game->get_name());
         game->set_directx(aux);
         break;
     case 12: // Editar sistema operacional
-        std::cout << "Digite o novo sistema operacional: ";
-        std::cin >> aux2;
+        aux2 = Input::input_name("Digite o novo sistema operacional: ");
         change_gameValue("OS", aux2, game->get_name());
         game->set_os(aux2);
         break;
     case 13: // Editar idioma
-        std::cout << "Digite o novo idioma: ";
-        std::cin >> aux2;
+        aux2 = Input::input_name("Digite o novo idioma: ");
         change_gameValue("Language", aux2, game->get_name());
         game->set_language(aux2);
         break;
     case 14: // Editar classificação indicativa
-        std::cout << "Digite a nova classificação indicativa: ";
-        std::cin >> aux;
+        aux = Input::input_int("Digite a nova classificação indicativa: ", 0, 18);
         change_gameValue("Age rating", aux, game->get_name());
         game->set_age_rating(aux);
         break;
     case 15: // Editar gênero
-        std::cout << "Digite o novo gênero: ";
-        std::cin >> aux2;
+        aux2 = Input::input_name("Digite o novo gênero: ");
         change_gameValue("Gender", aux2, game->get_name());
         game->set_gender(aux2);
         break;
@@ -360,10 +340,12 @@ void GameDB::delete_game(std::string game){
     std::string name = game;
     bool gameExists = false;
 
-    while (true) {
+    while (true) 
+    {
 
         std::ifstream inputFile("games.json");    // Abre o arquivo JSON
-        if (!inputFile.is_open()) {    // Verifica se o arquivo foi aberto corretamente
+        if (!inputFile.is_open()) 
+        {    // Verifica se o arquivo foi aberto corretamente
             std::cerr << "Erro ao abrir o arquivo json" << std::endl;
             return;
         }
@@ -377,7 +359,8 @@ void GameDB::delete_game(std::string game){
             return game["Name"] == name;
         });
 
-        if (it != dadosJSON.end()) {    // Se o jogo existir, remove
+        if (it != dadosJSON.end()) 
+        {    // Se o jogo existir, remove
             dadosJSON.erase(it);
 
             std::ofstream fileout("games.json");
@@ -387,11 +370,13 @@ void GameDB::delete_game(std::string game){
             std::cout << "Jogo removido com sucesso!" << std::endl;
             gameExists = true;
         }
-        else{    // Jogo não encontrado, pede para tentar novamente
+        else
+        {    // Jogo não encontrado, pede para tentar novamente
             std::cout << "Jogo nao encontrado. Por favor tente novamente: " << std::endl;
         }
 
-        if(gameExists){
+        if(gameExists)
+        {
             break;
         }
     }

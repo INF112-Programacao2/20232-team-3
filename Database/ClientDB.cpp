@@ -8,7 +8,7 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-void change_clientValue(std::string key, std::string value, std::string username) // AUXILIAR
+void change_clientValue(std::string key, std::string value, std::string username) // Função auxiliar - Muda um valor string de um cliente no json
 {
     std::ifstream arquivo("clients.json");
     if (!arquivo.is_open()) 
@@ -43,7 +43,7 @@ void change_clientValue(std::string key, std::string value, std::string username
     }
 }
 
-void change_clientValue(std::string key, double value, std::string username) // AUXILIAR
+void change_clientValue(std::string key, double value, std::string username) // Função auxiliar - Muda um valor double de um cliente no json
 {
     std::ifstream arquivo("clients.json");
     if (!arquivo.is_open()) 
@@ -79,10 +79,11 @@ void change_clientValue(std::string key, double value, std::string username) // 
     }
 }
 
-bool ClientDB::exist_username(std::string &username)
+bool username_exist(std::string &username) // Função auxiliar - Retorna se um username existe em clients.json
 {
     std::ifstream arquivo("clients.json");
-    if (!arquivo.is_open()) {
+    if (!arquivo.is_open()) 
+    {
         std::cerr << "Erro ao abrir o arquivo JSON.1" << std::endl;
     }
 
@@ -90,12 +91,15 @@ bool ClientDB::exist_username(std::string &username)
     arquivo >> dadosJSON;
     arquivo.close();
 
-    if (dadosJSON.is_array()) {
-        for (const auto& data : dadosJSON) {
+    if (dadosJSON.is_array()) 
+    {
+        for (const auto& data : dadosJSON) 
+        {
             std::string usernameJSON = data["Username"];
 
             // Verifique se o nome e o usuário correspondem aos fornecidos
-            if (usernameJSON == username) {
+            if (usernameJSON == username) 
+            {
                 return true;
             }
         }
@@ -103,10 +107,11 @@ bool ClientDB::exist_username(std::string &username)
     return false;
 }
 
-bool ClientDB::exist_email(std::string &email)
+bool email_exist(std::string &email) // Função auxiliar - Retorna se um email existe em clients.json
 {
     std::ifstream arquivo("clients.json");
-    if (!arquivo.is_open()) {
+    if (!arquivo.is_open()) 
+    {
         std::cerr << "Erro ao abrir o arquivo JSON.1" << std::endl;
     }
 
@@ -114,12 +119,15 @@ bool ClientDB::exist_email(std::string &email)
     arquivo >> dadosJSON;
     arquivo.close();
 
-    if (dadosJSON.is_array()) {
-        for (const auto& data : dadosJSON) {
+    if (dadosJSON.is_array()) 
+    {
+        for (const auto& data : dadosJSON) 
+        {
             std::string emailJSON = data["Email"];
 
             // Verifique se o nome e o usuário correspondem aos fornecidos
-            if (emailJSON == email) {
+            if (emailJSON == email) 
+            {
                 return true;
             }
         }
@@ -131,20 +139,16 @@ void ClientDB::edit_info(Client* client)
 {
     int aux;
     std::string temp, temp2;
-    std::cout << "O que deseja alterar?\n1 - Username;\n2 - Password;\n3 - Email;\n4 - Voltar\n";
+    std::cout << "O que deseja alterar?\n1 - Username;\n2 - Password;\n3 - Email;\nAperte qualquer outra tecla para voltar\n";
     std::cin >> aux;
+    std::cin.ignore();
     switch (aux)
     {
         case 1:
             while (true)
             {
-                std::cout << "Digite seu novo nome de usuário: ";
-                std::cin >> temp;
-                if(temp.size() > 30)
-                {
-                    std::cout << "Nome de usuário muito grande, digite novamente\n";
-                }
-                else if(exist_username(temp))
+                temp = Input::input_name("Digite seu novo nome de usuário: ", 30);
+                if(username_exist(temp))
                 {
                     std::cout << "Nome de usuário já existente, digite novamente\n";
                 }
@@ -161,10 +165,10 @@ void ClientDB::edit_info(Client* client)
             {
                 std::cout << "Digite sua senha antiga: ";
                 std::cin >> temp;
+                std::cin.ignore();
                 if(temp == client->get_password())
                 {
-                    std::cout << "Digite sua nova senha: ";
-                    std::cin >> temp2;
+                    temp2 = Input::input_password();
 
                     std::ifstream arquivo("clients.json");
                     if (!arquivo.is_open()) 
@@ -177,7 +181,7 @@ void ClientDB::edit_info(Client* client)
                     arquivo.close();
 
                     change_clientValue("Password", temp2, client->get_username());
-                    client->set_password(temp);
+                    client->set_password(temp2);
                     break;
 
                 }
@@ -190,13 +194,8 @@ void ClientDB::edit_info(Client* client)
         case 3:
             while (true)
             {
-                std::cout << "Digite seu novo e-mail: ";
-                std::cin >> temp;
-                if(temp.size() > 30)
-                {
-                    std::cout << "E-mail muito grande, digite novamente\n";
-                }
-                else if(exist_email(temp))
+                temp = Input::input_email("Digite seu novo email: ");
+                if(email_exist(temp))
                 {
                     std::cout << "E-mail já existente, digite novamente\n";
                 }
@@ -226,9 +225,8 @@ void ClientDB::redeem_balance(Developer* dev)
     while (true)
     {
         std::cout << "Seu saldo atual é de: R$" << dev->get_balance() << '\n';
-        std::cout << "Digite o valor que deseja resgatar: ";
         double aux;
-        std::cin >> aux;
+        aux = Input::input_double("Digite o valor que deseja resgatar: ");
         if(aux > dev->get_balance())
         {
             std::cout << "Valor maior que o saldo atual, tente novamente\n";
@@ -263,9 +261,8 @@ void ClientDB::add_balance(User* usr)
     while (true)
     {
         std::cout << "Seu saldo atual é de: R$" << usr->get_balance() << '\n';
-        std::cout << "Digite o valor que deseja adicionar: ";
         double aux;
-        std::cin >> aux;
+        aux = Input::input_double("Digite o valor que deseja adicionar: ");
         if (aux < 0)
         {
             std::cout << "Valor inválido, tente novamente\n";
@@ -289,12 +286,6 @@ void ClientDB::add_balance(User* usr)
         }
     }
 }
-
-// INPUT USERNAME
-// INPUT EMAIL
-// INPUT PASSWORD
-// INPUT CPF
-// VERIFY DATE
 
 void add_client(std::string &username, std::string &email, std::string &password,int &ID, std::string &cpf, std::string &birthdate) // AUXILIAR
 {
@@ -335,84 +326,35 @@ void ClientDB::do_register()
     int ID;
     while(true)
     {
-        std::cout << "Voce deseja registrar-se como Usuario ou como um desenvolvedor?\n";
-        std::cout << "1 - Usuario\n";
-        std::cout << "2 - Desenvolvedor\n";
-        int op;
-        std::cin >> op;
-        std::cin.ignore();
-            if (op == 1){
-                ID = 1;
-                break;
-            }else if (op == 2){
-                ID = 10;
-                break;
-            }else{
-                std::cout << "Opcao invalida tente novamente\n";
-                continue;
-            }
-    }
-    name = Input::input_name("Digite seu nome de usuário: ", 30);
-    email = Input::input_email("Digite seu nome de email: ");
-    if (!exist_username(name) && !exist_email(email))
-    {
-        password = Input::input_password();
-        cpf = Input::input_cpf();
-        //balance = 0
-        birthdate = Input::input_date("Digite sua data de nascimento:");
-        // ID
-        add_client(name, email, password, ID, cpf, birthdate);
-    }
-    else
-        std::cout << "Usuario ja cadastrado\n";
-        //falta colocar o que fazer se for cadatrado
-}
-
-void search_game2(std::string &game, std::vector<Game> &games) // AUXILIAR
-{
-    std::ifstream arquivo("games.json");
-    if (!arquivo.is_open()) 
-    {
-        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
-    }
-
-    json dadosJSON;
-    arquivo >> dadosJSON;
-    arquivo.close();
-
-    if (dadosJSON.is_array()) {
-        for (auto& data : dadosJSON) {
-            std::string gameJSON = data["Name"];
-            if (gameJSON == game)
-            {
-                std::string name = data["Name"];
-                std::string platform = data["Platform"];
-                std::string release_date = data["Release Date"];
-                std::string studio = data["Studio"];
-                int age = data["Age Rating"];
-                bool available = data["Availability"].get<int>();
-                int directx = data["DirectX"];
-                double price = data["Price"];
-                std::string gender = data["Gender"];
-                std::string graphics =data["Graphics"];
-                std::string language = data["Language"];
-                std::string memory = data["Memory"];
-                std::string os = data["OS"];
-                std::string processor = data["Processor"];
-                std::string storage = data["Storage"];
-                std::vector <std::string> review;
-                for(auto& rev : data["Review"])
-                {
-                    review.push_back(rev);
-                }
-                Game jogo(name, studio, age, price, available, review, release_date, gender, platform, language, os, processor, memory, graphics, directx, storage);
-                games.push_back(jogo);
-            }
+        ID = Input::input_int("Voce deseja registrar-se como Usuario ou como um desenvolvedor?\n1 - Usuario\n2 - Desenvolvedor ", 1, 2);
+        if (ID == 1)
+        {
+            break;
+        }
+        else
+        {
+            ID = 10;
+            break;
         }
     }
+        name = Input::input_name("Digite seu nome de usuário: ", 30);
+        email = Input::input_email("Digite seu nome de email: ");
+        if (!username_exist(name) && !email_exist(email))
+        {
+            password = Input::input_password();
+            cpf = Input::input_cpf();
+            //balance = 0
+            birthdate = Input::input_date("Digite sua data de nascimento:");
+            // ID
+            add_client(name, email, password, ID, cpf, birthdate);
+        }
+        else
+            std::cout << "Usuario ja cadastrado\n";
+            //falta colocar o que fazer se for cadatrado
 }
 
-static Client* CreateaclientfromJson(std::string username)
+
+static Client* load_client_from_json(std::string username)
 {
     std::vector <Game> wishlist;
     std::vector <Game> library;
@@ -432,7 +374,6 @@ static Client* CreateaclientfromJson(std::string username)
         {
             if (data["Username"] == username)
             {
-                //std::cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n";
                 double balance = data["Balance"].get<double>();
                 std::string cpf = data["CPF"];
                 std::string email = data["Email"];
@@ -445,18 +386,18 @@ static Client* CreateaclientfromJson(std::string username)
                 {
                     for (const auto& games : data["Jogos"]){
                         jogo = games;
-                        search_game2(jogo, library);
+                        load_game_from_json(jogo, library);
                     }
                     for (const auto& games : data["Wishlist"]){
                         jogo = games;
-                        search_game2(jogo, wishlist);
+                        load_game_from_json(jogo, wishlist);
                     }
                     return new User(username, password, email, cpf, balance, birthdate,  library, wishlist);
                 }else
                 {
                     for (const auto& games : data["Publicacoes"]){
                         jogo = games;
-                        search_game2(jogo, published_games);
+                        load_game_from_json(jogo, published_games);
                     }
                     return new Developer(username, password, email, cpf, balance, birthdate, published_games);
                 }
@@ -472,11 +413,11 @@ Client* ClientDB::do_login()
     std::string password;
     while(true)
     {
-        std::cout << "Digite seu nome de usuario\n";
-        std::cin >> username;
-        std::cout << "Digite sua senha\n";
+        username = Input::input_name("Digite seu nome de usuário: ", 30);
+        std::cout << "Digite sua senha: \n";
         std::cin >> password;
-        if(exist_username(username))
+        std::cin.ignore();
+        if(username_exist(username))
         {
             std::ifstream arquivo("clients.json");
             if (!arquivo.is_open()) {
@@ -494,9 +435,9 @@ Client* ClientDB::do_login()
                     // Verifique se o nome e o usuário correspondem aos fornecidos
                     if (usernameJSON == username && data["Password"] == password) {
                         std::cout << "Login efetuado com sucesso\n";
-                        return CreateaclientfromJson(username);
+                        return load_client_from_json(username);
                     }
-                    else
+                    else if(usernameJSON == username)
                     {
                         std::cout << "Senha incorreta, tente novamente. \n";
                         continue;
@@ -504,5 +445,9 @@ Client* ClientDB::do_login()
                 }
             }
         }
+        else
+        {
+            std::cout << "Usuário não cadastrado, tente novamente\n";
+            continue;}
     }   
 }
