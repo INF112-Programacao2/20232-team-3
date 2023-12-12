@@ -64,7 +64,7 @@
                     "Wishlist": null
           },
           {
-                    "Balance": 25.0,
+                    "Balance": 1000.0,
                     "Birthdate": "08/09/2004",
                     "CPF": "12345678910",
                     "Email": "marianna.verduin@ufv.br",
@@ -77,7 +77,8 @@
                     "Publicacoes": null,
                     "Username": "MariannaBR",
                     "Wishlist": [
-                              "CCPânico"
+                              "CCPânico",
+                              "GTA VI"
                     ]
           }
 ]

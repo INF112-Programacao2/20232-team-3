@@ -155,6 +155,15 @@ void User::buy_game(Game game, std::string username)
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
     }
+    if(!game.get_availability())
+    {
+        int aux = Input::input_int("Jogo indisponivel, deseja adiciona-lo à lista de desejos?\n1 - Sim\n2 - Nao\n", 1, 2);
+        if(aux == 1)
+        {
+            add_to_wishlist(game.get_name(), username);
+        }
+        return;
+    }
 
     json dadosClientsJSON;
     arquivo >> dadosClientsJSON;
@@ -174,7 +183,7 @@ void User::buy_game(Game game, std::string username)
                     {
                         existe = true;
                         std::cout << "Jogo já está na biblioteca\n";
-                        break;
+                        return;
                     }
                 }
                 // Adiciona à wishlist no objeto
