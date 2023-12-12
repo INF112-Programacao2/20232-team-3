@@ -5,7 +5,7 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-bool checkgame(std::string gameName)
+bool checkgame(std::string gameName) // AUXILAR
 {
     std::ifstream arquivo("games.json");
     if (!arquivo.is_open()) 
@@ -34,7 +34,8 @@ bool checkgame(std::string gameName)
     return false;
 }
 
-void search_game(std::string &game, std::vector<Game> &games){
+void search_game(std::string &game, std::vector<Game> &games) // AUXILIAR
+{
     std::ifstream arquivo("games.json");
     if (!arquivo.is_open()) 
     {

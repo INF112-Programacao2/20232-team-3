@@ -1,197 +1,19 @@
 #include "GameDB.hpp"
-#include <iostream>
+#include "../Auxiliar/Input.hpp"
+
 #include <fstream>
-#include <nlohmann/json.hpp>
+#include <iostream>
 #include <vector>
+
+#include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-std::string verifyName() {    // Verifica se o nome é válido
-    std::string name;
-    while (true) {
-        try {
-            std::cin >> name;
-            if (name.empty()) {
-                throw std::invalid_argument("O nome nao pode ser vazio.");
-            }
-            for (char c : name) {    // Verifica se o nome contém apenas letras, números e espaços
-                if (!std::isalnum(c) && c != ' ') {
-                    throw std::invalid_argument("O nome deve ter apenas letras, numeros e espacos.");
-                }
-            }
-            if (!std::isupper(name[0]) && !std::isdigit(name[0])) {    // Verifica se o nome começa com uma letra maiúscula ou um número
-                throw std::invalid_argument("O nome deve comecar com letra maiuscula ou numero.");
-            }
-
-            if(name.size() > 50){    // Verifica se o nome tem mais de 50 caracteres
-                throw std::out_of_range("O nome deve ter no maximo 50 caracteres.");
-            }
-            break;
-
-        } catch (const std::exception& e) {
-            std::cerr << e.what() << " Por favor tente novamente: ";
-        }
-    }
-    return name;
-}
-
-std::string verifyStudio() {    // Verifica se o nome é válido
-    std::string studio;
-    while (true) {
-        try {
-            std::cin >> studio;
-            for (char c : studio) {    // Verifica se o nome contém apenas letras, números e espaços
-                if (!std::isalnum(c) && c != ' ') {
-                    throw std::invalid_argument("The studio must contain only letters, numbers, and spaces.");
-                }
-            }
-            if (!std::isupper(studio[0])) {    // Verifica se o nome começa com uma letra maiúscula
-                throw std::invalid_argument("The studio must start with a capital letter or a number.");
-            }
-        
-            if(studio.size() > 30){    // Verifica se o nome tem mais de 50 caracteres
-                throw std::out_of_range("The studio must have a maximum of 30 characters.");
-            }
-            break;
-
-        } catch (const std::exception& e) {
-            std::cerr << e.what() << " Please try again: ";
-        }
-    }
-    return studio;
-}
-
-int verifyAgeRating(){
-    int ageRating;
-    while(true){
-        try{
-            bool validAgeRating = true;
-            std::cin >> ageRating;
-            if(ageRating > 18 || ageRating < 0){    // Verifica se a classificação etária é válida
-                validAgeRating = false;
-                throw std::invalid_argument("The age rating must be between 0 and 18.");
-            }
-            if(validAgeRating){
-                break;
-            }
-        }catch (const std::exception& e){
-            std::cerr << e.what() << " Please try again: ";
-        }
-    }
-    return ageRating;
-}
-
-double verifyPrice() {
-    std::string price;
-    while (true){
-        try{
-            std::cin >> price;
-            bool validPrice = true;
-            for(char c : price) {
-                if(!std::isdigit(c) && c != '.'){
-                    validPrice = false;
-                    throw std::invalid_argument("The price must contain only numbers and '.'");
-                }
-            }
-            if(price.size() > 6){    // Verifica se o nome tem mais de 50 caracteres
-                throw std::out_of_range("The price must have a maximum of 10 characters.");
-            }
-            if(validPrice){
-                break;
-            }
-        }catch (const std::exception& e){
-            std::cerr << e.what() << " Please try again: ";
-        }
-    }
-    return std::stod(price);
-}
-
-int verifyAvailability() {    // Verifica se a disponibilidade é válida
-    int availability;
-    while (true) {
-        try {
-            bool validAvailability = true;
-            std::cin >> availability;
-            if (availability != 0 && availability != 1) {
-                validAvailability = false;
-                throw std::invalid_argument("Availability must be 0 or 1.");
-            }
-            if(validAvailability){
-                break;
-            }
-        } catch (const std::exception& e) {    // Caso a disponibilidade não seja válida, pede para tentar novamente
-            std::cerr << e.what() << " Please try again: ";
-            //std::cin.clear(); // Limpa o estado de erro
-            //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Descarta caracteres inválidos no buffer
-        }
-    }
-    return availability == 0 ? 0 : 1;
-}
-
-std::string verifyDate()
-{    // Verifica se a data de lançamento é válida
-    int day, month, year;
-    while (true){
-        try{
-            std::cout << "Day: ";
-            std::cin >> day;
-            std::cout << "Month: ";
-            std::cin >> month;
-            std::cout << "Year: ";
-            std::cin >> year;
-            if(day < 1 || day > 31 || month < 1 || month > 12 || year < 1951){    // Verifica se a data é válida
-                throw std::out_of_range("The date is out of a valid range. The day must be between 1 and 31, the month must be between 1 and 12 and the year must be between 1951 and the current year.");
-            }
-            if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){    // Verifica se o ano é bissexto
-                if (month == 2 && day > 29) {    // Verifica se o dia é válido para o mês de fevereiro em um ano bissexto
-                    throw std::out_of_range("The date is out of a valid range. The day must be between 1 and 29.");
-                }
-            }
-            else{
-                if (month == 2 && day > 28) {    // Verifica se o dia é válido para o mês de fevereiro
-                    throw std::out_of_range("The date is out of a valid range. The day must be between 1 and 28.");
-                }
-            }
-            if((month == 4 || month == 6 || month == 9 || month == 11) && day > 30){    // Verifica se o dia é válido para os meses de 30 dias
-                throw std::out_of_range("The date is out of a valid range. The day must be between 1 and 30.");
-            }
-            if((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day > 31){    // Verifica se o dia é válido para os meses de 31 dias
-                throw std::out_of_range("The date is out of a valid range. The day must be between 1 and 31.");
-            }
-            break;
-        }catch(const std::exception& e){    // Caso a data não seja válida, pede para tentar novamente
-            std::cerr << " Please try again." << std::endl;
-        }
-    }
-    std::string strday = std::to_string(day), strmonth = std::to_string(month), stryear = std::to_string(year);
-    if(strday.size() == 1) strday = "0" + strday;
-    if(strmonth.size() == 1) strmonth = "0" + strmonth;
-    if(stryear.size() == 1) stryear = "0" + stryear;
-    std::string releaseDate = strday + '/' + strmonth + '/' + stryear;
-    return releaseDate;
-}
-
-int verify_num()
-{
-    int num;
-    while (true)
-    {
-        try
-        {
-            std::cin >> num;
-            if (num < 0)
-            {
-                throw std::invalid_argument("O número deve ser positivo.");
-            }
-            break;
-        }
-        catch (const std::exception& e)
-        {
-            std::cerr << e.what() << " Por favor tente novamente: ";
-        }
-    }
-    return num;
-
-}
+// VERIFY NAME
+// VERIFY STUDIO
+// VERIFY AGE RATING
+// VERIFY PRICE
+// VERIFY AVAILABILITY
+// VERIFY DATE
 
 void change_gameValue(std::string key, std::string value, std::string gameName)
 {
@@ -471,37 +293,22 @@ Game* GameDB::add_game()
 
     while (true)
     {
-        std::cout << "Digite o nome do jogo: ";
-        name = verifyName();
-        std::cout << "Digite o estúdio do jogo: ";
-        studio = verifyStudio();
-        std::cout << "Digite a classificação indicativa do jogo: ";
-        ageRating = verifyAgeRating();
-        std::cout << "Digite o preço do jogo: ";
-        price = verifyPrice();
-        std::cout << "O jogo está disponível? (1 - Sim, 0 - Não): ";
-        availability = verifyAvailability();
+        name = Input::input_name("Digite o nome do jogo: ");
+        studio = Input::input_name("Digite o estúdio do jogo: ");
+        ageRating = Input::input_int("Digite a classificação indicativa do jogo: ", 0, 18);
+        price = Input::input_double("Digite o preço do jogo: ");
+        availability = Input::input_bool("O jogo está disponível? (1 - Sim, 0 - Não): ");
         // review = {}
-        std::cout << "Digite a data de lançamento do jogo: \n";
-        releaseDate = verifyDate();
-        std::cout << "Digite o gênero do jogo: ";
-        gender = verifyName();
-        std::cout << "Digite a plataforma do jogo: ";
-        plataform = verifyName();
-        std::cout << "Digite o idioma do jogo: ";
-        language = verifyName();
-        std::cout << "Digite o sistema operacional do jogo: ";
-        os = verifyName();
-        std::cout << "Digite o processador do jogo: ";
-        processor = verifyName();
-        std::cout << "Digite a memória do jogo: ";
-        memory = verifyName();
-        std::cout << "Digite a placa de vídeo do jogo: ";
-        graphics = verifyName();
-        std::cout << "Digite o DirectX do jogo: ";
-        directx = verify_num();
-        std::cout << "Digite o armazenamento do jogo: ";
-        storage = verifyName();
+        releaseDate = Input::input_date("Digite a data de lançamento do jogo: ");
+        gender = Input::input_name("Digite o gênero do jogo: ");
+        plataform = Input::input_name("Digite a plataforma do jogo: ");
+        language = Input::input_name("Digite o idioma do jogo: ");
+        os = Input::input_name("Digite o sistema operacional do jogo: ");
+        processor = Input::input_name("Digite o processador do jogo: ");
+        memory = Input::input_name("Digite a memória do jogo: ");
+        graphics = Input::input_name("Digite a placa de vídeo do jogo: ");
+        directx = Input::input_int("Digite o DirectX do jogo: ", 0, 12);
+        storage = Input::input_name("Digite o armazenamento do jogo: ");
 
         gameptr = new Game(name, studio, ageRating, price, availability, {}, releaseDate, gender, plataform, language, os, processor, memory, graphics, directx, storage);
 
