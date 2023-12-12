@@ -6,7 +6,7 @@
 class Game : public Product {    // Classe Game herda da classe Product
     private:
     // Data
-	    std::string _gender;    //Genero do jogo
+	    std::string _genre;    //Genero do jogo
 	    std::string _platform;    //Plataforma do jogo
 	    std::string _language;    //Idiomas do jogo
 	    std::string _os;    //Sistema operacional
@@ -17,14 +17,14 @@ class Game : public Product {    // Classe Game herda da classe Product
 	    std::string _storage;    //Armazenamento
 
 	public:
-	    Game(std::string name, std::string studio, int ageRating, double price, bool availability, std::vector<std::string> review, std::string releaseDate, std::string gender, std::string platform, std::string language, std::string os, std::string processor, std::string memory, std::string graphics, int directx, std::string storage);
+	    Game(std::string name, std::string studio, int ageRating, double price, bool availability, std::vector<std::string> review, std::string releaseDate, std::string genre, std::string platform, std::string language, std::string os, std::string processor, std::string memory, std::string graphics, int directx, std::string storage);
 		Game();	// Construtor
 	
 	    // Destructor
 	    ~Game();
 
 	    // Getters
-	    std::string get_gender();    //Retorna o genero do jogo
+	    std::string get_genre();    //Retorna o genero do jogo
 	    std::string get_platform();    //Retorna a plataforma do jogo
 	    std::string get_language();    //Retorna os idiomas do jogo
 	    std::string get_os();    //Retorna o sistema operacional
@@ -35,7 +35,7 @@ class Game : public Product {    // Classe Game herda da classe Product
 	    std::string get_storage();    //Retorna o armazenamento
 		
 		//Setters
-		void set_gender(std::string gender);	//Define o genero do jogo
+		void set_genre(std::string genre);	//Define o genero do jogo
 		void set_platform(std::string platform);	//Define a plataforma do jogo
 		void set_language(std::string language);	//Define os idiomas do jogo
 		void set_os(std::string os);	//Define o sistema operacional

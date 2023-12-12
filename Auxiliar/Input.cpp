@@ -225,6 +225,7 @@ std::string Input::input_date(std::string text)
 int Input::input_int(std::string text, int lower, int upper)
 {
     int num;
+    std::string strnum;
 
     std::cout << text << std::endl;
 
@@ -233,8 +234,18 @@ int Input::input_int(std::string text, int lower, int upper)
         try
         {
             bool validNum = true;
-            std::cin >> num;
+            std::cin >> strnum;
             std::cin.ignore();
+            for(char c : strnum)
+            {
+                if(!std::isdigit(c))
+                {
+                    validNum = false;
+                    throw std::invalid_argument("O valor só pode conter números.");
+                }
+            }
+
+            num = std::stoi(strnum);
 
             if(num > upper || num < lower)
             {

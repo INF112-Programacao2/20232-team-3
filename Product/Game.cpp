@@ -1,10 +1,10 @@
 #include "Game.hpp"
 
 // Chama o construtor da classe base
-Game::Game(std::string name, std::string studio, int ageRating, double price, bool availability, std::vector<std::string> review, std::string releaseDate, std::string gender, std::string platform, std::string language, std::string os, std::string processor, std::string memory, std::string graphics, int directx, std::string storage): 
+Game::Game(std::string name, std::string studio, int ageRating, double price, bool availability, std::vector<std::string> review, std::string releaseDate, std::string genre, std::string platform, std::string language, std::string os, std::string processor, std::string memory, std::string graphics, int directx, std::string storage): 
 Product(name, studio, ageRating, price, availability, review, releaseDate)
 {
-    _gender = gender;
+    _genre = genre;
     _platform = platform;
     _language = language;
     _os = os;
@@ -26,9 +26,9 @@ Game::~Game()
 }
 
 //Retorna o genero do jogo
-std::string Game::get_gender() 
+std::string Game::get_genre() 
 {
-    return _gender;
+    return _genre;
 }
 
 // Retorna a plataforma do jogo
@@ -80,9 +80,9 @@ std::string Game::get_storage()
 }
 
 // Define o genero do jogo
-void Game::set_gender(std::string gender)   
+void Game::set_genre(std::string genre)   
 {
-    _gender = gender;
+    _genre = genre;
 }
 
 // Define a plataforma do jogo

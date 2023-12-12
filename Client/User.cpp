@@ -62,7 +62,7 @@ void load_game_from_json(std::string name, std::vector<Game> &games) // Função
                 bool available = data["Availability"].get<int>();
                 int directx = data["DirectX"];
                 double price = data["Price"];
-                std::string gender = data["Gender"];
+                std::string genre = data["Genre"];
                 std::string graphics =data["Graphics"];
                 std::string language = data["Language"];
                 std::string memory = data["Memory"];
@@ -74,7 +74,7 @@ void load_game_from_json(std::string name, std::vector<Game> &games) // Função
                 {
                     review.push_back(rev);
                 }
-                Game jogo(name, studio, age, price, available, review, release_date, gender, platform, language, os, processor, memory, graphics, directx, storage);
+                Game jogo(name, studio, age, price, available, review, release_date, genre, platform, language, os, processor, memory, graphics, directx, storage);
                 games.push_back(jogo);
             }
         }
@@ -108,7 +108,7 @@ Game load_game_from_json(std::string &name) // Função auxiliar - Busca um game
                 bool available = data["Availability"].get<int>();
                 int directx = data["DirectX"];
                 double price = data["Price"];
-                std::string gender = data["Gender"];
+                std::string genre = data["Genre"];
                 std::string graphics =data["Graphics"];
                 std::string language = data["Language"];
                 std::string memory = data["Memory"];
@@ -120,7 +120,7 @@ Game load_game_from_json(std::string &name) // Função auxiliar - Busca um game
                 {
                     review.push_back(rev);
                 }
-                Game jogo(name, studio, age, price, available, review, release_date, gender, platform, language, os, processor, memory, graphics, directx, storage);
+                Game jogo(name, studio, age, price, available, review, release_date, genre, platform, language, os, processor, memory, graphics, directx, storage);
                 return jogo;
             }
         }

@@ -139,7 +139,7 @@ void GameDB::list_games()
             std::cout << "Sistema operacional: " << data["OS"] << std::endl;
             std::cout << "Idioma: " << data["Language"] << std::endl;
             std::cout << "Classificação indicativa: " << data["Age rating"] << std::endl;
-            std::cout << "Gênero: " << data["Gender"] << std::endl;
+            std::cout << "Gênero: " << data["Genre"] << std::endl;
             for(auto review : data["Review"])
                 std::cout << "Review: " << review << std::endl;
             std::cout << std::endl;
@@ -244,8 +244,8 @@ void GameDB::edit_game(Game* game)
         break;
     case 15: // Editar gênero
         aux2 = Input::input_name("Digite o novo gênero: ");
-        change_gameValue("Gender", aux2, game->get_name());
-        game->set_gender(aux2);
+        change_gameValue("Genre", aux2, game->get_name());
+        game->set_genre(aux2);
         break;
     default:
         break;
@@ -254,7 +254,7 @@ void GameDB::edit_game(Game* game)
 
 Game* GameDB::add_game() 
 {
-    std::string name, studio, releaseDate, gender, plataform, language, os, processor, memory, graphics, storage;
+    std::string name, studio, releaseDate, genre, plataform, language, os, processor, memory, graphics, storage;
     int ageRating, directx;
     double price;
     bool availability;
@@ -280,7 +280,7 @@ Game* GameDB::add_game()
         availability = Input::input_bool("O jogo está disponível? (1 - Sim, 0 - Não): ");
         // review = {}
         releaseDate = Input::input_date("Digite a data de lançamento do jogo: ");
-        gender = Input::input_name("Digite o gênero do jogo: ");
+        genre = Input::input_name("Digite o gênero do jogo: ");
         plataform = Input::input_name("Digite a plataforma do jogo: ");
         language = Input::input_name("Digite o idioma do jogo: ");
         os = Input::input_name("Digite o sistema operacional do jogo: ");
@@ -290,7 +290,7 @@ Game* GameDB::add_game()
         directx = Input::input_int("Digite o DirectX do jogo: ", 0, 12);
         storage = Input::input_name("Digite o armazenamento do jogo: ");
 
-        gameptr = new Game(name, studio, ageRating, price, availability, {}, releaseDate, gender, plataform, language, os, processor, memory, graphics, directx, storage);
+        gameptr = new Game(name, studio, ageRating, price, availability, {}, releaseDate, genre, plataform, language, os, processor, memory, graphics, directx, storage);
 
         if (dadosJSON.is_array())
         {
@@ -324,7 +324,7 @@ Game* GameDB::add_game()
     novoGame["Price"] = gameptr->get_price();
     novoGame["Language"] = gameptr->get_language();
     novoGame["OS"] = gameptr->get_os();
-    novoGame["Gender"] = gameptr->get_gender();
+    novoGame["Genre"] = gameptr->get_genre();
     novoGame["Review"] = {};
 
     dadosJSON.push_back(novoGame);
