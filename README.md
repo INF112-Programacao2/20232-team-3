@@ -20,4 +20,5 @@ Para o uso no LinuX (Ubuntu) : sudo apt-get install nlohmann-json3-dev
 
 # Instruçoes para compilar o Programa
 
-Rode ```g++ -o main main.cpp Client/Client.cpp Client/Developer.cpp Client/User.cpp Database/ClientDB.cpp Database/GameDB.cpp Product/Game.cpp Product/Product.cpp Auxiliar/Input.cpp && ./main``` para compilar e executar o programa.
+Rode a seguinte linha de comando para compilar e executar o programa.
+```g++ -o main main.cpp Client/Client.cpp Client/Developer.cpp Client/User.cpp Database/ClientDB.cpp Database/GameDB.cpp Product/Game.cpp Product/Product.cpp Auxiliar/Input.cpp && ./main```
