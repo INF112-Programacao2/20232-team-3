@@ -30,7 +30,7 @@ public:
     void set_email(std::string email);  // Define o email
     void set_balance(double balance);   // Define o saldo
     
-    // Método virtual para o menu, igualado a 0 para forçar a classe filha a implementar
+    // Método virtual para o menu, igualado a 0 para forçar a classe filhas a implementar
     virtual void menu() = 0;
 };
 
