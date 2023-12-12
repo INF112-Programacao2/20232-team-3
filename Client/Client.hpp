@@ -1,25 +1,19 @@
 #ifndef CLIENT_HPP_
 #define CLIENT_HPP_
 
-#include<ctime>
-#include<string>
+#include<bits/stdc++.h>
 
 // Struct para armazenar a data de nascimento
-struct Date
-{
-    int day, month, year;
-};
-
 class Client
 {
 protected:
     // Dados pessoais do cliente
     std::string _username, _password, _email, _cpf; // Nome de usuario, senha, email e CPF
-    Date _birthdate;    // Data de nascimento
+    std::string _birthdate;    // Data de nascimento
     int _id; // Identificador do cliente
     double _balance; // Saldo do cliente
 public:
-    Client(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, int id); // Construtor
+    Client(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::string birthdate, int id); // Construtor
 
     // Getters
     std::string get_username(); // Retorna o nome de usuario

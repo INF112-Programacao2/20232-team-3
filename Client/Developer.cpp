@@ -3,7 +3,7 @@
 #include"../Database/GameDB.hpp"
 #include<iostream>
 
-Developer::Developer(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::vector<Game> publishedGames): Client(_username, _password, _email, _cpf, balance, 10)
+Developer::Developer(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::string birthdate, std::vector<Game> publishedGames): Client(_username, _password, _email, _cpf, balance, birthdate, 10)
 { 
     _publishedGames = publishedGames;
 }

@@ -127,7 +127,8 @@ int verifyAvailability() {    // Verifica se a disponibilidade é válida
     return availability == 0 ? 0 : 1;
 }
 
-std::string verifyReleaseDate(){    // Verifica se a data de lançamento é válida
+std::string verifyDate()
+{    // Verifica se a data de lançamento é válida
     int day, month, year;
     while (true){
         try{
@@ -161,7 +162,11 @@ std::string verifyReleaseDate(){    // Verifica se a data de lançamento é vál
             std::cerr << " Please try again." << std::endl;
         }
     }
-    std::string releaseDate = std::to_string(day) + '/' + std::to_string(month) + '/' + std::to_string(year);
+    std::string strday = std::to_string(day), strmonth = std::to_string(month), stryear = std::to_string(year);
+    if(strday.size() == 1) strday = "0" + strday;
+    if(strmonth.size() == 1) strmonth = "0" + strmonth;
+    if(stryear.size() == 1) stryear = "0" + stryear;
+    std::string releaseDate = strday + '/' + strmonth + '/' + stryear;
     return releaseDate;
 }
 
@@ -478,7 +483,7 @@ Game* GameDB::add_game()
         availability = verifyAvailability();
         // review = {}
         std::cout << "Digite a data de lançamento do jogo: \n";
-        releaseDate = verifyReleaseDate();
+        releaseDate = verifyDate();
         std::cout << "Digite o gênero do jogo: ";
         gender = verifyName();
         std::cout << "Digite a plataforma do jogo: ";

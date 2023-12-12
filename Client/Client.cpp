@@ -1,7 +1,7 @@
 #include"Client.hpp"
 
 // Constructor
-Client::Client(std::string username, std::string password, std::string email, std::string cpf, double balance, int id) 
+Client::Client(std::string username, std::string password, std::string email, std::string cpf, double balance, std::string birthdate, int id) 
 {
     _username = username;
     _password = password;
@@ -9,6 +9,7 @@ Client::Client(std::string username, std::string password, std::string email, st
     _cpf = cpf;
     _balance = balance;
     _id = id;
+    _birthdate = birthdate;
 }
 
 // retorna o nome de usuario
@@ -65,7 +66,11 @@ int Client::get_age()
     // Pega a data atual
     std::time_t currentTime = std::time(nullptr);
     std::tm* currentDate = std::localtime(&currentTime);
-
+    struct Date
+    {
+        int day, month, year;
+    };
+    Date _birthdatef = {(_birthdate[0]-'0')*10+(_birthdate[1]-'0'), (_birthdate[3]-'0')*10+(_birthdate[4]-'0'), (_birthdate[6]-'0')*1000+(_birthdate[7]-'0')*100+(_birthdate[8]-'0')*10+(_birthdate[9]-'0')};
     // Define a data atual
     Date current;
     current.day = currentDate->tm_mday;
@@ -73,11 +78,11 @@ int Client::get_age()
     current.year = currentDate->tm_year+1900;
 
     // Calcula a idade
-    int age = current.year - _birthdate.year;
-    if(current.month < _birthdate.month)
+    int age = current.year - _birthdatef.year;
+    if(current.month < _birthdatef.month)
         age--;
-    else if(current.month == _birthdate.month)
-        if(current.day < _birthdate.day)
+    else if(current.month == _birthdatef.month)
+        if(current.day < _birthdatef.day)
             age--;
     return age;     // Retorna a idade
 }
