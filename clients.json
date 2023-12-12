@@ -1,0 +1,54 @@
+[
+          {
+                    "Balance": 0.0,
+                    "Birthdate": "04/04/1996",
+                    "CPF": "12345678910",
+                    "Email": "ricardo@univicosa.br",
+                    "ID": 10,
+                    "Jogos": [],
+                    "Password": "paredesemurosdotrump05",
+                    "Publicacoes": [],
+                    "Username": "Ricardo",
+                    "Wishlist": []
+          },
+          {
+                    "Balance": 0.0,
+                    "Birthdate": "26/11/2003",
+                    "CPF": "12345678910",
+                    "Email": "matheus.antony@ufv.br",
+                    "ID": 1,
+                    "Jogos": [
+                              "Hollow Knight"
+                    ],
+                    "Password": "1234",
+                    "Publicacoes": [],
+                    "Username": "Matheuzao",
+                    "Wishlist": [
+                              "Hollo Knight: Silksong"
+                    ]
+          },
+          {
+                    "Balance": 0.0,
+                    "Birthdate": "06/01/2004",
+                    "CPF": "12345678910",
+                    "Email": "leanderson.leles@ufv.br",
+                    "ID": 1,
+                    "Jogos": null,
+                    "Password": "1234a",
+                    "Publicacoes": null,
+                    "Username": "Leleleles",
+                    "Wishlist": null
+          },
+          {
+                    "Balance": 0.0,
+                    "Birthdate": "20/06/2005",
+                    "CPF": "12345678910",
+                    "Email": "leonardo.porto@ufv.br",
+                    "ID": 10,
+                    "Jogos": null,
+                    "Password": "1234a",
+                    "Publicacoes": null,
+                    "Username": "Leozao",
+                    "Wishlist": null
+          }
+]
