@@ -519,3 +519,141 @@ void ClientDB::do_register()
         std::cout << "Usuario ja cadastrado\n";
         //falta colocar o que fazer se for cadatrado
 }
+
+void search_game2(std::string &game, std::vector<Game> &games){
+    std::ifstream arquivo("games.json");
+    if (!arquivo.is_open()) 
+    {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosJSON;
+    arquivo >> dadosJSON;
+    arquivo.close();
+
+    if (dadosJSON.is_array()) {
+        for (auto& data : dadosJSON) {
+            std::string gameJSON = data["Name"];
+            if (gameJSON == game)
+            {
+                std::string name = data["Name"];
+                std::string platform = data["Platform"];
+                std::string release_date = data["Release Date"];
+                std::string studio = data["Studio"];
+                int age = data["Age Rating"];
+                bool available = data["Availability"].get<int>();
+                int directx = data["DirectX"];
+                double price = data["Price"];
+                std::string gender = data["Gender"];
+                std::string graphics =data["Graphics"];
+                std::string language = data["Language"];
+                std::string memory = data["Memory"];
+                std::string os = data["OS"];
+                std::string processor = data["Processor"];
+                std::string storage = data["Storage"];
+                std::vector <std::string> review;
+                for(auto& rev : data["Review"])
+                {
+                    review.push_back(rev);
+                }
+                Game jogo(name, studio, age, price, available, review, release_date, gender, platform, language, os, processor, memory, graphics, directx, storage);
+                games.push_back(jogo);
+            }
+        }
+    }
+}
+
+static Client* CreateaclientfromJson(std::string username)
+{
+    std::vector <Game> wishlist;
+    std::vector <Game> library;
+    std::vector <Game> published_games;
+    std::string jogo;
+    std::ifstream arquivo("clients.json");
+    if (!arquivo.is_open()) {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosJSON;
+    arquivo >> dadosJSON;
+    arquivo.close();
+
+    if (dadosJSON.is_array()) {
+        for (const auto& data : dadosJSON) 
+        {
+            if (data["Username"] == username)
+            {
+                //std::cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n";
+                double balance = data["Balance"].get<double>();
+                std::string cpf = data["CPF"];
+                std::string email = data["Email"];
+                int id = data["ID"].get<int>();
+                std::string password = data["Password"];
+                std::string username = data["Username"];
+                std::string birthdate = data["Birthdate"];
+
+                if (data["ID"] == 1)
+                {
+                    for (const auto& games : data["Jogos"]){
+                        jogo = games;
+                        search_game2(jogo, library);
+                    }
+                    for (const auto& games : data["Wishlist"]){
+                        jogo = games;
+                        search_game2(jogo, wishlist);
+                    }
+                    return new User(username, password, email, cpf, balance, birthdate,  library, wishlist);
+                }else
+                {
+                    for (const auto& games : data["Publicacoes"]){
+                        jogo = games;
+                        search_game2(jogo, published_games);
+                    }
+                    return new Developer(username, password, email, cpf, balance, birthdate, published_games);
+                }
+            }
+        }
+    }
+    return nullptr;
+}
+
+Client* ClientDB::do_login()
+{
+    std::string username;
+    std::string password;
+    while(true)
+    {
+        std::cout << "Digite seu nome de usuario\n";
+        std::cin >> username;
+        std::cout << "Digite sua senha\n";
+        std::cin >> password;
+        if(exist_username(username))
+        {
+            std::ifstream arquivo("clients.json");
+            if (!arquivo.is_open()) {
+                std::cerr << "Erro ao abrir o arquivo JSON.1" << std::endl;
+            }
+
+            json dadosJSON;
+            arquivo >> dadosJSON;
+            arquivo.close();
+
+            if (dadosJSON.is_array()) {
+                for (const auto& data : dadosJSON) {
+                    std::string usernameJSON = data["Username"];
+
+                    // Verifique se o nome e o usuário correspondem aos fornecidos
+                    if (usernameJSON == username && data["Password"] == password) {
+                        std::cout << "Login efetuado com sucesso\n";
+                        return CreateaclientfromJson(username);
+                    }
+                    else
+                    {
+                        std::cout << "Senha incorreta, tente novamente. \n";
+                        continue;
+                    }
+                }
+            }
+        }
+    }   
+}

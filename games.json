@@ -37,5 +37,23 @@
                                 "Review": null,
                                 "Storage": "5",
                                 "Studio": "Mojang"
+                },
+                {
+                                "Age Rating": 14,
+                                "Availability": 0,
+                                "DirectX": 11,
+                                "Gender": "Metroidvania",
+                                "Graphics": "Intel Graphics",
+                                "Language": "Portugues",
+                                "Memory": "8GB",
+                                "Name": "Hollow Knight",
+                                "OS": "Windows 11",
+                                "Platform": "PC",
+                                "Price": 25.0,
+                                "Processor": "Intel Core i5",
+                                "Release Date": "11/12/2024",
+                                "Review": null,
+                                "Storage": "10 GB",
+                                "Studio": "Ric"
                 }
 ]

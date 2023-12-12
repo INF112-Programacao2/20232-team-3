@@ -20,6 +20,7 @@ public:
     static void add_balance(User* usr);
 
     static void do_register();
+    static Client* do_login();
 };
 
 #endif // CLIENTDB_HPP

@@ -8,6 +8,7 @@
 
 int main()
 {
-    ClientDB::do_register();
+    Client* client = ClientDB::do_login();  
+    client->menu();  
     return 0;
 }
