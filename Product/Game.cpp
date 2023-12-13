@@ -128,7 +128,7 @@ void Game::set_storage(std::string storage)
 {
     _storage = storage;
 }
-
+// define a faixa etária do jogo
 void Game::set_age_rating(int ageRating)  // Define a classificacao etaria do jogo
 {
     _ageRating = ageRating;

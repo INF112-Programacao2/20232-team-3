@@ -8,7 +8,7 @@
 
 int main()
 {
-    Client* client = ClientDB::do_login();  
-    client->menu();  
+    Client* client = ClientDB::do_login();  // Faz o login do cliente  
+    client->menu();     // Chama o menu do cliente(dev ou user) 
     return 0;
 }

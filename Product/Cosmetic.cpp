@@ -8,12 +8,11 @@ Cosmetic::Cosmetic(std::string name, std::string studio, int ageRating, double p
 {
 
 }
-
-// Getters
+//retorna o tipo de cosmético
 std::string Cosmetic::get_type() {
     return _type;
 }
-
+//retorna a descrição do cosmético
 std::string Cosmetic::get_description() {
     return _description;
 }

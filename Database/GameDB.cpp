@@ -28,7 +28,7 @@ std::string verifyName() {    // Verifica se o nome é válido
             break;
 
         } catch (const std::exception& e) {
-            std::cerr << e.what() << " Por favor tente novamente: ";
+            std::cerr << e.what() << " Por favor tente novamente: ";    // Caso o nome não seja válido, pede para tentar novamente
         }
     }
     return name;
@@ -54,7 +54,7 @@ std::string verifyStudio() {    // Verifica se o nome é válido
             break;
 
         } catch (const std::exception& e) {
-            std::cerr << e.what() << " Please try again: ";
+            std::cerr << e.what() << " Please try again: ";   // Caso o nome não seja válido, pede para tentar novamente
         }
     }
     return studio;
@@ -68,25 +68,25 @@ int verifyAgeRating(){
             std::cin >> ageRating;
             if(ageRating > 18 || ageRating < 0){    // Verifica se a classificação etária é válida
                 validAgeRating = false;
-                throw std::invalid_argument("The age rating must be between 0 and 18.");
+                throw std::invalid_argument("The age rating must be between 0 and 18.");    
             }
             if(validAgeRating){
                 break;
             }
         }catch (const std::exception& e){
-            std::cerr << e.what() << " Please try again: ";
+            std::cerr << e.what() << " Please try again: ";   // Caso a classificação etária não seja válida, pede para tentar novamente
         }
     }
     return ageRating;
 }
 
-double verifyPrice() {
+double verifyPrice() {  // Verifica se o preço é válido
     std::string price;
     while (true){
         try{
             std::cin >> price;
             bool validPrice = true;
-            for(char c : price) {
+            for(char c : price) {   // Verifica se o preço contém apenas números e '.'
                 if(!std::isdigit(c) && c != '.'){
                     validPrice = false;
                     throw std::invalid_argument("The price must contain only numbers and '.'");
@@ -99,7 +99,7 @@ double verifyPrice() {
                 break;
             }
         }catch (const std::exception& e){
-            std::cerr << e.what() << " Please try again: ";
+            std::cerr << e.what() << " Please try again: ";  // Caso o preço não seja válido, pede para tentar novamente
         }
     }
     return std::stod(price);
@@ -111,7 +111,7 @@ int verifyAvailability() {    // Verifica se a disponibilidade é válida
         try {
             bool validAvailability = true;
             std::cin >> availability;
-            if (availability != 0 && availability != 1) {
+            if (availability != 0 && availability != 1) {   // Verifica se a disponibilidade é falsa ou verdadeira
                 validAvailability = false;
                 throw std::invalid_argument("Availability must be 0 or 1.");
             }
@@ -120,8 +120,6 @@ int verifyAvailability() {    // Verifica se a disponibilidade é válida
             }
         } catch (const std::exception& e) {    // Caso a disponibilidade não seja válida, pede para tentar novamente
             std::cerr << e.what() << " Please try again: ";
-            //std::cin.clear(); // Limpa o estado de erro
-            //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Descarta caracteres inválidos no buffer
         }
     }
     return availability == 0 ? 0 : 1;
@@ -162,15 +160,15 @@ std::string verifyDate()
             std::cerr << " Please try again." << std::endl;
         }
     }
-    std::string strday = std::to_string(day), strmonth = std::to_string(month), stryear = std::to_string(year);
+    std::string strday = std::to_string(day), strmonth = std::to_string(month), stryear = std::to_string(year);   // Transforma os inteiros em strings
     if(strday.size() == 1) strday = "0" + strday;
     if(strmonth.size() == 1) strmonth = "0" + strmonth;
     if(stryear.size() == 1) stryear = "0" + stryear;
-    std::string releaseDate = strday + '/' + strmonth + '/' + stryear;
+    std::string releaseDate = strday + '/' + strmonth + '/' + stryear;  // Concatena as strings
     return releaseDate;
 }
 
-int verify_num()
+int verify_num()    // Verifica se o número é válido
 {
     int num;
     while (true)
@@ -178,7 +176,7 @@ int verify_num()
         try
         {
             std::cin >> num;
-            if (num < 0)
+            if (num < 0)    // Verifica se o número é positivo
             {
                 throw std::invalid_argument("O número deve ser positivo.");
             }
@@ -193,21 +191,87 @@ int verify_num()
 
 }
 
-void change_gameValue(std::string key, std::string value, std::string gameName)
+void change_gameValue(std::string key, std::string value, std::string gameName)   // Função que altera o valor de uma chave de um jogo
 {
-    std::ifstream arquivo("games.json");
-    if (!arquivo.is_open()) 
+    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
     }
 
-    json dadosJSON;
-    arquivo >> dadosJSON;
-    arquivo.close();
+    json dadosJSON;    // Cria um array tipo JSON
+    arquivo >> dadosJSON;   // Lê o arquivo JSON
+    arquivo.close();    // Fecha o arquivo
 
-    if (dadosJSON.is_array()) 
+    if (dadosJSON.is_array())   // Verifica se o arquivo é um array 
+    {
+        for (auto& data : dadosJSON)    // Percorre o array 
+        {
+            // Verifique se o nome e o usuário correspondem aos fornecidos
+            if (data["Name"] == gameName)   // Verifica se o nome do jogo é igual ao nome do jogo que se deseja alterar 
+            {
+                data[key] = value;  // Altera o valor da chave
+                std::ofstream arquivoSaida("games.json");   // Abre o arquivo JSON
+                arquivoSaida << dadosJSON.dump(16);    // Escreve no arquivo JSON
+                arquivoSaida.close();   // Fecha o arquivo
+                return;
+            }
+        }
+    }
+    else
+    {
+        std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
+    }
+}
+
+void change_gameValue(std::string key, double value, std::string gameName)  // Função que altera o valor de uma chave de um jogo
+{
+    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    if (!arquivo.is_open())     //verifica se o arquivo foi aberto corretamente
+    {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosJSON;   // Cria um array tipo JSON
+    arquivo >> dadosJSON;   // Lê o arquivo JSON
+    arquivo.close();    // Fecha o arquivo
+
+    if (dadosJSON.is_array())   //verifica se o aarquivo é um array
     {
         for (auto& data : dadosJSON) 
+        {
+            // Verifique se o nome e o usuário correspondem aos fornecidos
+            if (data["Name"] == gameName) 
+            {
+                data[key] = value;  // Altera o valor da chave
+                std::ofstream arquivoSaida("games.json");   // Abre o arquivo JSON
+                arquivoSaida << dadosJSON.dump(16);   // Escreve no arquivo JSON
+                arquivoSaida.close();   // Fecha o arquivo
+                return;
+            }
+        }
+    }
+    else
+    {
+        std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
+    }
+}
+
+void change_gameValue(std::string key, int value, std::string gameName) //função que altera o valor de uma chave de um jogo
+{
+    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    if (!arquivo.is_open()) //verifica se o arquivo foi aberto corretamente 
+    {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosJSON;  // Cria um array tipo JSON
+    arquivo >> dadosJSON;   // Lê o arquivo JSON
+    arquivo.close();    // Fecha o arquivo
+
+    if (dadosJSON.is_array())   //verifica se o arquivo é um array
+    {
+        for (auto& data : dadosJSON)    // pecorre o array 
         {
             // Verifique se o nome e o usuário correspondem aos fornecidos
             if (data["Name"] == gameName) 
@@ -226,87 +290,21 @@ void change_gameValue(std::string key, std::string value, std::string gameName)
     }
 }
 
-void change_gameValue(std::string key, double value, std::string gameName)
+void GameDB::list_games()   // Função que lista os jogos
 {
-    std::ifstream arquivo("games.json");
-    if (!arquivo.is_open()) 
+    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    if (!arquivo.is_open())     //verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
     }
 
-    json dadosJSON;
-    arquivo >> dadosJSON;
-    arquivo.close();
+    json dadosJSON;  // Cria um array tipo JSON
+    arquivo >> dadosJSON;   // Lê o arquivo JSON
+    arquivo.close();    // Fecha o arquivo
 
-    if (dadosJSON.is_array()) 
+    if (dadosJSON.is_array())   //verifica se o arquivo é um array
     {
-        for (auto& data : dadosJSON) 
-        {
-            // Verifique se o nome e o usuário correspondem aos fornecidos
-            if (data["Name"] == gameName) 
-            {
-                data[key] = value;
-                std::ofstream arquivoSaida("games.json");
-                arquivoSaida << dadosJSON.dump(16);
-                arquivoSaida.close();
-                return;
-            }
-        }
-    }
-    else
-    {
-        std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
-    }
-}
-
-void change_gameValue(std::string key, int value, std::string gameName)
-{
-    std::ifstream arquivo("games.json");
-    if (!arquivo.is_open()) 
-    {
-        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
-    }
-
-    json dadosJSON;
-    arquivo >> dadosJSON;
-    arquivo.close();
-
-    if (dadosJSON.is_array()) 
-    {
-        for (auto& data : dadosJSON) 
-        {
-            // Verifique se o nome e o usuário correspondem aos fornecidos
-            if (data["Name"] == gameName) 
-            {
-                data[key] = value;
-                std::ofstream arquivoSaida("games.json");
-                arquivoSaida << dadosJSON.dump(16);
-                arquivoSaida.close();
-                return;
-            }
-        }
-    }
-    else
-    {
-        std::cout << "Ocorreu algum erro inesperado, tente novamente" << std::endl;
-    }
-}
-
-void GameDB::list_games()
-{
-    std::ifstream arquivo("games.json");
-    if (!arquivo.is_open()) 
-    {
-        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
-    }
-
-    json dadosJSON;
-    arquivo >> dadosJSON;
-    arquivo.close();
-
-    if (dadosJSON.is_array()) 
-    {
-        for (auto& data : dadosJSON) 
+        for (auto& data : dadosJSON)    //pecorre o array do tipo json printando seus dados  
         {
             std::cout << "    Nome: " << data["Name"] << std::endl;
             std::cout << "Plataforma: " << data["Platform"] << std::endl;
@@ -325,7 +323,7 @@ void GameDB::list_games()
             std::cout << "Idioma: " << data["Language"] << std::endl;
             std::cout << "Classificação indicativa: " << data["Age rating"] << std::endl;
             std::cout << "Gênero: " << data["Gender"] << std::endl;
-            for(auto review : data["Review"])
+            for(auto review : data["Review"])   // Printa as reviews do jogo(vector de strings)
                 std::cout << "Review: " << review << std::endl;
 
         }
@@ -336,10 +334,11 @@ void GameDB::list_games()
     }
 }
 
-void GameDB::edit_game(Game* game)
+void GameDB::edit_game(Game* game)  // Função que permite que o usuario veja seus jogos e edite eles
 {
     std::cout << "Digite o número correspondente à informação que deseja alterar: \n";
-    std::cout << "1 - Nome\n2 - Plataforma\n3 - Preço\n4 - Disponibilidade\n5 - Estúdio\n6 - Data de lançamento\n7 - Processador\n8 - Memória\n9 - Armazenamento\n10 - Placa de vídeo\n11 - DirectX\n12 - Sistema operacional\n13 - Idioma\n14 - Classificação indicativa\n15 - Gênero\n16 - Sair\n";
+    // Menu de opções
+    std::cout << "1 - Nome\n2 - Plataforma\n3 - Preço\n4 - Disponibilidade\n5 - Estúdio\n6 - Data de lançamento\n7 - Processador\n8 - Memória\n9 - Armazenamento\n10 - Placa de vídeo\n11 - DirectX\n12 - Sistema operacional\n13 - Idioma\n14 - Classificação indicativa\n15 - Gênero\n16 - Sair\n";   
     int aux;
     std::string aux2;
     double aux3;
@@ -350,169 +349,169 @@ void GameDB::edit_game(Game* game)
     case 1: // Editar nome
         std::cout << "Digite o novo nome: ";
         std::cin >> aux2;
-        change_gameValue("Name", aux2, game->get_name());
-        game->set_name(aux2);
+        change_gameValue("Name", aux2, game->get_name());   // Altera o valor da chave
+        game->set_name(aux2);   // Altera o nome do jogo
         break;
     case 2: // Editar plataforma
         std::cout << "Digite a nova plataforma: ";
         std::cin >> aux2;
-        change_gameValue("Platform", aux2, game->get_name());
-        game->set_platform(aux2);
+        change_gameValue("Platform", aux2, game->get_name());   // Altera o valor da chave
+        game->set_platform(aux2);   // Altera a plataforma do jogo
         break;
     case 3: // Editar preço
         while (true)
         {
             std::cout << "Digite o novo preço: ";
             std::cin >> aux3;
-            if(aux3 >= 0) break;
+            if(aux3 >= 0) break;    // Verifica se o preço é positivo
             else std::cout << "Preço inválido, tente novamente" << std::endl;
         }
-        change_gameValue("Price", aux3, game->get_name());
-        game->set_price(aux3);
+        change_gameValue("Price", aux3, game->get_name());  // Altera o valor da chave
+        game->set_price(aux3);  // Altera o preço do jogo
         break;
     case 4: // Editar disponibilidade
         std::cout << "O produto está disponível? (1 - Sim, 0 - Não): ";
         std::cin >> aux;
         if(aux == 0)
-            change_gameValue("Availability", 0, game->get_name());
+            change_gameValue("Availability", 0, game->get_name());  // Altera o valor da chave
         else
-            change_gameValue("Availability", 1, game->get_name());
-        game->set_availability((bool)aux);
+            change_gameValue("Availability", 1, game->get_name());  // Altera o valor da chave
+        game->set_availability((bool)aux);  // Altera a disponibilidade do jogo
         break;
     case 5: // Editar estúdio
         std::cout << "Digite o novo estúdio: ";
         std::cin >> aux2;
-        change_gameValue("Studio", aux2, game->get_name());
-        game->set_studio(aux2);
+        change_gameValue("Studio", aux2, game->get_name());  // Altera o valor da chave
+        game->set_studio(aux2); // Altera o estúdio do jogo
         break;
     case 6: // Editar data de lançamento
         std::cout << "Digite a nova data de lançamento: ";
         std::cin >> aux2;
-        change_gameValue("Release Date", aux2, game->get_name());
-        game->set_releaseDate(aux2);
+        change_gameValue("Release Date", aux2, game->get_name());   // Altera o valor da chave
+        game->set_releaseDate(aux2);    // Altera a data de lançamento do jogo
         break;
     case 7: // Editar processador
         std::cout << "Digite o novo processador: ";
         std::cin >> aux2;
-        change_gameValue("Processor", aux2, game->get_name());
-        game->set_processor(aux2);
+        change_gameValue("Processor", aux2, game->get_name());  // Altera o valor da chave
+        game->set_processor(aux2);  // Altera o processador do jogo
         break;
     case 8: // Editar memória
         std::cout << "Digite a nova memória: ";
         std::cin >> aux2;
-        change_gameValue("Memory", aux2, game->get_name());
-        game->set_memory(aux2);
+        change_gameValue("Memory", aux2, game->get_name()); // Altera o valor da chave
+        game->set_memory(aux2); // Altera a memória do jogo
         break;
     case 9: // Editar armazenamento
         std::cout << "Digite o novo armazenamento: ";
         std::cin >> aux2;
-        change_gameValue("Storage", aux2, game->get_name());
-        game->set_storage(aux2);
+        change_gameValue("Storage", aux2, game->get_name());    // Altera o valor da chave
+        game->set_storage(aux2);    // Altera o armazenamento do jogo
         break;
     case 10: // Editar placa de vídeo
         std::cout << "Digite a nova placa de vídeo: ";
         std::cin >> aux2;
-        change_gameValue("Graphics", aux2, game->get_name());
-        game->set_graphics(aux2);
+        change_gameValue("Graphics", aux2, game->get_name());   // Altera o valor da chave
+        game->set_graphics(aux2);   // Altera a placa de vídeo do jogo
         break;
     case 11: // Editar DirectX
         std::cout << "Digite o novo DirectX: ";
         std::cin >> aux;
-        change_gameValue("DirectX", aux, game->get_name());
-        game->set_directx(aux);
+        change_gameValue("DirectX", aux, game->get_name()); // Altera o valor da chave
+        game->set_directx(aux); // Altera o DirectX do jogo
         break;
     case 12: // Editar sistema operacional
         std::cout << "Digite o novo sistema operacional: ";
         std::cin >> aux2;
-        change_gameValue("OS", aux2, game->get_name());
-        game->set_os(aux2);
+        change_gameValue("OS", aux2, game->get_name());   // Altera o valor da chave
+        game->set_os(aux2); // Altera o sistema operacional do jogo
         break;
     case 13: // Editar idioma
         std::cout << "Digite o novo idioma: ";
         std::cin >> aux2;
-        change_gameValue("Language", aux2, game->get_name());
-        game->set_language(aux2);
+        change_gameValue("Language", aux2, game->get_name());   // Altera o valor da chave
+        game->set_language(aux2);   // Altera o idioma do jogo
         break;
     case 14: // Editar classificação indicativa
         std::cout << "Digite a nova classificação indicativa: ";
         std::cin >> aux;
-        change_gameValue("Age rating", aux, game->get_name());
-        game->set_age_rating(aux);
+        change_gameValue("Age rating", aux, game->get_name());  // Altera o valor da chave
+        game->set_age_rating(aux);  // Altera a classificação indicativa do jogo
         break;
     case 15: // Editar gênero
         std::cout << "Digite o novo gênero: ";
         std::cin >> aux2;
-        change_gameValue("Gender", aux2, game->get_name());
-        game->set_gender(aux2);
+        change_gameValue("Gender", aux2, game->get_name()); // Altera o valor da chave
+        game->set_gender(aux2); // Altera o gênero do jogo
         break;
     default:
         break;
     }
 }
 
-Game* GameDB::add_game() 
+Game* GameDB::add_game()    // Função que permite que o usuario(desenvolvedor) publique um jogo
 {
-    std::string name, studio, releaseDate, gender, plataform, language, os, processor, memory, graphics, storage;
+    std::string name, studio, releaseDate, gender, plataform, language, os, processor, memory, graphics, storage;   // Declaração das variáveis
     int ageRating, directx;
     double price;
     bool availability;
 
-    Game* gameptr;
+    Game* gameptr;  // Ponteiro para um jogo
 
-    std::ifstream arquivo("games.json");
-    if (!arquivo.is_open()) 
+    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
     }
 
-    json dadosJSON;
-    arquivo >> dadosJSON;
-    arquivo.close();
+    json dadosJSON;   // Cria um vetor JSON
+    arquivo >> dadosJSON;   // Lê o arquivo JSON
+    arquivo.close();    // Fecha o arquivo
 
     while (true)
     {
         std::cout << "Digite o nome do jogo: ";
-        name = verifyName();
+        name = verifyName();    // Verifica se o nome é válido
         std::cout << "Digite o estúdio do jogo: ";
-        studio = verifyStudio();
+        studio = verifyStudio();    // Verifica se o estúdio é válido
         std::cout << "Digite a classificação indicativa do jogo: ";
-        ageRating = verifyAgeRating();
+        ageRating = verifyAgeRating();  // Verifica se a classificação etária é válida
         std::cout << "Digite o preço do jogo: ";
-        price = verifyPrice();
+        price = verifyPrice();  // Verifica se o preço é válido
         std::cout << "O jogo está disponível? (1 - Sim, 0 - Não): ";
-        availability = verifyAvailability();
-        // review = {}
+        availability = verifyAvailability();    // Verifica se a disponibilidade é válida
         std::cout << "Digite a data de lançamento do jogo: \n";
-        releaseDate = verifyDate();
+        releaseDate = verifyDate(); // Verifica se a data de lançamento é válida
         std::cout << "Digite o gênero do jogo: ";
-        gender = verifyName();
+        gender = verifyName();  // Verifica se o gênero é válido
         std::cout << "Digite a plataforma do jogo: ";
-        plataform = verifyName();
+        plataform = verifyName();   // Verifica se a plataforma é válida
         std::cout << "Digite o idioma do jogo: ";
-        language = verifyName();
+        language = verifyName();    // Verifica se o idioma é válido
         std::cout << "Digite o sistema operacional do jogo: ";
-        os = verifyName();
+        os = verifyName();  // Verifica se o sistema operacional é válido
         std::cout << "Digite o processador do jogo: ";
-        processor = verifyName();
+        processor = verifyName();   // Verifica se o processador é válido
         std::cout << "Digite a memória do jogo: ";
-        memory = verifyName();
+        memory = verifyName();  // Verifica se a memória é válida
         std::cout << "Digite a placa de vídeo do jogo: ";
-        graphics = verifyName();
+        graphics = verifyName();    // Verifica se a placa de vídeo é válida
         std::cout << "Digite o DirectX do jogo: ";
-        directx = verify_num();
+        directx = verify_num(); // Verifica se o DirectX é válido
         std::cout << "Digite o armazenamento do jogo: ";
-        storage = verifyName();
+        storage = verifyName(); // Verifica se o armazenamento é válido
+        
+        // Cria um jogo
+        gameptr = new Game(name, studio, ageRating, price, availability, {}, releaseDate, gender, plataform, language, os, processor, memory, graphics, directx, storage);  
 
-        gameptr = new Game(name, studio, ageRating, price, availability, {}, releaseDate, gender, plataform, language, os, processor, memory, graphics, directx, storage);
-
-        if (dadosJSON.is_array())
+        if (dadosJSON.is_array())   // Verifica se o arquivo é um array
         {
-            for (const auto& data : dadosJSON) 
+            for (const auto& data : dadosJSON)  // Percorre o array
             {
-                if (data["Name"] == gameptr->get_name()) 
+                if (data["Name"] == gameptr->get_name())    // Verifica se o jogo já existe
                 {
                     std::cout << "Jogo já cadastrado." << std::endl;
-                    delete gameptr;
+                    delete gameptr; // Deleta o jogo
                     continue;
                 }
             }
@@ -522,34 +521,33 @@ Game* GameDB::add_game()
     
 
 
-    json novoGame;
-    novoGame["Name"] = gameptr->get_name();
-    novoGame["Platform"] = gameptr->get_platform();
-    novoGame["Release Date"] = gameptr->get_releaseDate();
-    novoGame["Studio"] = gameptr->get_studio();
-    novoGame["Age Rating"] = gameptr->get_ageRating();
-    novoGame["Availability"] = (int)gameptr->get_availability();
-    novoGame["DirectX"] = gameptr->get_directx();
-    novoGame["Memory"] = gameptr->get_memory();
-    novoGame["Graphics"] = gameptr->get_graphics();
-    novoGame["Processor"] = gameptr->get_processor();
-    novoGame["Storage"] = gameptr->get_storage();
-    novoGame["Price"] = gameptr->get_price();
-    novoGame["Language"] = gameptr->get_language();
-    novoGame["OS"] = gameptr->get_os();
-    novoGame["Gender"] = gameptr->get_gender();
-    novoGame["Review"] = {};
+    json novoGame;  // Cria um novo jogo
+    novoGame["Name"] = gameptr->get_name();  // Adiciona o nome do jogo
+    novoGame["Platform"] = gameptr->get_platform();     // Adiciona a plataforma do jogo
+    novoGame["Release Date"] = gameptr->get_releaseDate();  // Adiciona a data de lançamento do jogo
+    novoGame["Studio"] = gameptr->get_studio();   // Adiciona o estúdio do jogo
+    novoGame["Age Rating"] = gameptr->get_ageRating();  // Adiciona a classificação etária do jogo
+    novoGame["Availability"] = (int)gameptr->get_availability();    // Adiciona a disponibilidade do jogo
+    novoGame["DirectX"] = gameptr->get_directx();   // Adiciona o DirectX do jogo
+    novoGame["Memory"] = gameptr->get_memory();    // Adiciona a memória do jogo
+    novoGame["Graphics"] = gameptr->get_graphics();     // Adiciona a placa de vídeo do jogo
+    novoGame["Processor"] = gameptr->get_processor();   // Adiciona o processador do jogo
+    novoGame["Storage"] = gameptr->get_storage();   // Adiciona o armazenamento do jogo
+    novoGame["Price"] = gameptr->get_price();   // Adiciona o preço do jogo
+    novoGame["Language"] = gameptr->get_language();  // Adiciona o idioma do jogo
+    novoGame["OS"] = gameptr->get_os();  // Adiciona o sistema operacional do jogo
+    novoGame["Gender"] = gameptr->get_gender(); // Adiciona o gênero do jogo
+    novoGame["Review"] = {};    // inicializa as reviews do jogo
 
-    dadosJSON.push_back(novoGame);
-    std::ofstream arquivoSaida("games.json");
-    arquivoSaida << dadosJSON.dump(16);
-    arquivoSaida.close();
-    //std::cout << "Game cadastrado com sucesso" << std::endl;
+    dadosJSON.push_back(novoGame);  // Adiciona o novo jogo ao array
+    std::ofstream arquivoSaida("games.json");   // Abre o arquivo JSON
+    arquivoSaida << dadosJSON.dump(16);  // Escreve no arquivo JSON
+    arquivoSaida.close();   // Fecha o arquivo
 
-    return gameptr;
+    return gameptr; // Retorna o jogo
 }
 
-void GameDB::delete_game(std::string game){
+void GameDB::delete_game(std::string game){   // Função que permite que o usuario(desenvolvedor) remova um jogo
     std::string name = game;
     bool gameExists = false;
 
@@ -573,9 +571,9 @@ void GameDB::delete_game(std::string game){
         if (it != dadosJSON.end()) {    // Se o jogo existir, remove
             dadosJSON.erase(it);
 
-            std::ofstream fileout("games.json");
+            std::ofstream fileout("games.json");    // Abre o arquivo JSON
             fileout << dadosJSON.dump(4);  // Ajuste o valor de indentação conforme necessário
-            fileout.close();
+            fileout.close();    // Fecha o arquivo
 
             std::cout << "Jogo removido com sucesso!" << std::endl;
             gameExists = true;
@@ -584,7 +582,7 @@ void GameDB::delete_game(std::string game){
             std::cout << "Jogo nao encontrado. Por favor tente novamente: " << std::endl;
         }
 
-        if(gameExists){
+        if(gameExists){   // Se o jogo existir, sai do loop
             break;
         }
     }

@@ -7,15 +7,13 @@
 int main()
 {
     int aux, output;
-    std::cout << "Bem vindo à Steam!\n";
+    std::cout << "Bem vindo à Steam!\n";    // Mensagem de boas vindas
     std::cout << "O que deseja fazer?\n1 - Registrar\n2 - Logar\n";
-    std::cin >> aux;
+    std::cin >> aux;    // Variavel auxiliar para escolher entre registrar e logar
     switch (aux)
     {
     case 1:
         REGISTRO: 
-        //output = funcaoRegistrar();
-        // 1 se registrou, 0 se não
         switch (output)
         {
         case 0:
