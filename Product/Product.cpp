@@ -12,75 +12,91 @@ Product::Product(std::string name, std::string studio, int ageRating, double pri
     _releaseDate = releaseDate;
 }
 
-Product::Product() // Construtor
+// Construtor sem parametros
+Product::Product() 
 {
 }
 
-std::string Product::get_name() //Retorna o nome do produto
+ //Retorna o nome do produto
+std::string Product::get_name()
 {
     return _name;
 }
 
-void Product::set_name(std::string name) //Define o nome do produto
+//Define o nome do produto
+void Product::set_name(std::string name) 
 {
     _name = name;
 }
 
-std::string Product::get_studio()   //Retorna o nome do studio que produziu o produto
+//Retorna o nome do studio que produziu o produto
+std::string Product::get_studio()   
 {
     return _studio;
 }
 
-void Product::set_studio(std::string studio)    //Define o nome do studio que produziu o produto
+//Define o nome do studio que produziu o produto
+void Product::set_studio(std::string studio)    
 {
     _studio = studio;
 }
 
-int Product::get_ageRating()    //Retorna a classificacao etaria do produto
+//Retorna a classificacao etaria do produto
+int Product::get_ageRating()    
 {
     return _ageRating;
 }
 
-double Product::get_price()     //Retorna o preco do produto
+//Retorna o preco do produto
+double Product::get_price()     
 {
     return _price;
 }
 
-bool Product::get_availability()    //Retorna a disponibilidade do produto
+//Retorna a disponibilidade do produto
+bool Product::get_availability()    
 {
     return _availability;
 }
-std::string Product::get_releaseDate()  //Retorna a data de lancamento do produto
+
+//Retorna a data de lancamento do produto
+std::string Product::get_releaseDate()  
 {
     return _releaseDate;
 }
 
-void Product::set_availability(bool availability) //Define a disponibilidade do produto
+//Define a disponibilidade do produto
+void Product::set_availability(bool availability) 
 {
     _availability = availability;
 }
 
-void Product::set_price(double price)   //Define o preco do produto
+//Define o preco do produto
+void Product::set_price(double price)   
 {
     _price = price;
 }
 
-void Product::set_ageRating(std::string ageRating) //Define a classificacao etaria do produto
+//Define a classificacao etaria do produto
+void Product::set_ageRating(std::string ageRating) 
 {
     _ageRating = stoi(ageRating);
 }
 
-std::vector <std::string> Product::get_review() //Retorna as avaliacoes do produto
+//Retorna as avaliacoes do produto
+std::vector <std::string> Product::get_review() 
 {
     return _review;
 }
 
-void Product::set_review(std::vector <std::string> review) //Define as avaliacoes do produto
+//Define as avaliacoes do produto
+void Product::set_review(std::vector <std::string> review) 
 {
     _review = review;
 }
 
-void Product::set_releaseDate(std::string releaseDate) //Define a data de lancamento do produto
+//Define a data de lancamento do produto
+void Product::set_releaseDate(std::string releaseDate) 
 {
     _releaseDate = releaseDate;
 }

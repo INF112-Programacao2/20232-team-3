@@ -8,21 +8,21 @@ using json = nlohmann::json;
 
 bool game_exist(std::string gameName)// Função auxiliar - retorna se um jogo existe em games.json
 {
-    std::ifstream arquivo("games.json");
-    if (!arquivo.is_open()) 
+    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    if (!arquivo.is_open()) // Verifica se o arquivo foi aberto corretamente 
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
     }
 
-    json dadosGamesJSON;
-    arquivo >> dadosGamesJSON;
-    arquivo.close();
+    json dadosGamesJSON;    // Cria um objeto json
+    arquivo >> dadosGamesJSON;  // Lê o arquivo JSON
+    arquivo.close();    // Fecha o arquivo
 
-    if (dadosGamesJSON.is_array()) 
+    if (dadosGamesJSON.is_array())  // Verifica se o arquivo é um array
     {
-        for (auto& data : dadosGamesJSON) 
+        for (auto& data : dadosGamesJSON)   // Percorre o array
         {
-            if (data["Name"] == gameName) 
+            if (data["Name"] == gameName)   // Verifica se o nome do jogo é igual ao nome do jogo passado como parâmetro
             {
                 return true;
             }
@@ -37,45 +37,46 @@ bool game_exist(std::string gameName)// Função auxiliar - retorna se um jogo e
 
 void load_game_from_json(std::string name, std::vector<Game> &games) // Função auxiliar - Busca um game no json e adiciona no vetor de games
 {
-    std::ifstream arquivo("games.json");
-    if (!arquivo.is_open()) 
+    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
     }
 
-    json dadosJSON;
-    arquivo >> dadosJSON;
-    arquivo.close();
+    json dadosJSON; // Cria um objeto json
+    arquivo >> dadosJSON;   // Lê o arquivo JSON
+    arquivo.close();    // Fecha o arquivo
 
-    if (dadosJSON.is_array()) 
+    if (dadosJSON.is_array())   // Verifica se o arquivo é um array
     {
-        for (auto& data : dadosJSON) 
+        for (auto& data : dadosJSON)    // Percorre o array
         {
-            std::string gameJSON = data["Name"];
-            if (gameJSON == name)
+            std::string gameJSON = data["Name"];    // Pega o nome do jogo
+            if (gameJSON == name)   // Verifica se o nome do jogo é igual ao nome do jogo passado como parâmetro
             {
-                std::string name = data["Name"];
-                std::string platform = data["Platform"];
-                std::string release_date = data["Release Date"];
-                std::string studio = data["Studio"];
-                int age = data["Age Rating"];
-                bool available = data["Availability"].get<int>();
-                int directx = data["DirectX"];
-                double price = data["Price"];
-                std::string genre = data["Genre"];
-                std::string graphics =data["Graphics"];
-                std::string language = data["Language"];
-                std::string memory = data["Memory"];
-                std::string os = data["OS"];
-                std::string processor = data["Processor"];
-                std::string storage = data["Storage"];
-                std::vector <std::string> review;
-                for(auto& rev : data["Review"])
+                std::string name = data["Name"];    // Pega o nome do jogo
+                std::string platform = data["Platform"];    // Pega a plataforma do jogo
+                std::string release_date = data["Release Date"];    // Pega a data de lançamento do jogo
+                std::string studio = data["Studio"];    // Pega o estúdio do jogo
+                int age = data["Age Rating"];   // Pega a classificação indicativa do jogo
+                bool available = data["Availability"].get<int>();   // Pega a disponibilidade do jogo
+                int directx = data["DirectX"];  // Pega o directx do jogo
+                double price = data["Price"];   // Pega o preço do jogo
+                std::string genre = data["Genre"];  // Pega o gênero do jogo
+                std::string graphics =data["Graphics"]; // Pega a placa de vídeo do jogo
+                std::string language = data["Language"];    // Pega o idioma do jogo
+                std::string memory = data["Memory"];    // Pega a memória do jogo
+                std::string os = data["OS"];    // Pega o sistema operacional do jogo
+                std::string processor = data["Processor"];  // Pega o processador do jogo
+                std::string storage = data["Storage"];  // Pega o armazenamento do jogo
+                std::vector <std::string> review;   // Cria um vetor de reviews
+                for(auto& rev : data["Review"]) // Percorre o array de reviews
                 {
-                    review.push_back(rev);
+                    review.push_back(rev);  // Adiciona a review no vetor
                 }
+                // Cria um objeto Game com os dados do jogo
                 Game jogo(name, studio, age, price, available, review, release_date, genre, platform, language, os, processor, memory, graphics, directx, storage);
-                games.push_back(jogo);
+                games.push_back(jogo);  // Adiciona o jogo no vetor de jogos
             }
         }
     }
@@ -83,103 +84,105 @@ void load_game_from_json(std::string name, std::vector<Game> &games) // Função
 
 Game load_game_from_json(std::string &name) // Função auxiliar - Busca um game no json e adiciona no vetor de games
 {
-    std::ifstream arquivo("games.json");
-    if (!arquivo.is_open()) 
+    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    if (!arquivo.is_open())    // Verifica se o arquivo foi aberto corretamente 
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
     }
 
-    json dadosJSON;
-    arquivo >> dadosJSON;
-    arquivo.close();
+    json dadosJSON; // Cria um objeto json
+    arquivo >> dadosJSON;   // Lê o arquivo JSON
+    arquivo.close();    // Fecha o arquivo
 
-    if (dadosJSON.is_array()) 
+    if (dadosJSON.is_array())   // Verifica se o arquivo é um array
     {
         for (auto& data : dadosJSON) 
         {
-            std::string gameJSON = data["Name"];
-            if (gameJSON == name)
+            std::string gameJSON = data["Name"];    // Pega o nome do jogo
+            if (gameJSON == name)   // Verifica se o nome do jogo é igual ao nome do jogo passado como parâmetro
             {
-                std::string name = data["Name"];
-                std::string platform = data["Platform"];
-                std::string release_date = data["Release Date"];
-                std::string studio = data["Studio"];
-                int age = data["Age Rating"];
-                bool available = data["Availability"].get<int>();
-                int directx = data["DirectX"];
-                double price = data["Price"];
-                std::string genre = data["Genre"];
-                std::string graphics =data["Graphics"];
-                std::string language = data["Language"];
-                std::string memory = data["Memory"];
-                std::string os = data["OS"];
-                std::string processor = data["Processor"];
-                std::string storage = data["Storage"];
-                std::vector <std::string> review;
-                for(auto& rev : data["Review"])
+                std::string name = data["Name"];    // Pega o nome do jogo
+                std::string platform = data["Platform"];    // Pega a plataforma do jogo
+                std::string release_date = data["Release Date"];    // Pega a data de lançamento do jogo
+                std::string studio = data["Studio"];    // Pega o estúdio do jogo
+                int age = data["Age Rating"];   // Pega a classificação indicativa do jogo
+                bool available = data["Availability"].get<int>();   // Pega a disponibilidade do jogo
+                int directx = data["DirectX"];  // Pega o directx do jogo
+                double price = data["Price"];   // Pega o preço do jogo
+                std::string genre = data["Genre"];  // Pega o gênero do jogo
+                std::string graphics =data["Graphics"];     // Pega a placa de vídeo do jogo
+                std::string language = data["Language"];    // Pega o idioma do jogo
+                std::string memory = data["Memory"];    // Pega a memória do jogo
+                std::string os = data["OS"];    // Pega o sistema operacional do jogo
+                std::string processor = data["Processor"];  // Pega o processador do jogo
+                std::string storage = data["Storage"];  // Pega o armazenamento do jogo
+                std::vector <std::string> review;   // Cria um vetor de reviews
+                for(auto& rev : data["Review"]) // Percorre o array de reviews
                 {
-                    review.push_back(rev);
+                    review.push_back(rev);  // Adiciona a review no vetor
                 }
+                // Cria um objeto Game com os dados do jogo
                 Game jogo(name, studio, age, price, available, review, release_date, genre, platform, language, os, processor, memory, graphics, directx, storage);
                 return jogo;
             }
         }
     }
-    return Game();
+    return Game();  // Retorna um jogo vazio
 }
 
+// Construtor
 User::User(std::string _username, std::string _password, std::string _email, std::string _cpf, double balance, std::string birthdate, const std::vector<Game> _library, const std::vector<Game> _wishlist): Client(_username, _password, _email, _cpf, balance, birthdate, 1), _library(_library), _wishlist(_wishlist)
 {
 }
 
-void User::print_wishlist()
+void User::print_wishlist() // Imprime a lista de desejos
 {
-    for(int i = 0 ; i < _wishlist.size() ; i++)
+    for(int i = 0 ; i < _wishlist.size() ; i++) // Percorre o vetor de jogos
     {
         std::cout << i+1 << " " << _wishlist[i].get_name() << '\n';
     }
 }
 
-void User::print_library()
+void User::print_library()      // Imprime a biblioteca de jogos
 {
-    for(int i = 0 ; i < _library.size() ; i++)
+    for(int i = 0 ; i < _library.size() ; i++)  // Percorre o vetor de jogos
     {
         std::cout << i+1 << " " << _library[i].get_name() << '\n';
     }
 }
 
-void User::buy_game(Game game, std::string username)
+void User::buy_game(Game game, std::string username)    // Função que permite que o usuario compre um jogo
 {
-    std::ifstream arquivo("clients.json");
-    if (!arquivo.is_open()) 
+    std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+    if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
     }
-    if(!game.get_availability())
+    if(!game.get_availability())    // Verifica se o jogo está disponível
     {
         int aux = Input::input_int("Jogo indisponivel, deseja adiciona-lo à lista de desejos?\n1 - Sim\n2 - Nao\n", 1, 2);
-        if(aux == 1)
+        if(aux == 1)    // Adiciona o jogo à lista de desejos
         {
-            add_to_wishlist(game.get_name(), username);
+            add_to_wishlist(game.get_name(), username); // Adiciona o jogo à lista de desejos
         }
         return;
     }
 
-    json dadosClientsJSON;
-    arquivo >> dadosClientsJSON;
-    arquivo.close();
+    json dadosClientsJSON;  // Cria um objeto json
+    arquivo >> dadosClientsJSON;    // Lê o arquivo JSON
+    arquivo.close();    // Fecha o arquivo
     bool existe = false;
 
-    if(dadosClientsJSON.is_array())
+    if(dadosClientsJSON.is_array()) // Verifica se o arquivo é um array
     {
-        for (auto& data : dadosClientsJSON)
+        for (auto& data : dadosClientsJSON)  // Percorre o array
         {
-            if(data["Username"] == username)
+            if(data["Username"] == username)    // Verifica se o nome de usuario é igual ao nome de usuario passado como parâmetro
             {
                 // Adiciona à wishlist no json
-                for (auto it = data["Jogos"].begin(); it != data["Jogos"].end(); ++it) 
+                for (auto it = data["Jogos"].begin(); it != data["Jogos"].end(); ++it)  // Percorre o array de jogos 
                 {
-                    if (*it == game.get_name()) 
+                    if (*it == game.get_name()) // Verifica se o nome do jogo é igual ao nome do jogo passado como parâmetro 
                     {
                         existe = true;
                         std::cout << "Jogo já está na biblioteca\n";
@@ -189,49 +192,49 @@ void User::buy_game(Game game, std::string username)
                 // Adiciona à wishlist no objeto
                 if(!existe)
                 {
-                    load_game_from_json(game.get_name(), _library);
-                    data["Jogos"].push_back(game.get_name());
-                    _balance -= game.get_price();
-                    data["Balance"] = _balance;
+                    load_game_from_json(game.get_name(), _library); // Carrega o jogo do json
+                    data["Jogos"].push_back(game.get_name());   // Adiciona o jogo no array de jogos
+                    _balance -= game.get_price();   // Diminui o saldo do cliente
+                    data["Balance"] = _balance; // Atualiza o saldo no json
                 }
             }
         }
     }
-    std::ofstream arquivoSaida("clients.json");
-    arquivoSaida << dadosClientsJSON.dump(10);
-    arquivoSaida.close();
+    std::ofstream arquivoSaida("clients.json"); // Abre o arquivo JSON
+    arquivoSaida << dadosClientsJSON.dump(10);  // Escreve no arquivo JSON
+    arquivoSaida.close();   // Fecha o arquivo
 }
 
-void User::add_to_wishlist(std::string gameName, std::string username)
+void User::add_to_wishlist(std::string gameName, std::string username)  // Adiciona um jogo a lista de desejos
 {
-    if(!game_exist(gameName))
+    if(!game_exist(gameName))   // Verifica se o jogo existe
     {
         std::cout << "Erro: jogo nao encontrado\n";
         return;
     }
 
-    std::ifstream arquivo("clients.json");
-    if (!arquivo.is_open()) 
+    std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+    if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
     }
 
-    json dadosClientsJSON;
-    arquivo >> dadosClientsJSON;
-    arquivo.close();
+    json dadosClientsJSON;  // Cria um objeto json
+    arquivo >> dadosClientsJSON;    // Lê o arquivo JSON
+    arquivo.close();    // Fecha o arquivo
 
     bool existe = false;
 
-    if(dadosClientsJSON.is_array())
+    if(dadosClientsJSON.is_array()) // Verifica se o arquivo é um array
     {
-        for (auto& data : dadosClientsJSON)
+        for (auto& data : dadosClientsJSON) // Percorre o array
         {
-            if(data["Username"] == username)
+            if(data["Username"] == username)    // Verifica se o nome de usuario é igual ao nome de usuario passado como parâmetro
             {
                 // Adiciona à wishlist no json
-                for (auto it = data["Wishlist"].begin(); it != data["Wishlist"].end(); ++it) 
+                for (auto it = data["Wishlist"].begin(); it != data["Wishlist"].end(); ++it)    // Percorre o array de jogos
                 {
-                    if (*it == gameName) 
+                    if (*it == gameName)    // Verifica se o nome do jogo é igual ao nome do jogo passado como parâmetro
                     {
                         existe = true;
                         std::cout << "Jogo já está na lista de desejos\n";
@@ -241,19 +244,19 @@ void User::add_to_wishlist(std::string gameName, std::string username)
                 // Adiciona à wishlist no objeto
                 if(!existe)
                 {
-                    load_game_from_json(gameName, _wishlist);
-                    data["Wishlist"].push_back(gameName);
+                    load_game_from_json(gameName, _wishlist);   // Carrega o jogo do json
+                    data["Wishlist"].push_back(gameName);   // Adiciona o jogo no array de jogos
                 }
             }
         }
     }
-    std::ofstream arquivoSaida("clients.json");
-    arquivoSaida << dadosClientsJSON.dump(10);
-    arquivoSaida.close();
+    std::ofstream arquivoSaida("clients.json"); // Abre o arquivo JSON
+    arquivoSaida << dadosClientsJSON.dump(10);  // Escreve no arquivo JSON
+    arquivoSaida.close();   // Fecha o arquivo
 
 }
 
-void User::menu()
+void User::menu()   // Menu do usuário
 {
     int aux;
     Game auxgame;
@@ -278,7 +281,7 @@ void User::menu()
         break;
     case 3:
         std::cout << "Biblioteca:\n";
-        print_library();
+        print_library();    // Função que imprime a biblioteca de jogos
         goto INIT;
         break;
     case 4:
@@ -291,22 +294,22 @@ void User::menu()
             case 1:
                 while (true)
                 {
-                    aux2 = Input::input_name("Digite o nome do jogo que deseja comprar: ");
-                    auxgame = load_game_from_json(aux2);
-                    std::cout << auxgame.get_price() << '\n';
-                    std::cout << _balance << '\n';
-                    if(!game_exist(aux2))
+                    aux2 = Input::input_name("Digite o nome do jogo que deseja comprar: "); // Função que recebe o nome do jogo
+                    auxgame = load_game_from_json(aux2);    // Carrega o jogo do json
+                    std::cout << auxgame.get_price() << '\n';   // Imprime o preço do jogo
+                    std::cout << _balance << '\n';  // Imprime o saldo do cliente
+                    if(!game_exist(aux2))   // Verifica se o jogo existe
                     {
                         std::cout << "Erro: jogo nao encontrado\n";
                     }
-                    else if(auxgame.get_price() > _balance)
+                    else if(auxgame.get_price() > _balance) // Verifica se o preço do jogo é maior que o saldo do cliente
                     {
                         std::cout << "Erro: saldo insuficiente\n";
                         break;
                     }
                     else
                     {
-                        buy_game(auxgame, _username);
+                        buy_game(auxgame, _username);   // Função que permite que o usuario compre um jogo
                         std::cout << "Jogo comprado com sucesso!\n";
                         break;
                     }
@@ -314,8 +317,8 @@ void User::menu()
             break;
             case 2:
                 std::cout << "Digite o nome do jogo que deseja adicionar à lista de desejos: ";
-                std::getline(std::cin, aux2);
-                add_to_wishlist(aux2, _username);
+                std::getline(std::cin, aux2);   // Recebe o nome do jogo
+                add_to_wishlist(aux2, _username);   // Adiciona o jogo à lista de desejos
                 std::cout << "Jogo adicionado à lista de desejos com sucesso!\n";
                 break;
             default:
@@ -324,11 +327,11 @@ void User::menu()
         }
         goto INIT;
     case 5:
-        print_wishlist();
+        print_wishlist();   // Função que imprime a lista de desejos
         goto INIT;
         break;
     default:
-        std::cout << "Obrigado por usar a Steam!\n";
+        std::cout << "Obrigado por usar a Steam!\n";    // Mensagem de despedida :)
         break;
     }
 } 

@@ -14,10 +14,9 @@ class Product{
 	    std::string _releaseDate;    //Data de lancamento do produto
 
     public:
-	    // Constructor
+	    // Constructor com parametros
 	    Product(std::string name, std::string studio, int ageRating, double price, bool availability, std::vector<std::string> review, std::string releaseDate);
-        //Product(std::string name, double price, bool availability);
-		Product();
+		Product();	// Construtor sem parametros
 
         // Getters
 	    std::string get_name();    //Retorna o nome do produto

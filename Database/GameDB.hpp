@@ -2,19 +2,15 @@
 #define _GAME_DB_HPP_
 
 #include "../Product/Game.hpp"
-
 #include <string>
 
 class GameDB
 {
-private:
-    
-public:
-    static Game* add_game();
-    static void edit_game(Game* game);
-    static void delete_game(std::string game);
-    static void list_games();
-
+    public:
+        static Game* add_game();    // Adiciona um jogo
+        static void edit_game(Game* game);  // Edita um jogo
+        static void delete_game(std::string game);      // Deleta um jogo
+        static void list_games();   // Lista os jogos
 
 };
 

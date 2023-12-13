@@ -1,6 +1,6 @@
 #include"Input.hpp"
 
-std::string Input::input_name(std::string text, int limit)
+std::string Input::input_name(std::string text, int limit)  // Recebe um texto e retorna uma string com o nome
 {
     std::string name;
     std::cout << text << std::endl;
@@ -9,17 +9,17 @@ std::string Input::input_name(std::string text, int limit)
         try
         {
             std::getline(std::cin, name);
-            if(name.empty())
+            if(name.empty())    // Verifica se o nome está vazio
             {
                 throw std::invalid_argument("Nome vazio.");
             }
-            if(name.size() > limit)
+            if(name.size() > limit) // Verifica se o nome tem mais de 50 caracteres
             {
                 throw std::out_of_range("Nome muito grande.");
             }
             break;
         } 
-        catch(const std::exception& e)
+        catch(const std::exception& e)  // Caso o nome esteja vazio, pede para digitar novamente
         {
             std::cerr << e.what() << " Digite novamente: ";
         } 
@@ -27,7 +27,7 @@ std::string Input::input_name(std::string text, int limit)
     return name;
 }
 
-std::string Input::input_name(std::string text)
+std::string Input::input_name(std::string text) // Recebe um texto e retorna uma string com o nome
 {
     std::string name;
     std::cout << text << std::endl;
@@ -36,13 +36,13 @@ std::string Input::input_name(std::string text)
         try
         {
             std::getline(std::cin, name);
-            if(name.empty())
+            if(name.empty())    // Verifica se o nome está vazio
             {
                 throw std::invalid_argument("Nome vazio.");
             }
             break;
         } 
-        catch(const std::exception& e)
+        catch(const std::exception& e)  // Caso o nome esteja vazio, pede para digitar novamente
         {
             std::cerr << e.what() << " Digite novamente: ";
         } 
@@ -50,7 +50,7 @@ std::string Input::input_name(std::string text)
     return name;
 }
 
-std::string Input::input_email(std::string text)
+std::string Input::input_email(std::string text)    // Recebe um texto e retorna uma string com o email
 {
     std::string email;
     bool hasAtSign = false;
@@ -59,28 +59,28 @@ std::string Input::input_email(std::string text)
     {
         try{
             std::getline(std::cin, email);
-            if(email.empty())
+            if(email.empty())   // Verifica se o email está vazio
             {
                 throw std::invalid_argument("Email vazio.");
             }
-            if(email.size() > 30)
+            if(email.size() > 30)   // Verifica se o email tem mais de 30 caracteres
             {
                 throw std::out_of_range("Email muito grande.");
             }
             for (const char c: email)
             {
-                if(c == '@')
+                if(c == '@')    // Verifica se o email tem '@'
                 {
                     hasAtSign = true;
                 }
             }
-            if(!hasAtSign)
+            if(!hasAtSign)  // Caso não tenha '@', pede para digitar novamente
             {
                 throw std::invalid_argument("Email inválido.");
             }
             break;
         }
-        catch(const std::exception& e)
+        catch(const std::exception& e)  // Caso o email esteja vazio, pede para digitar novamente
         {
             std::cerr << e.what() << " Digite novamente: ";
         }
@@ -88,7 +88,7 @@ std::string Input::input_email(std::string text)
     return email;
 }
 
-std::string Input::input_password()
+std::string Input::input_password() // Recebe um texto e retorna uma string com a senha
 {
     std::string password;
     std::string password2;
@@ -102,29 +102,29 @@ std::string Input::input_password()
             std::cout << "Repita a sua senha: ";
             std::getline(std::cin, password2);
 
-            if(password != password2)
+            if(password != password2)   // Verifica se as senhas coincidem
             {
                 throw std::invalid_argument("As senhas não coincidem.");
             }
 
             for(const char c: password)
             {
-                if(std::isdigit(c))
+                if(std::isdigit(c)) // Verifica se a senha tem pelo menos um número e uma letra
                 {
                     hasdigit = true;
                 }
-                if(std::isalpha(c))
+                if(std::isalpha(c))  // Verifica se a senha tem pelo menos um número e uma letra   
                 {
                     hasalpha = true;
                 }
             }
-            if(!hasdigit || !hasalpha)
+            if(!hasdigit || !hasalpha)  // Caso a senha não tenha pelo menos um número e uma letra, pede para digitar novamente
             {
                 throw std::invalid_argument("Senha muito fraca, ela deve ter pelo menos um número e uma letra.");
             }
             break;
         }
-        catch(const std::exception& e)
+        catch(const std::exception& e)  // Caso a senha não tenha pelo menos um número e uma letra, pede para digitar novamente
         {
             std::cerr << e.what() << " Por favor tente novamente.\n";
         }
@@ -132,7 +132,7 @@ std::string Input::input_password()
     return password;
 }
 
-std::string Input::input_cpf()
+std::string Input::input_cpf()  // Recebe um texto e retorna uma string com o CPF
 {
     std::string cpf;
     while (true)
@@ -142,24 +142,24 @@ std::string Input::input_cpf()
             std::cout << "Digite seu CPF sem pontuação: ";
             std::getline(std::cin, cpf);
 
-            if(cpf.empty())
+            if(cpf.empty()) // Verifica se o CPF está vazio
             {
                 throw std::invalid_argument("O CPF não pode ser vazio.");
             }
-            if(cpf.size() != 11)
+            if(cpf.size() != 11)    // Verifica se o CPF tem 11 digitos
             {
                 throw std::out_of_range("O CPF deve ter 11 digitos.");
             }
-            for(char c: cpf)
+            for(char c: cpf)    
             {
-                if(!std::isdigit(c))
+                if(!std::isdigit(c))    // Verifica se o CPF só tem números
                 {
                     throw std::invalid_argument("O CPF só pode ter numeros.");
                 }
             }
             break;
         } 
-        catch(const std::exception& e)
+        catch(const std::exception& e)  // Caso o CPF não tenha 11 digitos, pede para digitar novamente
         {  
             std::cerr << e.what() << " Por favor tente novamente.\n";
         }
@@ -167,7 +167,7 @@ std::string Input::input_cpf()
     return cpf;      
 }
 
-std::string Input::input_date(std::string text)
+std::string Input::input_date(std::string text)   // Recebe um texto e retorna uma string com a data
 {
     int day, month, year;
     while (true)
@@ -185,7 +185,7 @@ std::string Input::input_date(std::string text)
             std::cin >> year;
             std::cin.ignore();
 
-            if(day < 1 || day > 31 || month < 1 || month > 12 || year < 1923)
+            if(day < 1 || day > 31 || month < 1 || month > 12 || year < 1923)   // Verifica se a data é válida
             {
                 throw std::out_of_range("A data fornecida é invalida. O dia deve estar entre 1 e 31, o mês deve estar entre 1 e 12 e o ano deve estar entre 1923.");
             }
@@ -211,18 +211,18 @@ std::string Input::input_date(std::string text)
             std::cerr << " Tente novamente." << std::endl;
         }
     }
-    std::string strday = std::to_string(day), strmonth = std::to_string(month), stryear = std::to_string(year);
+    std::string strday = std::to_string(day), strmonth = std::to_string(month), stryear = std::to_string(year); // Transforma os inteiros em strings
 
-    if(strday.size() == 1) strday = "0" + strday;
-    if(strmonth.size() == 1) strmonth = "0" + strmonth;
-    if(stryear.size() == 1) stryear = "0" + stryear;
+    if(strday.size() == 1) strday = "0" + strday;   // Adiciona um 0 na frente dos dias e meses menores que 10
+    if(strmonth.size() == 1) strmonth = "0" + strmonth; // Adiciona um 0 na frente dos dias e meses menores que 10
+    if(stryear.size() == 1) stryear = "0" + stryear;    // Adiciona um 0 na frente dos anos menores que 10
 
-    std::string releaseDate = strday + '/' + strmonth + '/' + stryear;
+    std::string releaseDate = strday + '/' + strmonth + '/' + stryear;  // Concatena as strings
 
     return releaseDate;
 }
 
-int Input::input_int(std::string text, int lower, int upper)
+int Input::input_int(std::string text, int lower, int upper)    // Recebe um texto e retorna um inteiro
 {
     int num;
     std::string strnum;
@@ -238,7 +238,7 @@ int Input::input_int(std::string text, int lower, int upper)
             std::cin.ignore();
             for(char c : strnum)
             {
-                if(!std::isdigit(c))
+                if(!std::isdigit(c))    // Verifica se o valor só tem números
                 {
                     validNum = false;
                     throw std::invalid_argument("O valor só pode conter números.");
@@ -247,17 +247,17 @@ int Input::input_int(std::string text, int lower, int upper)
 
             num = std::stoi(strnum);
 
-            if(num > upper || num < lower)
+            if(num > upper || num < lower)  // Verifica se o valor está entre os limites
             {
                 validNum = false;
                 throw std::invalid_argument("O valor deve estar entre " + std::to_string(lower) + " e " + std::to_string(upper) + ".");
             }
-            if(validNum)
+            if(validNum)    // Caso o valor seja válido, retorna o valor
             {
                 break;
             }
         }
-        catch (const std::exception& e)
+        catch (const std::exception& e) // Caso o valor não seja válido, pede para digitar novamente
         {
             std::cerr << e.what() << " Tente novamente: ";
         }
@@ -265,12 +265,12 @@ int Input::input_int(std::string text, int lower, int upper)
     return num;
 }
 
-int Input::input_posint(std::string text)
+int Input::input_posint(std::string text)   // Recebe um texto e retorna um inteiro positivo
 {
     return input_int(text, 0, 2147483647);
 }
 
-double Input::input_double(std::string txt)
+double Input::input_double(std::string txt)   // Recebe um texto e retorna um double
 {
     std::cout << txt << std::endl;
     std::string num;
@@ -283,7 +283,7 @@ double Input::input_double(std::string txt)
             bool validnum = true;
             for(char c : num) 
             {
-                if(!std::isdigit(c) && c != '.')
+                if(!std::isdigit(c) && c != '.')    // Verifica se o valor só tem números e '.'
                 {
                     validnum = false;
                     throw std::invalid_argument("O valor só pode conter números e '.'.");
@@ -297,15 +297,15 @@ double Input::input_double(std::string txt)
             {
                 break;
             }
-        }catch (const std::exception& e)
+        }catch (const std::exception& e)    // Caso o valor não seja válido, pede para digitar novamente
         {
             std::cerr << e.what() << " Tente novamente.: ";
         }
     }
-    return std::stod(num);
+    return std::stod(num);  // retorna o string transformado em double
 }
 
-int Input::input_bool(std::string txt) 
+int Input::input_bool(std::string txt)  // Recebe um texto e retorna um booleano
 {    
     std::cout << txt << std::endl;
     int availability;
@@ -316,23 +316,23 @@ int Input::input_bool(std::string txt)
             bool validAvailability = true;
             std::cin >> availability;
             std::cin.ignore();
-            if (availability != 0 && availability != 1) 
+            if (availability != 0 && availability != 1) // Verifica se o valor é 0 ou 1 
             {
                 validAvailability = false;
                 throw std::invalid_argument("Valor deve ser 0 ou 1");
             }
-            if(validAvailability)
+            if(validAvailability)   // Caso o valor seja válido, retorna o valor
             {
                 break;
             }
         } 
-        catch (const std::exception& e) 
+        catch (const std::exception& e)     // Caso o valor não seja válido, pede para digitar novamente
         {
             std::cerr << e.what() << " Tente novamente: ";
 
         }
     }
-    return availability == 0 ? 0 : 1;
+    return availability == 0 ? 0 : 1;   // Retorna 0 ou 1
 }
 
 

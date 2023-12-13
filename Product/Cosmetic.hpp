@@ -15,8 +15,8 @@ class Cosmetic : public Product{
         Cosmetic(std::string name, std::string studio, int ageRating, double price, bool availability, std::vector<std::string> review, std::string releaseDate, std::string type, std::string description);
 
         // Getters
-        std::string get_type();
-        std::string get_description();
+        std::string get_type(); //retorna o tipo do cosmético
+        std::string get_description();  //retorna a descrição do cosmético
 };
 
 #endif

@@ -15,6 +15,7 @@ Product(name, studio, ageRating, price, availability, review, releaseDate)
     _storage = storage;
 }
 
+// Construtor sem parametros
 Game::Game() 
 {
 }
@@ -133,7 +134,8 @@ void Game::set_storage(std::string storage)
     _storage = storage;
 }
 
-void Game::set_age_rating(int ageRating)  // Define a classificacao etaria do jogo
+// Define a classificacao etaria do jogo
+void Game::set_age_rating(int ageRating)  
 {
     _ageRating = ageRating;
 }
