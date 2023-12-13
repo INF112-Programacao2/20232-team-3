@@ -1,108 +1,123 @@
 [
-       {
-              "Balance": 0.0,
-              "Birthdate": "04/04/1996",
-              "CPF": "12345678910",
-              "Email": "ricardo@univicosa.br",
-              "ID": 10,
-              "Jogos": [],
-              "Password": "paredesemurosdotrump05",
-              "Publicacoes": [],
-              "Username": "Ricardo",
-              "Wishlist": []
-       },
-       {
-              "Balance": 0.0,
-              "Birthdate": "26/11/2003",
-              "CPF": "12345678910",
-              "Email": "matheus.antony@ufv.br",
-              "ID": 1,
-              "Jogos": [
-                     "Hollow Knight"
-              ],
-              "Password": "1234",
-              "Publicacoes": [],
-              "Username": "Matheuzao",
-              "Wishlist": [
-                     "Hollo Knight: Silksong"
-              ]
-       },
-       {
-              "Balance": 0.0,
-              "Birthdate": "06/01/2004",
-              "CPF": "12345678910",
-              "Email": "leanderson.leles@ufv.br",
-              "ID": 1,
-              "Jogos": null,
-              "Password": "1234a",
-              "Publicacoes": null,
-              "Username": "Leleleles",
-              "Wishlist": null
-       },
-       {
-              "Balance": 0.0,
-              "Birthdate": "20/06/2005",
-              "CPF": "12345678910",
-              "Email": "leonardo.porto@ufv.br",
-              "ID": 10,
-              "Jogos": null,
-              "Password": "1234a",
-              "Publicacoes": null,
-              "Username": "Leozao",
-              "Wishlist": null
-       },
-       {
-              "Balance": 0.0,
-              "Birthdate": "12/12/2004",
-              "CPF": "12345678910",
-              "Email": "pedro.pereira@ufv.br",
-              "ID": 10,
-              "Jogos": null,
-              "Password": "amomeuamigolele06",
-              "Publicacoes": null,
-              "Username": "Pedro Coura",
-              "Wishlist": null
-       },
-       {
-              "Balance": 1000.0,
-              "Birthdate": "08/09/2004",
-              "CPF": "12345678910",
-              "Email": "marianna.verduin@ufv.br",
-              "ID": 1,
-              "Jogos": [
-                     "Hollow Knight",
-                     "CCPânico"
-              ],
-              "Password": "sosabilio123",
-              "Publicacoes": null,
-              "Username": "MariannaBR",
-              "Wishlist": [
-                     "CCPânico",
-                     "GTA VI"
-              ]
-       },
-       {
-              "Balance": 0.0,
-              "Birthdate": "01/01/2001",
-              "CPF": "11111111111",
-              "Email": "teste1@teste.com",
-              "ID": 1,
-              "Jogos": null,
-              "Password": "teste1",
-              "Publicacoes": null,
-              "Username": "teste1",
-              "Wishlist": null
-       },
-       {
-              "Balance": 0.0,
-              "Birthdate": "02/02/2002",
-              "CPF": "22222222222",
-              "Email": "teste2@gmail.com",
-              "ID": 10,
-              "Jogos": null,
-              "Password": "teste2",
-              "Publicacoes": null,
-              "Username": "teste2",
-              "Wishlist": null
-       }
+          {
+                    "Balance": 0.0,
+                    "Birthdate": "04/04/1996",
+                    "CPF": "12345678910",
+                    "Email": "ricardo@univicosa.br",
+                    "ID": 10,
+                    "Jogos": [],
+                    "Password": "paredesemurosdotrump05",
+                    "Publicacoes": [],
+                    "Username": "Ricardo",
+                    "Wishlist": []
+          },
+          {
+                    "Balance": 0.0,
+                    "Birthdate": "26/11/2003",
+                    "CPF": "12345678910",
+                    "Email": "matheus.antony@ufv.br",
+                    "ID": 1,
+                    "Jogos": [
+                              "Hollow Knight"
+                    ],
+                    "Password": "1234",
+                    "Publicacoes": [],
+                    "Username": "Matheuzao",
+                    "Wishlist": [
+                              "Hollo Knight: Silksong"
+                    ]
+          },
+          {
+                    "Balance": 0.0,
+                    "Birthdate": "06/01/2004",
+                    "CPF": "12345678910",
+                    "Email": "leanderson.leles@ufv.br",
+                    "ID": 1,
+                    "Jogos": null,
+                    "Password": "1234a",
+                    "Publicacoes": null,
+                    "Username": "Leleleles",
+                    "Wishlist": null
+          },
+          {
+                    "Balance": 0.0,
+                    "Birthdate": "20/06/2005",
+                    "CPF": "12345678910",
+                    "Email": "leonardo.porto@ufv.br",
+                    "ID": 10,
+                    "Jogos": null,
+                    "Password": "1234a",
+                    "Publicacoes": null,
+                    "Username": "Leozao",
+                    "Wishlist": null
+          },
+          {
+                    "Balance": 0.0,
+                    "Birthdate": "12/12/2004",
+                    "CPF": "12345678910",
+                    "Email": "pedro.pereira@ufv.br",
+                    "ID": 10,
+                    "Jogos": null,
+                    "Password": "amomeuamigolele06",
+                    "Publicacoes": null,
+                    "Username": "Pedro Coura",
+                    "Wishlist": null
+          },
+          {
+                    "Balance": 1000.0,
+                    "Birthdate": "08/09/2004",
+                    "CPF": "12345678910",
+                    "Email": "marianna.verduin@ufv.br",
+                    "ID": 1,
+                    "Jogos": [
+                              "Hollow Knight",
+                              "CCPânico"
+                    ],
+                    "Password": "sosabilio123",
+                    "Publicacoes": null,
+                    "Username": "MariannaBR",
+                    "Wishlist": [
+                              "CCPânico",
+                              "GTA VI"
+                    ]
+          },
+          {
+                    "Balance": 0.0,
+                    "Birthdate": "01/01/2001",
+                    "CPF": "11111111111",
+                    "Email": "teste1@teste.com",
+                    "ID": 1,
+                    "Jogos": null,
+                    "Password": "teste1",
+                    "Publicacoes": null,
+                    "Username": "teste1",
+                    "Wishlist": null
+          },
+          {
+                    "Balance": 0.0,
+                    "Birthdate": "02/02/2002",
+                    "CPF": "22222222222",
+                    "Email": "teste2@gmail.com",
+                    "ID": 10,
+                    "Jogos": null,
+                    "Password": "teste2",
+                    "Publicacoes": null,
+                    "Username": "teste2",
+                    "Wishlist": null
+          },
+          {
+                    "Balance": 0.0,
+                    "Birthdate": "06/01/2004",
+                    "CPF": "12345678901",
+                    "Email": "lele@gmail.com",
+                    "ID": 10,
+                    "Jogos": null,
+                    "Password": "lele123",
+                    "Publicacoes": [
+                              "jogo do lelezao",
+                              "Jogo bom"
+                    ],
+                    "Username": "Lele",
+                    "Wishlist": []
+          }
 ]

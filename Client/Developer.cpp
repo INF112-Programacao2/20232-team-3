@@ -60,8 +60,8 @@ void Developer::menu()  // Menu do desenvolvedor
                 auxgame = *auxgameptr;
                 delete auxgameptr;
                 std::cout << "Jogo publicado com sucesso!\n";
+                ClientDB::add_publication(this, auxgame.get_name());
                 _publishedGames.push_back(auxgame); // Adiciona o jogo publicado ao vetor de jogos publicados
-                std::cout << "Jogo publicado com sucesso!2\n";
             break;
             case 3:
                 for(int i = 0 ; i < _publishedGames.size() ; i++)   // Imprime os jogos publicados pelo desenvolvedor

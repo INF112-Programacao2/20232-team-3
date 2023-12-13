@@ -347,7 +347,6 @@ void ClientDB::do_register()    // Registra um novo cliente
             std::cout << "Usuario ja cadastrado\n";
 }
 
-
 static Client* load_client_from_json(std::string username)  // Carrega um cliente do json
 {
     std::vector <Game> wishlist;    // Cria uma lista de desejos
@@ -445,3 +444,42 @@ Client* ClientDB::do_login()    // Faz o login do cliente
             continue;}
     }   
 }
+
+void ClientDB::add_publication(Developer* dev, std::string game_name) // Adiciona uma publicação no json do usuário
+{
+    std::ifstream arquivo("clients.json");
+    if (!arquivo.is_open()) 
+    {
+        std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
+    }
+
+    json dadosJSON;
+    arquivo >> dadosJSON;
+    arquivo.close();
+
+    bool existe = false;
+    std::string jogo;
+    for (auto& data : dadosJSON) 
+    {
+        if (data["Username"] == dev->get_username())
+        {
+            for (auto it = data["Publicacoes"].begin(); it != data["Publicacoes"].end(); ++it) 
+                {
+                    if (*it == game_name) 
+                    {
+                        existe = true;
+                        std::cout << "Jogo já está na lista de publicaçoes\n";
+                        break;
+                    } 
+                }
+                // Adiciona à wishlist no objeto
+                if(!existe)
+                {
+                    data["Publicacoes"].push_back(game_name);
+                }
+            }
+        }
+    std::ofstream arquivoSaida("clients.json");
+    arquivoSaida << dadosJSON.dump(10);
+    arquivoSaida.close();
+    }
