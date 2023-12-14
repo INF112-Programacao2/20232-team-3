@@ -1,10 +1,10 @@
-#include "Client/Client.hpp"
-#include "Client/Developer.hpp"
-#include "Client/User.hpp"
-#include "Database/ClientDB.hpp"
-#include "Database/GameDB.hpp"
-#include "Product/Game.hpp"
-#include "Product/Product.hpp"
+#include "../include/Client.hpp"
+#include "../include/Developer.hpp"
+#include "../include/User.hpp"
+#include "../include/ClientDB.hpp"
+#include "../include/GameDB.hpp"
+#include "../include/Game.hpp"
+#include "../include/Product.hpp"
 
 #include <iostream>
 

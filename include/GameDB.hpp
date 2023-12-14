@@ -1,7 +1,7 @@
 #ifndef _GAME_DB_HPP_
 #define _GAME_DB_HPP_
 
-#include "../Product/Game.hpp"
+#include "Game.hpp"
 #include <string>
 
 class GameDB

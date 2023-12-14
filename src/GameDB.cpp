@@ -1,5 +1,5 @@
-#include "GameDB.hpp"
-#include "../Auxiliar/Input.hpp"
+#include "../include/GameDB.hpp"
+#include "../include/Input.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -10,7 +10,7 @@ using json = nlohmann::json;
 
 void change_gameValue(std::string key, std::string value, std::string gameName) // Função auxiliar para alterar um valor string de um jogo no arquivo JSON
 {
-    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    std::ifstream arquivo("data/games.json");    // Abre o arquivo JSON
     if (!arquivo.is_open())            // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -28,7 +28,7 @@ void change_gameValue(std::string key, std::string value, std::string gameName) 
             if (data["Name"] == gameName)   // verifica se o nome do jogo é igual ao nome do jogo que queremos alterar
             {
                 data[key] = value;  // Altera o valor da chave
-                std::ofstream arquivoSaida("games.json");   // Abre o arquivo JSON
+                std::ofstream arquivoSaida("data/games.json");   // Abre o arquivo JSON
                 arquivoSaida << dadosJSON.dump(16);  // Ajuste o valor de indentação conforme necessário
                 arquivoSaida.close();   // Fecha o arquivo
                 return;
@@ -43,7 +43,7 @@ void change_gameValue(std::string key, std::string value, std::string gameName) 
 
 void change_gameValue(std::string key, double value, std::string gameName) // Função auxiliar para alterar um valor double de um jogo no arquivo JSON
 {
-    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    std::ifstream arquivo("data/games.json");    // Abre o arquivo JSON
     if (!arquivo.is_open())       // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -61,7 +61,7 @@ void change_gameValue(std::string key, double value, std::string gameName) // Fu
             if (data["Name"] == gameName)   // verifica se o nome do jogo é igual ao nome do jogo que queremos alterar
             {
                 data[key] = value;  // Altera o valor da chave
-                std::ofstream arquivoSaida("games.json");   // Abre o arquivo JSON
+                std::ofstream arquivoSaida("data/games.json");   // Abre o arquivo JSON
                 arquivoSaida << dadosJSON.dump(16); // Ajuste o valor de indentação conforme necessário
                 arquivoSaida.close();   // Fecha o arquivo
                 return;
@@ -76,7 +76,7 @@ void change_gameValue(std::string key, double value, std::string gameName) // Fu
 
 void change_gameValue(std::string key, int value, std::string gameName) // Função auxiliar para alterar um valor int de um jogo no arquivo JSON
 {
-    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    std::ifstream arquivo("data/games.json");    // Abre o arquivo JSON
     if (!arquivo.is_open())     // verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -94,7 +94,7 @@ void change_gameValue(std::string key, int value, std::string gameName) // Funç
             if (data["Name"] == gameName)   // verifica se o nome do jogo é igual ao nome do jogo que queremos alterar
             {
                 data[key] = value;  // Altera o valor da chave
-                std::ofstream arquivoSaida("games.json");   // Abre o arquivo JSON
+                std::ofstream arquivoSaida("data/games.json");   // Abre o arquivo JSON
                 arquivoSaida << dadosJSON.dump(16); // Ajuste o valor de indentação conforme necessário
                 arquivoSaida.close();   // Fecha o arquivo
                 return;
@@ -109,7 +109,7 @@ void change_gameValue(std::string key, int value, std::string gameName) // Funç
 
 void GameDB::list_games()   // Função que lista os jogos cadastrados
 {
-    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    std::ifstream arquivo("data/games.json");    // Abre o arquivo JSON
     if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -261,7 +261,7 @@ Game* GameDB::add_game()    // Função que permite que o usuario publique um jo
 
     Game* gameptr;  // Ponteiro para um objeto da classe Game
 
-    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    std::ifstream arquivo("data/games.json");    // Abre o arquivo JSON
     if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -328,7 +328,7 @@ Game* GameDB::add_game()    // Função que permite que o usuario publique um jo
     novoGame["Review"] = {};    // Adiciona a review do jogo ao vetor JSON
 
     dadosJSON.push_back(novoGame);  // Adiciona o vetor JSON ao vetor de jogos
-    std::ofstream arquivoSaida("games.json");   // Abre o arquivo JSON
+    std::ofstream arquivoSaida("data/games.json");   // Abre o arquivo JSON
     arquivoSaida << dadosJSON.dump(16); // Ajuste o valor de indentação conforme necessário
     arquivoSaida.close();   // Fecha o arquivo
 
@@ -342,7 +342,7 @@ void GameDB::delete_game(std::string game){   // Função que permite que o usua
     while (true) 
     {
 
-        std::ifstream inputFile("games.json");    // Abre o arquivo JSON
+        std::ifstream inputFile("data/games.json");    // Abre o arquivo JSON
         if (!inputFile.is_open()) 
         {    // Verifica se o arquivo foi aberto corretamente
             std::cerr << "Erro ao abrir o arquivo json" << std::endl;
@@ -362,7 +362,7 @@ void GameDB::delete_game(std::string game){   // Função que permite que o usua
         {    // Se o jogo existir, remove
             dadosJSON.erase(it);
 
-            std::ofstream fileout("games.json");
+            std::ofstream fileout("data/games.json");
             fileout << dadosJSON.dump(4);  // Ajuste o valor de indentação conforme necessário
             fileout.close();
 

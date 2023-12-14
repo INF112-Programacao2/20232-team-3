@@ -1,9 +1,9 @@
 #ifndef CLIENTDB_HPP
 #define CLIENTDB_HPP
 
-#include "../Client/Developer.hpp"
-#include "../Client/User.hpp"
-#include "../Client/Client.hpp"
+#include "Developer.hpp"
+#include "User.hpp"
+#include "Client.hpp"
 
 #include <string>
 

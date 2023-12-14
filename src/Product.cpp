@@ -1,4 +1,4 @@
-#include "Product.hpp"
+#include "../include/Product.hpp"
 
 // Constructor
 Product::Product(std::string name, std::string studio, int ageRating, double price, bool availability, std::vector<std::string> review, std::string releaseDate) // Construtor

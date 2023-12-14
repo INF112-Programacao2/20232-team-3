@@ -1,14 +1,14 @@
-#include"User.hpp"
-#include"../Database/ClientDB.hpp"
-#include"../Database/GameDB.hpp"
-#include "iostream"
-#include "../Auxiliar/Input.hpp"
+#include"../include/User.hpp"
+#include"../include/ClientDB.hpp"
+#include"../include/GameDB.hpp"
+#include "../include/Input.hpp"
 #include <nlohmann/json.hpp>
+#include <iostream>
 using json = nlohmann::json;
 
-bool game_exist(std::string gameName)// Função auxiliar - retorna se um jogo existe em games.json
+bool game_exist(std::string gameName)// Função auxiliar - retorna se um jogo existe em data/games.json
 {
-    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    std::ifstream arquivo("data/games.json");    // Abre o arquivo JSON
     if (!arquivo.is_open()) // Verifica se o arquivo foi aberto corretamente 
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -37,7 +37,7 @@ bool game_exist(std::string gameName)// Função auxiliar - retorna se um jogo e
 
 void load_game_from_json(std::string name, std::vector<Game> &games) // Função auxiliar - Busca um game no json e adiciona no vetor de games
 {
-    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    std::ifstream arquivo("data/games.json");    // Abre o arquivo JSON
     if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -84,7 +84,7 @@ void load_game_from_json(std::string name, std::vector<Game> &games) // Função
 
 Game load_game_from_json(std::string &name) // Função auxiliar - Busca um game no json e adiciona no vetor de games
 {
-    std::ifstream arquivo("games.json");    // Abre o arquivo JSON
+    std::ifstream arquivo("data/games.json");    // Abre o arquivo JSON
     if (!arquivo.is_open())    // Verifica se o arquivo foi aberto corretamente 
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -153,7 +153,7 @@ void User::print_library()      // Imprime a biblioteca de jogos
 
 void User::buy_game(Game game, std::string username)    // Função que permite que o usuario compre um jogo
 {
-    std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+    std::ifstream arquivo("data/clients.json");  // Abre o arquivo JSON
     if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -200,7 +200,7 @@ void User::buy_game(Game game, std::string username)    // Função que permite 
             }
         }
     }
-    std::ofstream arquivoSaida("clients.json"); // Abre o arquivo JSON
+    std::ofstream arquivoSaida("data/clients.json"); // Abre o arquivo JSON
     arquivoSaida << dadosClientsJSON.dump(10);  // Escreve no arquivo JSON
     arquivoSaida.close();   // Fecha o arquivo
 }
@@ -213,7 +213,7 @@ void User::add_to_wishlist(std::string gameName, std::string username)  // Adici
         return;
     }
 
-    std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+    std::ifstream arquivo("data/clients.json");  // Abre o arquivo JSON
     if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -250,7 +250,7 @@ void User::add_to_wishlist(std::string gameName, std::string username)  // Adici
             }
         }
     }
-    std::ofstream arquivoSaida("clients.json"); // Abre o arquivo JSON
+    std::ofstream arquivoSaida("data/clients.json"); // Abre o arquivo JSON
     arquivoSaida << dadosClientsJSON.dump(10);  // Escreve no arquivo JSON
     arquivoSaida.close();   // Fecha o arquivo
 

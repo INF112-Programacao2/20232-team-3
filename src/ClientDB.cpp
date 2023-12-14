@@ -1,5 +1,5 @@
-#include "../Auxiliar/Input.hpp"
-#include "ClientDB.hpp"
+#include "../include/Input.hpp"
+#include "../include/ClientDB.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -10,7 +10,7 @@ using json = nlohmann::json;
 
 void change_clientValue(std::string key, std::string value, std::string username) // Função auxiliar - Muda um valor string de um cliente no json
 {
-    std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+    std::ifstream arquivo("data/clients.json");  // Abre o arquivo JSON
     if (!arquivo.is_open())            // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -30,7 +30,7 @@ void change_clientValue(std::string key, std::string value, std::string username
             if (usernameJSON == username)   // Verifica se o username do arquivo JSON é igual ao username fornecido
             {
                 data[key] = value;  // Muda o valor da chave para o valor fornecido
-                std::ofstream arquivoSaida("clients.json"); // Abre o arquivo JSON
+                std::ofstream arquivoSaida("data/clients.json"); // Abre o arquivo JSON
                 arquivoSaida << dadosJSON.dump(10); // Escreve no arquivo JSON
                 arquivoSaida.close();   // Fecha o arquivo
                 return;
@@ -45,7 +45,7 @@ void change_clientValue(std::string key, std::string value, std::string username
 
 void change_clientValue(std::string key, double value, std::string username) // Função auxiliar - Muda um valor double de um cliente no json
 {
-    std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+    std::ifstream arquivo("data/clients.json");  // Abre o arquivo JSON
     if (!arquivo.is_open())     // verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -65,7 +65,7 @@ void change_clientValue(std::string key, double value, std::string username) // 
             if (usernameJSON == username) 
             {
                 data[key] = value;  // Muda o valor da chave para o valor fornecido
-                std::ofstream arquivoSaida("clients.json"); // Abre o arquivo JSON
+                std::ofstream arquivoSaida("data/clients.json"); // Abre o arquivo JSON
                 arquivoSaida << dadosJSON.dump(10); // Escreve no arquivo JSON
                 arquivoSaida.close();   // Fecha o arquivo
                 return;
@@ -78,9 +78,9 @@ void change_clientValue(std::string key, double value, std::string username) // 
     }
 }
 
-bool username_exist(std::string &username) // Função auxiliar - Retorna se um username existe em clients.json
+bool username_exist(std::string &username) // Função auxiliar - Retorna se um username existe em data/clients.json
 {
-    std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+    std::ifstream arquivo("data/clients.json");  // Abre o arquivo JSON
     if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
     {
         std::cerr << "Erro ao abrir o arquivo JSON.1" << std::endl;
@@ -106,9 +106,9 @@ bool username_exist(std::string &username) // Função auxiliar - Retorna se um 
     return false;
 }
 
-bool email_exist(std::string &email) // Função auxiliar - Retorna se um email existe em clients.json
+bool email_exist(std::string &email) // Função auxiliar - Retorna se um email existe em data/clients.json
 {
-    std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+    std::ifstream arquivo("data/clients.json");  // Abre o arquivo JSON
     if (!arquivo.is_open())    // Verifica se o arquivo foi aberto corretamente 
     {
         std::cerr << "Erro ao abrir o arquivo JSON.1" << std::endl;
@@ -169,7 +169,7 @@ void ClientDB::edit_info(Client* client)    // Edita as informações do cliente
                 {
                     temp2 = Input::input_password();    // Recebe a nova senha
 
-                    std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+                    std::ifstream arquivo("data/clients.json");  // Abre o arquivo JSON
                     if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
                     {
                         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -200,7 +200,7 @@ void ClientDB::edit_info(Client* client)    // Edita as informações do cliente
                 }
                 else
                 {
-                    std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+                    std::ifstream arquivo("data/clients.json");  // Abre o arquivo JSON
                     if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
                     {
                         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -237,7 +237,7 @@ void ClientDB::redeem_balance(Developer* dev)   // Resgata o saldo do desenvolve
         else
         {
 
-            std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+            std::ifstream arquivo("data/clients.json");  // Abre o arquivo JSON
             if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
             {
                 std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -269,7 +269,7 @@ void ClientDB::add_balance(User* usr)   // Adiciona saldo ao usuário
         else
         {
 
-            std::ifstream arquivo("clients.json");
+            std::ifstream arquivo("data/clients.json");
             if (!arquivo.is_open())     // Verifica se o arquivo foi aberto corretamente
             {
                 std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -288,7 +288,7 @@ void ClientDB::add_balance(User* usr)   // Adiciona saldo ao usuário
 
 void add_client(std::string &username, std::string &email, std::string &password,int &ID, std::string &cpf, std::string &birthdate) // AUXILIAR
 {
-    std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+    std::ifstream arquivo("data/clients.json");  // Abre o arquivo JSON
     if (!arquivo.is_open()) {         // Verifica se o arquivo foi aberto corretamente
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;  
     }
@@ -311,7 +311,7 @@ void add_client(std::string &username, std::string &email, std::string &password
 
     dadosJSON.push_back(novoUsuario);   // Adiciona o novo usuário ao array
 
-    std::ofstream arquivoSaida("clients.json"); // Abre o arquivo JSON
+    std::ofstream arquivoSaida("data/clients.json"); // Abre o arquivo JSON
     arquivoSaida << dadosJSON.dump(7);  // Escreve no arquivo JSON
     arquivoSaida.close();   // Fecha o arquivo
     std::cout << "Usuario cadastrado com sucesso" << std::endl;
@@ -353,7 +353,7 @@ static Client* load_client_from_json(std::string username)  // Carrega um client
     std::vector <Game> library; // Cria uma biblioteca de jogos
     std::vector <Game> published_games; // Cria uma lista de jogos publicados
     std::string jogo;   // Cria uma string para armazenar os jogos
-    std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+    std::ifstream arquivo("data/clients.json");  // Abre o arquivo JSON
     if (!arquivo.is_open()) {      // Verifica se o arquivo foi aberto corretamente
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
     }
@@ -412,7 +412,7 @@ Client* ClientDB::do_login()    // Faz o login do cliente
         std::cin.ignore();
         if(username_exist(username))    // Verifica se o username existe
         {
-            std::ifstream arquivo("clients.json");  // Abre o arquivo JSON
+            std::ifstream arquivo("data/clients.json");  // Abre o arquivo JSON
             if (!arquivo.is_open()) {    // Verifica se o arquivo foi aberto corretamente
                 std::cerr << "Erro ao abrir o arquivo JSON.1" << std::endl;
             }
@@ -447,7 +447,7 @@ Client* ClientDB::do_login()    // Faz o login do cliente
 
 void ClientDB::add_publication(Developer* dev, std::string game_name) // Adiciona uma publicação no json do usuário
 {
-    std::ifstream arquivo("clients.json");
+    std::ifstream arquivo("data/clients.json");
     if (!arquivo.is_open()) 
     {
         std::cerr << "Erro ao abrir o arquivo JSON." << std::endl;
@@ -479,7 +479,7 @@ void ClientDB::add_publication(Developer* dev, std::string game_name) // Adicion
                 }
             }
         }
-    std::ofstream arquivoSaida("clients.json");
+    std::ofstream arquivoSaida("data/clients.json");
     arquivoSaida << dadosJSON.dump(10);
     arquivoSaida.close();
     }

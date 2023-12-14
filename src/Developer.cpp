@@ -1,7 +1,7 @@
-#include"Developer.hpp"
-#include"../Auxiliar/Input.hpp"
-#include"../Database/ClientDB.hpp"
-#include"../Database/GameDB.hpp"
+#include"../include/Developer.hpp"
+#include"../include/Input.hpp"
+#include"../include/ClientDB.hpp"
+#include"../include/GameDB.hpp"
 #include<iostream>
 
 // Construtor
@@ -19,7 +19,7 @@ void Developer::print_published_games()  // Imprime os jogos publicados pelo des
 void Developer::menu()  // Menu do desenvolvedor
 {
     int aux;
-    Game auxgame("Minecraft", "Mojang", 0, 125, 1, {}, "21/04/2008", "Sandbox", "PC", "Portugues", "Windows 11", "Intel core i3", "4 GB", "Intel graphics", 10, "5 GB");
+    Game auxgame;
     Game* auxgameptr;
 
     std::cout << "Bem vindo, " << _username << "!\n";

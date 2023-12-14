@@ -2,7 +2,7 @@
 #define DEVELOPER_HPP_
 
 #include"Client.hpp"
-#include"../Product/Game.hpp"
+#include"Game.hpp"
 
 #include<vector>
 

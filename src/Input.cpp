@@ -1,4 +1,4 @@
-#include"Input.hpp"
+#include"../include/Input.hpp"
 
 std::string Input::input_name(std::string text, int limit)  // Recebe um texto e retorna uma string com o nome
 {
