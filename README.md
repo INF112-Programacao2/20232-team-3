@@ -15,10 +15,10 @@ Ricardo de Oliveira Ferreira - 112689
 
 Leonardo de Andrade Porto - 112681
 
-# Instruções para instalação da Biblioteca para o uso do JSON
-Para o uso no LinuX (Ubuntu) : sudo apt-get install nlohmann-json3-dev
+# Instruções para instalação da biblioteca para o uso do JSON
+Para o uso no Linux (Ubuntu) : sudo apt-get install nlohmann-json3-dev
 
-# Instruçoes para compilar o Programa
+# Instruçoes para compilar e executar o programa
 
 Rode a seguinte linha de comando para compilar e executar o programa.
-```g++ -o main main.cpp Client/Client.cpp Client/Developer.cpp Client/User.cpp Database/ClientDB.cpp Database/GameDB.cpp Product/Game.cpp Product/Product.cpp Auxiliar/Input.cpp && ./main```
+```make && ./main```
