@@ -12,6 +12,7 @@ int main()
 {
     int aux;
     Client* client;
+    client = nullptr;
     std::cout << "Bem vindo à Steam!\n";
     MAIN:
     std::cout << "O que deseja fazer?\n1 - Registrar\n2 - Logar\nAperte qualquer outra tecla para sair\n";
@@ -31,8 +32,8 @@ int main()
     default:
         break;
     }
-
-    client->menu();
+    if (client != nullptr)
+        client->menu();
 
     std::cout << "Obrigado por usar a Steam!\n";
 

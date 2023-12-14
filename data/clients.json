@@ -119,5 +119,19 @@
                     ],
                     "Username": "Lele",
                     "Wishlist": []
+          },
+          {
+                    "Balance": 0.0,
+                    "Birthdate": "06/03/2003",
+                    "CPF": "15674456901",
+                    "Email": "lelezinho@gmail.com",
+                    "ID": 1,
+                    "Jogos": null,
+                    "Password": "lelezinho123",
+                    "Publicacoes": null,
+                    "Username": "lelezinho",
+                    "Wishlist": [
+                              "Resident Evil"
+                    ]
           }
 ]
